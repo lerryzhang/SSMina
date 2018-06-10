@@ -1,0 +1,287 @@
+[INFO] [2018-03-14 10:42:04][com.deyuan.weather.util.APIHttpClient]parameters:{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.impl.conn.BasicClientConnectionManager]Get connection for route {}->http://localhost:8080
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.impl.conn.DefaultClientConnectionOperator]Connecting to localhost:8080
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.client.protocol.RequestAddCookies]CookieSpec selected: default
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.client.protocol.RequestAuthCache]Auth cache not set in the context
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.client.protocol.RequestTargetAuthentication]Target auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.client.protocol.RequestProxyAuthentication]Proxy auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.impl.client.DefaultHttpClient]Attempt 1 to execute request
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.impl.conn.DefaultClientConnection]Sending request: POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.wire] >> "POST /WeatherApi/getGps HTTP/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.wire] >> "Content-type: application/json; charset=utf-8[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.wire] >> "Accept: application/json[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.wire] >> "Content-Length: 91[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.wire] >> "Host: localhost:8080[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.wire] >> "Connection: Keep-Alive[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.wire] >> "User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.wire] >> "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.headers]>> POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.headers]>> Content-type: application/json; charset=utf-8
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.headers]>> Accept: application/json
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.headers]>> Content-Length: 91
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.headers]>> Host: localhost:8080
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.headers]>> Connection: Keep-Alive
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.headers]>> User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)
+ [DEBUG] [2018-03-14 10:42:05][org.apache.http.wire] >> "{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "HTTP/1.1 200 OK[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "Server: Apache-Coyote/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "Content-Type: application/json;charset=UTF-8[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "Transfer-Encoding: chunked[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "Date: Wed, 14 Mar 2018 02:42:08 GMT[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.impl.conn.DefaultClientConnection]Receiving response: HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.headers]<< HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.headers]<< Server: Apache-Coyote/1.1
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.headers]<< Content-Type: application/json;charset=UTF-8
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.headers]<< Transfer-Encoding: chunked
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.headers]<< Date: Wed, 14 Mar 2018 02:42:08 GMT
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.impl.client.DefaultHttpClient]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 10:42:08][com.deyuan.weather.util.APIHttpClient]statusCode:200
+ [INFO] [2018-03-14 10:42:08][com.deyuan.weather.util.APIHttpClient]调用API 花费时间(单位：毫秒)：3779
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "20a[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "{"error":"0","status":"success","date":"2018-03-14","results":{"length":432,"content":"37B3F7BB6F1702000A0000009A170100000000009B170100030000009C171000E2A3A1C8248123FF2E2FAFFFFFFFFFFFA017010001000000A2173200100C0704010AFFFFFFFF170D08050200FFFFFFFF160E0906030BFFFFFFFFFF0F2B23282CFFFFFFFF2DFFFFFFFFFFFFFFFFFF0000A317010000000000A417010001000000F3170C00FFFFFFFFFFFFFFFFFFFFFFFF4C1801000400000068180100010000007A18010001000000F618010001000000F818010001000000E019010001000000571B1400323031372E31322E32362031333A35363A313200"}}"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "0[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.impl.conn.BasicClientConnectionManager]Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@37a001ff
+ [DEBUG] [2018-03-14 10:42:08][org.apache.http.impl.conn.BasicClientConnectionManager]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 10:42:08][com.deyuan.weather.util.APIHttpClient]调用接口状态：0
+ [INFO] [2018-03-14 10:42:33][com.deyuan.weather.util.APIHttpClient]parameters:{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.impl.conn.BasicClientConnectionManager]Get connection for route {}->http://localhost:8080
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.impl.conn.DefaultClientConnectionOperator]Connecting to localhost:8080
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.client.protocol.RequestAddCookies]CookieSpec selected: default
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.client.protocol.RequestAuthCache]Auth cache not set in the context
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.client.protocol.RequestTargetAuthentication]Target auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.client.protocol.RequestProxyAuthentication]Proxy auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.impl.client.DefaultHttpClient]Attempt 1 to execute request
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.impl.conn.DefaultClientConnection]Sending request: POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] >> "POST /WeatherApi/getGps HTTP/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] >> "Content-type: application/json; charset=utf-8[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] >> "Accept: application/json[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] >> "Content-Length: 91[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] >> "Host: localhost:8080[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] >> "Connection: Keep-Alive[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] >> "User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] >> "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]>> POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]>> Content-type: application/json; charset=utf-8
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]>> Accept: application/json
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]>> Content-Length: 91
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]>> Host: localhost:8080
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]>> Connection: Keep-Alive
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]>> User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] >> "{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "HTTP/1.1 200 OK[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "Server: Apache-Coyote/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "Content-Type: application/json;charset=UTF-8[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "Transfer-Encoding: chunked[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "Date: Wed, 14 Mar 2018 02:42:33 GMT[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.impl.conn.DefaultClientConnection]Receiving response: HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]<< HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]<< Server: Apache-Coyote/1.1
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]<< Content-Type: application/json;charset=UTF-8
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]<< Transfer-Encoding: chunked
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.headers]<< Date: Wed, 14 Mar 2018 02:42:33 GMT
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.impl.client.DefaultHttpClient]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 10:42:33][com.deyuan.weather.util.APIHttpClient]statusCode:200
+ [INFO] [2018-03-14 10:42:33][com.deyuan.weather.util.APIHttpClient]调用API 花费时间(单位：毫秒)：161
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "20a[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "{"error":"0","status":"success","date":"2018-03-14","results":{"length":432,"content":"37B3F7BB6F1702000A0000009A170100000000009B170100030000009C171000E2A3A1C8248123FF2E2FAFFFFFFFFFFFA017010001000000A2173200100C0704010AFFFFFFFF170D08050200FFFFFFFF160E0906030BFFFFFFFFFF0F2B23282CFFFFFFFF2DFFFFFFFFFFFFFFFFFF0000A317010000000000A417010001000000F3170C00FFFFFFFFFFFFFFFFFFFFFFFF4C1801000400000068180100010000007A18010001000000F618010001000000F818010001000000E019010001000000571B1400323031372E31322E32362031333A35363A313200"}}"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "0[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.impl.conn.BasicClientConnectionManager]Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@69e328e0
+ [DEBUG] [2018-03-14 10:42:33][org.apache.http.impl.conn.BasicClientConnectionManager]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 10:42:33][com.deyuan.weather.util.APIHttpClient]调用接口状态：0
+ [INFO] [2018-03-14 10:42:42][com.deyuan.weather.util.APIHttpClient]parameters:{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.impl.conn.BasicClientConnectionManager]Get connection for route {}->http://localhost:8080
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.impl.conn.DefaultClientConnectionOperator]Connecting to localhost:8080
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.client.protocol.RequestAddCookies]CookieSpec selected: default
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.client.protocol.RequestAuthCache]Auth cache not set in the context
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.client.protocol.RequestTargetAuthentication]Target auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.client.protocol.RequestProxyAuthentication]Proxy auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.impl.client.DefaultHttpClient]Attempt 1 to execute request
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.impl.conn.DefaultClientConnection]Sending request: POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] >> "POST /WeatherApi/getGps HTTP/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] >> "Content-type: application/json; charset=utf-8[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] >> "Accept: application/json[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] >> "Content-Length: 91[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] >> "Host: localhost:8080[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] >> "Connection: Keep-Alive[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] >> "User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] >> "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]>> POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]>> Content-type: application/json; charset=utf-8
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]>> Accept: application/json
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]>> Content-Length: 91
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]>> Host: localhost:8080
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]>> Connection: Keep-Alive
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]>> User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] >> "{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "HTTP/1.1 200 OK[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "Server: Apache-Coyote/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "Content-Type: application/json;charset=UTF-8[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "Transfer-Encoding: chunked[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "Date: Wed, 14 Mar 2018 02:42:42 GMT[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.impl.conn.DefaultClientConnection]Receiving response: HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]<< HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]<< Server: Apache-Coyote/1.1
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]<< Content-Type: application/json;charset=UTF-8
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]<< Transfer-Encoding: chunked
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.headers]<< Date: Wed, 14 Mar 2018 02:42:42 GMT
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.impl.client.DefaultHttpClient]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 10:42:42][com.deyuan.weather.util.APIHttpClient]statusCode:200
+ [INFO] [2018-03-14 10:42:42][com.deyuan.weather.util.APIHttpClient]调用API 花费时间(单位：毫秒)：166
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "20a[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "{"error":"0","status":"success","date":"2018-03-14","results":{"length":432,"content":"37B3F7BB6F1702000A0000009A170100000000009B170100030000009C171000E2A3A1C8248123FF2E2FAFFFFFFFFFFFA017010001000000A2173200100C0704010AFFFFFFFF170D08050200FFFFFFFF160E0906030BFFFFFFFFFF0F2B23282CFFFFFFFF2DFFFFFFFFFFFFFFFFFF0000A317010000000000A417010001000000F3170C00FFFFFFFFFFFFFFFFFFFFFFFF4C1801000400000068180100010000007A18010001000000F618010001000000F818010001000000E019010001000000571B1400323031372E31322E32362031333A35363A313200"}}"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "0[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.impl.conn.BasicClientConnectionManager]Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@4090c06f
+ [DEBUG] [2018-03-14 10:42:42][org.apache.http.impl.conn.BasicClientConnectionManager]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 10:42:42][com.deyuan.weather.util.APIHttpClient]调用接口状态：0
+ [INFO] [2018-03-14 10:43:47][com.deyuan.weather.util.APIHttpClient]parameters:{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.impl.conn.BasicClientConnectionManager]Get connection for route {}->http://localhost:8080
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.impl.conn.DefaultClientConnectionOperator]Connecting to localhost:8080
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.client.protocol.RequestAddCookies]CookieSpec selected: default
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.client.protocol.RequestAuthCache]Auth cache not set in the context
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.client.protocol.RequestTargetAuthentication]Target auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.client.protocol.RequestProxyAuthentication]Proxy auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.impl.client.DefaultHttpClient]Attempt 1 to execute request
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.impl.conn.DefaultClientConnection]Sending request: POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] >> "POST /WeatherApi/getGps HTTP/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] >> "Content-type: application/json; charset=utf-8[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] >> "Accept: application/json[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] >> "Content-Length: 91[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] >> "Host: localhost:8080[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] >> "Connection: Keep-Alive[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] >> "User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] >> "[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]>> POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]>> Content-type: application/json; charset=utf-8
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]>> Accept: application/json
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]>> Content-Length: 91
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]>> Host: localhost:8080
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]>> Connection: Keep-Alive
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]>> User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] >> "{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "HTTP/1.1 200 OK[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "Server: Apache-Coyote/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "Content-Type: application/json;charset=UTF-8[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "Transfer-Encoding: chunked[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "Date: Wed, 14 Mar 2018 02:43:47 GMT[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.impl.conn.DefaultClientConnection]Receiving response: HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]<< HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]<< Server: Apache-Coyote/1.1
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]<< Content-Type: application/json;charset=UTF-8
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]<< Transfer-Encoding: chunked
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.headers]<< Date: Wed, 14 Mar 2018 02:43:47 GMT
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.impl.client.DefaultHttpClient]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 10:43:47][com.deyuan.weather.util.APIHttpClient]statusCode:200
+ [INFO] [2018-03-14 10:43:47][com.deyuan.weather.util.APIHttpClient]调用API 花费时间(单位：毫秒)：153
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "20a[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "{"error":"0","status":"success","date":"2018-03-14","results":{"length":432,"content":"37B3F7BB6F1702000A0000009A170100000000009B170100030000009C171000E2A3A1C8248123FF2E2FAFFFFFFFFFFFA017010001000000A2173200100C0704010AFFFFFFFF170D08050200FFFFFFFF160E0906030BFFFFFFFFFF0F2B23282CFFFFFFFF2DFFFFFFFFFFFFFFFFFF0000A317010000000000A417010001000000F3170C00FFFFFFFFFFFFFFFFFFFFFFFF4C1801000400000068180100010000007A18010001000000F618010001000000F818010001000000E019010001000000571B1400323031372E31322E32362031333A35363A313200"}}"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "0[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.impl.conn.BasicClientConnectionManager]Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@48e61a35
+ [DEBUG] [2018-03-14 10:43:47][org.apache.http.impl.conn.BasicClientConnectionManager]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 10:43:47][com.deyuan.weather.util.APIHttpClient]调用接口状态：0
+ [INFO] [2018-03-14 14:48:34][com.deyuan.weather.util.APIHttpClient]parameters:{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}
+ [DEBUG] [2018-03-14 14:48:34][org.apache.http.impl.conn.BasicClientConnectionManager]Get connection for route {}->http://localhost:8080
+ [DEBUG] [2018-03-14 14:48:34][org.apache.http.impl.conn.DefaultClientConnectionOperator]Connecting to localhost:8080
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.client.protocol.RequestAddCookies]CookieSpec selected: default
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.client.protocol.RequestAuthCache]Auth cache not set in the context
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.client.protocol.RequestTargetAuthentication]Target auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.client.protocol.RequestProxyAuthentication]Proxy auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.impl.client.DefaultHttpClient]Attempt 1 to execute request
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.impl.conn.DefaultClientConnection]Sending request: POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] >> "POST /WeatherApi/getGps HTTP/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] >> "Content-type: application/json; charset=utf-8[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] >> "Accept: application/json[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] >> "Content-Length: 91[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] >> "Host: localhost:8080[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] >> "Connection: Keep-Alive[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] >> "User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] >> "[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]>> POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]>> Content-type: application/json; charset=utf-8
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]>> Accept: application/json
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]>> Content-Length: 91
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]>> Host: localhost:8080
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]>> Connection: Keep-Alive
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]>> User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] >> "{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "HTTP/1.1 200 OK[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "Server: Apache-Coyote/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "Content-Type: application/json;charset=UTF-8[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "Transfer-Encoding: chunked[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "Date: Wed, 14 Mar 2018 06:48:35 GMT[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.impl.conn.DefaultClientConnection]Receiving response: HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]<< HTTP/1.1 200 OK
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]<< Server: Apache-Coyote/1.1
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]<< Content-Type: application/json;charset=UTF-8
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]<< Transfer-Encoding: chunked
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.headers]<< Date: Wed, 14 Mar 2018 06:48:35 GMT
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.impl.client.DefaultHttpClient]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 14:48:35][com.deyuan.weather.util.APIHttpClient]statusCode:200
+ [INFO] [2018-03-14 14:48:35][com.deyuan.weather.util.APIHttpClient]调用API 花费时间(单位：毫秒)：879
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "20a[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "{"error":"0","status":"success","date":"2018-03-14","results":{"length":432,"content":"37B3F7BB6F1702000A0000009A170100000000009B170100030000009C171000E2A3A1C8248123FF2E2FAFFFFFFFFFFFA017010001000000A2173200100C0704010AFFFFFFFF170D08050200FFFFFFFF160E0906030BFFFFFFFFFF0F2B23282CFFFFFFFF2DFFFFFFFFFFFFFFFFFF0000A317010000000000A417010001000000F3170C00FFFFFFFFFFFFFFFFFFFFFFFF4C1801000400000068180100010000007A18010001000000F618010001000000F818010001000000E019010001000000571B1400323031372E31322E32362031333A35363A313200"}}"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "0[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.impl.conn.BasicClientConnectionManager]Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@48e61a35
+ [DEBUG] [2018-03-14 14:48:35][org.apache.http.impl.conn.BasicClientConnectionManager]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 14:48:35][com.deyuan.weather.util.APIHttpClient]调用接口状态：0
+ [INFO] [2018-03-14 15:04:26][com.deyuan.weather.util.APIHttpClient]parameters:{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.conn.BasicClientConnectionManager]Get connection for route {}->http://221.130.135.74:60006
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.conn.DefaultClientConnectionOperator]Connecting to 221.130.135.74:60006
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.client.protocol.RequestAddCookies]CookieSpec selected: default
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.client.protocol.RequestAuthCache]Auth cache not set in the context
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.client.protocol.RequestTargetAuthentication]Target auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.client.protocol.RequestProxyAuthentication]Proxy auth state: UNCHALLENGED
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.client.DefaultHttpClient]Attempt 1 to execute request
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.conn.DefaultClientConnection]Sending request: POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] >> "POST /WeatherApi/getGps HTTP/1.1[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] >> "Content-type: application/json; charset=utf-8[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] >> "Accept: application/json[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] >> "Content-Length: 91[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] >> "Host: 221.130.135.74:60006[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] >> "Connection: Keep-Alive[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] >> "User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] >> "[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]>> POST /WeatherApi/getGps HTTP/1.1
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]>> Content-type: application/json; charset=utf-8
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]>> Accept: application/json
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]>> Content-Length: 91
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]>> Host: 221.130.135.74:60006
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]>> Connection: Keep-Alive
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]>> User-Agent: Apache-HttpClient/4.4 (Java 1.5 minimum; Java/1.6.0_13)
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] >> "{"cid":"5","imei":"1","imsi":"2","key":"","lac":"4","ptime":"","savetime":"","version":"6"}"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "HTTP/1.1 200 [\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "Content-Type: application/json;charset=UTF-8[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "Transfer-Encoding: chunked[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "Date: Wed, 14 Mar 2018 07:04:44 GMT[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.conn.DefaultClientConnection]Receiving response: HTTP/1.1 200 
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]<< HTTP/1.1 200 
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]<< Content-Type: application/json;charset=UTF-8
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]<< Transfer-Encoding: chunked
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.headers]<< Date: Wed, 14 Mar 2018 07:04:44 GMT
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.client.DefaultHttpClient]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 15:04:26][com.deyuan.weather.util.APIHttpClient]statusCode:200
+ [INFO] [2018-03-14 15:04:26][com.deyuan.weather.util.APIHttpClient]调用API 花费时间(单位：毫秒)：321
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "208[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "{"error":"0","status":"success","date":"2018-03-14","results":{"length":0,"content":"37B3F7BB6F1702000A0000009A170100000000009B170100030000009C171000E2A3A1C8248123FF2E2FAFFFFFFFFFFFA017010001000000A2173200100C0704010AFFFFFFFF170D08050200FFFFFFFF160E0906030BFFFFFFFFFF0F2B23282CFFFFFFFF2DFFFFFFFFFFFFFFFFFF0000A317010000000000A417010001000000F3170C00FFFFFFFFFFFFFFFFFFFFFFFF4C1801000400000068180100010000007A18010001000000F618010001000000F818010001000000E019010001000000571B1400323031372E31322E32362031333A35363A313200"}}"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "0[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.wire] << "[\r][\n]"
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.conn.BasicClientConnectionManager]Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@5c1fe88d
+ [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.conn.BasicClientConnectionManager]Connection can be kept alive indefinitely
+ [INFO] [2018-03-14 15:04:26][com.deyuan.weather.util.APIHttpClient]调用接口状态：0
+ 
