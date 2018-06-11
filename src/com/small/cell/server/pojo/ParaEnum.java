@@ -2,8 +2,21 @@ package com.small.cell.server.pojo;
 
 public enum ParaEnum {
 	MAC("0001", "mac"), MODEL("0002", "model"), FW("0003", "fw"), STARTTYPE(
-			"0005", "startType"), REM("0006", "rem"), ROUTERFW("000F",
-			"routerFw"), IMSI("3002", "imsi"), TAC("3005", "tac"), LNGLAT(
+			"0005", "startType"), REM("0006", "rem"), ZL_81X3_D("0007",
+			"corrModel"), ZL_81X3_E("0008", "corrModel"), ZL_81X3_F("0009",
+			"corrModel"), ZL_81X3_1("000a", "corrModel"), ZL_81X3_0("000b",
+			"corrModel"), ZL_81X3_3D("000c", "corrModel"), ZL_81X3_3L("000d",
+			"corrModel"), ZL_81X3_ALL("000d", "corrModel"), ROUTERFW("000F",
+			"routerFw"), ZL_8110("0010", "corrModel"), ZL_8700_D("0011",
+			"corrModel"), ZL_8700_E("0012", "corrModel"), ZL_8700_F("0013",
+			"corrModel"), ZL_8700_1("0014", "corrModel"), FDD_BAND1("0015",
+			"corrModel"), ZL_8700_3D("0016", "corrModel"), ZL_8700_3L("0017",
+			"corrModel"), IMSI("3002", "imsi"), BAND("3004", "band"), TAC(
+			"3005", "tac"), FREPOINTS("3006", "frePoints"), REGIONS("3007",
+			"regions"), PLMN("300A", "plmn"), FREPOINT("300B", "frePoint"),
+			PCI("300C", "pci"),FieldStrength("300D","fieldStrength"),
+			SNIFFERFRE("300E","snifferFre"),IMSITIME("300F","imsiTime"),
+			LNGLAT(
 			"3013", "lnglat");
 	// 成员变量
 	private String code;

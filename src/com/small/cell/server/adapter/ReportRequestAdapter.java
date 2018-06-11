@@ -49,7 +49,6 @@ public class ReportRequestAdapter {
 				resTlv.setValue(ByteAndStr16.HexString2Bytes(MyUtils
 						.IntegerToString16For2(Res.InvalidFormat)));
 			tlvList.addAll(subList);
-
 			Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
 			ReflectUtils.setProperty(tlvList, smtp);
 			JedisUtil.set(mac.getBytes(), ObjectUtil.object2Bytes(smtp));

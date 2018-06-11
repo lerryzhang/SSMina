@@ -1,6 +1,7 @@
 package com.small.cell.server.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Smtp implements Serializable {
 	/**
@@ -26,6 +27,8 @@ public class Smtp implements Serializable {
 	private String pci;
 	private String fieldStrength;
 	private String lnglat;
+	private String corrModel;
+	private List<FrePoint> frePoints;
 
 	public String getMac() {
 		return mac;
@@ -161,6 +164,14 @@ public class Smtp implements Serializable {
 
 	public void setSeqNum(String seqNum) {
 		this.seqNum = seqNum;
+	}
+
+	public String getCorrModel() {
+		return corrModel;
+	}
+
+	public void setCorrModel(String corrModel) {
+		this.corrModel = corrModel;
 	}
 
 }

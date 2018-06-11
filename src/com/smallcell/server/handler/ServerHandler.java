@@ -7,6 +7,7 @@ import org.apache.mina.core.session.IoSession;
 
 import com.small.cell.server.adapter.AlarmRequestAdapter;
 import com.small.cell.server.adapter.AuthRequestAdapter;
+import com.small.cell.server.adapter.ConfigureQueryResponseAdapter;
 import com.small.cell.server.adapter.EchoRequestAdapter;
 import com.small.cell.server.adapter.ReportRequestAdapter;
 import com.small.cell.server.pojo.FrameFlag;
@@ -15,12 +16,10 @@ import com.small.cell.server.pojo.Para;
 import com.small.cell.server.pojo.TypeCode;
 import com.small.cell.server.pojo.PackageData.MsgHeader;
 
-import com.small.cell.server.session.SessionManager;
 import com.small.cell.server.util.ByteAndStr16;
 import com.small.cell.server.util.MyExeUtil;
 import com.small.cell.server.util.MyUtils;
 
-import com.small.cell.server.util.TlvTools;
 
 /**
  * 服务器端消息处理器
@@ -81,26 +80,33 @@ public class ServerHandler extends IoHandlerAdapter {
 		switch (TypeCode.getByValue(msgHeader.getMsgTypeCode())) {
 		case AuthRequest:
 			packageData = AuthRequestAdapter.handler(packageData, session);
+			session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
+					.toString())));
 			break;
 		case ReportRequest:
 			packageData = ReportRequestAdapter.handler(packageData);
+			session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
+					.toString())));
 			break;
 		case ControlResponse:
 			break;
 		case ConfigureUpdateResponse:
 			break;
 		case ConfigureQueryResponse:
-
+			ConfigureQueryResponseAdapter.handler(packageData);
 			break;
 		case AlarmRequest:
 			packageData = AlarmRequestAdapter.handler(packageData);
+			session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
+					.toString())));
 			break;
 		case EchoRequest:
 			packageData = EchoRequestAdapter.handler(packageData);
+			session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
+					.toString())));
 			break;
 		}
-		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
-				.toString())));
+		
 	}
 
 	@Override
