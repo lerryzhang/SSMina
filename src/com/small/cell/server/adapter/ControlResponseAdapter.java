@@ -14,7 +14,7 @@ import com.small.cell.server.util.ObjectUtil;
 import com.small.cell.server.util.ReflectUtils;
 import com.small.cell.server.util.TlvTools;
 
-public class ConfigureQueryResponseAdapter {
+public class ControlResponseAdapter {
 	public static String handler(PackageData packageData) throws Exception {
 
 		List<Tlv> tlvList = TlvTools.unpack(packageData.getMsgBodyBytes());

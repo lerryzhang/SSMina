@@ -8,6 +8,8 @@ import org.apache.mina.core.session.IoSession;
 import com.small.cell.server.adapter.AlarmRequestAdapter;
 import com.small.cell.server.adapter.AuthRequestAdapter;
 import com.small.cell.server.adapter.ConfigureQueryResponseAdapter;
+import com.small.cell.server.adapter.ConfigureUpdateResponseAdapter;
+import com.small.cell.server.adapter.ControlResponseAdapter;
 import com.small.cell.server.adapter.EchoRequestAdapter;
 import com.small.cell.server.adapter.ReportRequestAdapter;
 import com.small.cell.server.pojo.FrameFlag;
@@ -17,9 +19,9 @@ import com.small.cell.server.pojo.TypeCode;
 import com.small.cell.server.pojo.PackageData.MsgHeader;
 
 import com.small.cell.server.util.ByteAndStr16;
+import com.small.cell.server.util.GoEasyUtil;
 import com.small.cell.server.util.MyExeUtil;
 import com.small.cell.server.util.MyUtils;
-
 
 /**
  * 服务器端消息处理器
@@ -48,6 +50,7 @@ public class ServerHandler extends IoHandlerAdapter {
 				+ ByteAndStr16.Bytes2HexString(bytes));
 		PackageData packageData = new PackageData();
 		MsgHeader msgHeader = new MsgHeader();
+		String mac = null;
 		msgHeader.setMsgFrameFlag(MyUtils.parseBcdStringFromBytes(bytes, 0, 2));
 		msgHeader.setMsgTypeCode(MyUtils.parseBcdStringFromBytes(bytes, 2, 2));
 		msgHeader.setMsgVersion(MyUtils.parseBcdStringFromBytes(bytes, 4, 2));
@@ -62,51 +65,54 @@ public class ServerHandler extends IoHandlerAdapter {
 				bytes, 10, 2)));
 		packageData.setMsgHeader(msgHeader);
 		if (FrameFlag.Encrypt.equals(msgHeader.getMsgFrameFlag())) {
-			packageData.setMsgBodyBytes(MyExeUtil.getExeRes(
-					Para.BlowFishMode_2, ByteAndStr16.Bytes2HexString(MyUtils
-							.subBytes(bytes, PackageData.msgHeaderLength,
+			packageData
+					.setMsgBodyBytes(MyExeUtil.getExeRes(Para.BlowFishMode_2,
+							ByteAndStr16.Bytes2HexString(MyUtils.subBytes(
+									bytes,
+									PackageData.msgHeaderLength,
 									Integer.valueOf(msgHeader.getMsgLength(),
-											16)
-											- PackageData.msgHeaderLength))));
+											16) - PackageData.msgHeaderLength))));
 		} else if (FrameFlag.NoEncrypt.equals(msgHeader.getMsgFrameFlag())) {
 
 			packageData.setMsgBodyBytes(ByteAndStr16.Bytes2HexString(MyUtils
-					.subBytes(bytes, PackageData.msgHeaderLength, Integer
-							.valueOf(msgHeader.getMsgLength(), 16)
-
-							- PackageData.msgHeaderLength)));
+					.subBytes(bytes, PackageData.msgHeaderLength,
+							Integer.valueOf(msgHeader.getMsgLength(), 16)
+									- PackageData.msgHeaderLength)));
 		}
-
 		switch (TypeCode.getByValue(msgHeader.getMsgTypeCode())) {
 		case AuthRequest:
 			packageData = AuthRequestAdapter.handler(packageData, session);
-			session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
-					.toString())));
+			session.write(IoBuffer.wrap(ByteAndStr16
+					.HexString2Bytes(packageData.toString())));
 			break;
 		case ReportRequest:
 			packageData = ReportRequestAdapter.handler(packageData);
-			session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
-					.toString())));
+			session.write(IoBuffer.wrap(ByteAndStr16
+					.HexString2Bytes(packageData.toString())));
 			break;
 		case ControlResponse:
+			mac = ControlResponseAdapter.handler(packageData);
+			GoEasyUtil.send(String.format("MAC地址为%s的终端控制请求得到相应", mac));
 			break;
 		case ConfigureUpdateResponse:
+			ConfigureUpdateResponseAdapter.handler(packageData);
 			break;
 		case ConfigureQueryResponse:
-			ConfigureQueryResponseAdapter.handler(packageData);
+			mac = ConfigureQueryResponseAdapter.handler(packageData);
+			GoEasyUtil.send(String.format("MAC地址为%s的终端配置查新请求得到相应", mac));
 			break;
 		case AlarmRequest:
 			packageData = AlarmRequestAdapter.handler(packageData);
-			session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
-					.toString())));
+			session.write(IoBuffer.wrap(ByteAndStr16
+					.HexString2Bytes(packageData.toString())));
 			break;
 		case EchoRequest:
 			packageData = EchoRequestAdapter.handler(packageData);
-			session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
-					.toString())));
+			session.write(IoBuffer.wrap(ByteAndStr16
+					.HexString2Bytes(packageData.toString())));
 			break;
 		}
-		
+
 	}
 
 	@Override

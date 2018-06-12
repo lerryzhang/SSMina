@@ -284,4 +284,8 @@
  [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.conn.BasicClientConnectionManager]Releasing connection org.apache.http.impl.conn.ManagedClientConnectionImpl@5c1fe88d
  [DEBUG] [2018-03-14 15:04:26][org.apache.http.impl.conn.BasicClientConnectionManager]Connection can be kept alive indefinitely
  [INFO] [2018-03-14 15:04:26][com.deyuan.weather.util.APIHttpClient]调用接口状态：0
+ [WARN] [2018-06-12 10:01:33][org.directwebremoting.extend.Factory]DWR has not been initialized properly
+ [WARN] [2018-06-12 10:01:33][org.directwebremoting.extend.Factory]DWR has not been initialized properly
+ [WARN] [2018-06-12 10:03:13][org.directwebremoting.extend.Factory]DWR has not been initialized properly
+ [WARN] [2018-06-12 10:03:13][org.directwebremoting.extend.Factory]DWR has not been initialized properly
  

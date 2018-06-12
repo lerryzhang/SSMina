@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import com.small.cell.server.pojo.Control;
 import com.small.cell.server.pojo.FrameFlag;
 import com.small.cell.server.pojo.General;
@@ -55,9 +54,9 @@ public class SmallCellController {
 				.IntegerToString16For4(PackageData.msgHeaderLength
 						+ mac.length() / 2));
 		packageData.setMsgHeader(msgHeader);
-		String body = String.format("%s%s%s", MyUtils
-				.IntegerToString16For4(General.Mac), MyUtils
-				.IntegerToString16For4(mac.length() / 2), mac);
+		String body = String.format("%s%s%s",
+				MyUtils.IntegerToString16For4(General.Mac),
+				MyUtils.IntegerToString16For4(mac.length() / 2), mac);
 		try {
 			packageData.setMsgBodyBytes(MyExeUtil.getExeRes(
 					Para.BlowFishMode_1, body));
@@ -65,7 +64,6 @@ public class SmallCellController {
 			logger.info("exception:" + e.getMessage());
 			return Return.FAIL;
 		}
-		System.out.println("==2=2==2==2"+packageData.toString());
 		IoSession session = SessionManager.getManager().get(mac);
 		if (session == null) {
 			logger.info("session is null!");
@@ -119,35 +117,36 @@ public class SmallCellController {
 					Upgrade.Version.getCode(), MyUtils
 							.IntegerToString16For4(MyUtils.strTo16(version)
 									.length() / 2), MyUtils.strTo16(version));
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(body.length() / 2), body);
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(body.length() / 2),
+					body);
 
 			break;
 		case Restart:
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For2(1), "01");
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For2(1), "01");
 			break;
 		case Reset:
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For2(1), "01");
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For2(1), "01");
 			break;
 		case RouterUpgrade:
 			url = request.getParameter("routerUrl");
 			body = String.format("%s%s%s", Upgrade.Url.getCode(), MyUtils
 					.IntegerToString16For4(MyUtils.strTo16(url).length() / 2),
 					MyUtils.strTo16(url));
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(body.length() / 2), body);
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(body.length() / 2),
+					body);
 			break;
-
 		}
 		body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
 		msgHeader.setMsgLength(MyUtils
@@ -155,7 +154,6 @@ public class SmallCellController {
 						+ body.length() / 2));
 		packageData.setMsgHeader(msgHeader);
 		packageData.setMsgBodyBytes(body);
-		System.out.println("=====" + packageData.toString());
 		IoSession session = SessionManager.getManager().get(mac);
 		if (session == null) {
 			logger.info("session is null!");
@@ -163,6 +161,14 @@ public class SmallCellController {
 		}
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
+		return Return.SUCCESS;
+	}
+
+	@RequestMapping("/update")
+	@ResponseBody
+	public Integer update(HttpServletRequest request) throws IOException,
+			InterruptedException {
+		String mac=request.getParameter("mac");
 		return Return.SUCCESS;
 	}
 }

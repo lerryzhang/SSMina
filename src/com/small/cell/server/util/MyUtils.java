@@ -645,9 +645,5 @@ public class MyUtils {
 	
 	
 	
-	public static void main(String args[]){
-		
-		System.out.println("==="+hexStringToString("323232"));
-		
-	}
+
 }

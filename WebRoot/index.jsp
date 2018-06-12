@@ -8,26 +8,21 @@
 %>
 <title>layout 后台大布局 - Layui</title>
 <link href="layui/css/layui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://cdn.goeasy.io/goeasy.js"></script>
 
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
 		<div class="layui-header">
-			<div class="layui-logo">
-				终端管理后台
-			</div>
+			<div class="layui-logo">终端管理后台</div>
 			<!-- 头部区域（可配合layui已有的水平导航） -->
 			<ul class="layui-nav layui-layout-left">
-				<li class="layui-nav-item">
-					<a href="">控制台</a>
+				<li class="layui-nav-item"><a href="">控制台</a>
 				</li>
-				<li class="layui-nav-item">
-					<a href="">商品管理</a>
+				<li class="layui-nav-item"><a href="">商品管理</a>
 				</li>
-				<li class="layui-nav-item">
-					<a href="">用户</a>
+				<li class="layui-nav-item"><a href="">用户</a>
 				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;">其它系统</a>
+				<li class="layui-nav-item"><a href="javascript:;">其它系统</a>
 					<dl class="layui-nav-child">
 						<dd>
 							<a href="">邮件管理</a>
@@ -42,9 +37,8 @@
 				</li>
 			</ul>
 			<ul class="layui-nav layui-layout-right">
-				<li class="layui-nav-item">
-					<a href="javascript:;"> <img src="http://t.cn/RCzsdCq"
-							class="layui-nav-img"> 贤心 </a>
+				<li class="layui-nav-item"><a href="javascript:;"> <img
+						src="http://t.cn/RCzsdCq" class="layui-nav-img"> 贤心 </a>
 					<dl class="layui-nav-child">
 						<dd>
 							<a href="">基本资料</a>
@@ -54,8 +48,7 @@
 						</dd>
 					</dl>
 				</li>
-				<li class="layui-nav-item">
-					<a href="">退了</a>
+				<li class="layui-nav-item"><a href="">退了</a>
 				</li>
 			</ul>
 		</div>
@@ -64,8 +57,8 @@
 			<div class="layui-side-scroll">
 				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 				<ul class="layui-nav layui-nav-tree" lay-filter="test">
-					<li class="layui-nav-item layui-nav-itemed">
-						<a class="" href="javascript:;">所有商品</a>
+					<li class="layui-nav-item layui-nav-itemed"><a class=""
+						href="javascript:;">所有商品</a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;">列表一</a>
@@ -81,8 +74,7 @@
 							</dd>
 						</dl>
 					</li>
-					<li class="layui-nav-item">
-						<a href="javascript:;">解决方案</a>
+					<li class="layui-nav-item"><a href="javascript:;">解决方案</a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;">列表一</a>
@@ -95,11 +87,9 @@
 							</dd>
 						</dl>
 					</li>
-					<li class="layui-nav-item">
-						<a href="">云市场</a>
+					<li class="layui-nav-item"><a href="">云市场</a>
 					</li>
-					<li class="layui-nav-item">
-						<a href="">发布商品</a>
+					<li class="layui-nav-item"><a href="">发布商品</a>
 					</li>
 				</ul>
 			</div>
@@ -130,100 +120,127 @@
 </script>
 
 	<script>
-	//JavaScript代码区域
-	layui.use('element', function() {
-		var element = layui.element;
-
-	});
-
-	layui.use('table', function() {
-		var table = layui.table;
-
-		table.render( {
-			elem : '#test',
-			url : 'smallCell/list',
-			page : true //开启分页
-			,
-			cellMinWidth : 120,
-			cols : [ [ {title: '序号',templet: '#indexTpl'}, {
-				field : 'mac',
-				title : 'MAC地址'
-			}, {
-				field : 'model',
-				title : '设备型号'
-			}, {
-				field : 'fw',
-				title : '固件版本'
-			}, {
-				field : 'startType',
-				title : '启动类型'
-
-			}, {
-				field : 'rem',
-				title : 'REM扫描状态'
-			}, {
-				field : 'routerFw',
-				title : '路由器固件版本'
-			}, {
-				field : 'tac',
-				title : 'TAC'
-			}, {
-				fixed : 'right',
-				align : 'center',
-				toolbar : '#barDemo',
-				width : 250
-			} ] ]
+		//JavaScript代码区域
+		layui.use('element', function() {
+			var element = layui.element;
 
 		});
 
-		table.on('tool(demo)', function(obj) {
-			var data = obj.data;
-			if (obj.event === 'query') {
-				$.ajax( {
-					url : "smallCell/query",
-					type : "POST",
-					data : {
-						"mac" : data.mac
-					},
-					dataType : "json",
-					success : function(data) {
-						if (data == 0) {
-							layer.msg('配置查询指令下发成功！');
-						} else {
-							layer.msg('配置查询指令下发失败！');
+		layui.use('table', function() {
+			var table = layui.table;
+
+			table.render({
+				elem : '#test',
+				url : 'smallCell/list',
+				page : true //开启分页
+				,
+				cellMinWidth : 120,
+				cols : [ [ {
+					title : '序号',
+					templet : '#indexTpl'
+				}, {
+					field : 'mac',
+					title : 'MAC地址'
+				}, {
+					field : 'model',
+					title : '设备型号'
+				}, {
+					field : 'fw',
+					title : '固件版本'
+				}, {
+					field : 'startType',
+					title : '启动类型'
+
+				}, {
+					field : 'rem',
+					title : 'REM扫描状态'
+				}, {
+					field : 'routerFw',
+					title : '路由器固件版本'
+				}, {
+					field : 'tac',
+					title : 'TAC'
+				}, {
+					fixed : 'right',
+					align : 'center',
+					toolbar : '#barDemo',
+					width : 250
+				} ] ]
+
+			});
+
+			table.on('tool(demo)', function(obj) {
+				var data = obj.data;
+				if (obj.event === 'query') {
+					$.ajax({
+						url : "smallCell/query",
+						type : "POST",
+						data : {
+							"mac" : data.mac
+						},
+						dataType : "json",
+						success : function(data) {
+							if (data == 0) {
+								layer.msg('配置查询指令下发成功！');
+							} else {
+								layer.msg('配置查询指令下发失败！');
+							}
 						}
-					}
+					});
+
+				} else if (obj.event === 'update') {
+					layer.open({
+						type : 2 //Page层类型
+						,
+						area : [ '800px', '600px' ],
+						title : '更新命令列表',
+						shade : 0.6 //遮罩透明度
+						,
+						maxmin : true //允许全屏最小化
+						,
+						anim : 1 //0-6的动画形式，-1不开启
+						,
+						content : [ 'update.jsp?mac=' + data.mac, 'yes' ], //iframe的url，no代表不显示滚动条
+					});
+
+				} else if (obj.event === 'control') {
+
+					layer.open({
+						type : 2 //Page层类型
+						,
+						area : [ '800px', '600px' ],
+						title : '控制命令列表',
+						shade : 0.6 //遮罩透明度
+						,
+						maxmin : true //允许全屏最小化
+						,
+						anim : 1 //0-6的动画形式，-1不开启
+						,
+						content : [ 'control.jsp?mac=' + data.mac, 'no' ], //iframe的url，no代表不显示滚动条
+					});
+				}
+			});
+
+		});
+
+		var goEasy = new GoEasy({
+			appkey : 'BC-fff7f85db34d4e82bd5dc8ab7f5e29fa'
+		});
+		goEasy.subscribe({
+			channel : '系统通知',
+			onMessage : function(message) {
+
+				layer.open({
+					title : '在线调试',
+					offset : 'rb',
+					content : message.content
 				});
 
-			} else if (obj.event === 'update') {
-			 layer.open({
-              type: 2 //Page层类型
-             ,area: ['800px', '600px']
-              ,title: '更新命令列表'
-              ,shade: 0.6 //遮罩透明度
-              ,maxmin: true //允许全屏最小化
-              ,anim: 1 //0-6的动画形式，-1不开启
-              ,content: ['update.jsp?mac='+data.mac, 'yes'], //iframe的url，no代表不显示滚动条
-            });  
-
-			} else if (obj.event === 'control') {
-			
-			 layer.open({
-              type: 2 //Page层类型
-             ,area: ['800px', '600px']
-              ,title: '控制命令列表'
-              ,shade: 0.6 //遮罩透明度
-              ,maxmin: true //允许全屏最小化
-              ,anim: 1 //0-6的动画形式，-1不开启
-              ,content: ['control.jsp?mac='+data.mac, 'no'], //iframe的url，no代表不显示滚动条
-            });  
 			}
 		});
+	</script>
 
-	});
-</script>
-
-<script type="text/html" id="indexTpl">
+	<script type="text/html" id="indexTpl">
     {{d.LAY_TABLE_INDEX+1}}
 </script>
 </body>
