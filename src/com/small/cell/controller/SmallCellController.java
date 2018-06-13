@@ -1,15 +1,19 @@
 package com.small.cell.controller;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONObject;
+
 import org.apache.log4j.Logger;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.small.cell.collections.Convert;
+import com.small.cell.server.pojo.Config;
 import com.small.cell.server.pojo.Control;
 import com.small.cell.server.pojo.FrameFlag;
 import com.small.cell.server.pojo.General;
@@ -50,25 +56,31 @@ public class SmallCellController {
 		msgHeader.setMsgTypeCode(TypeCode.ConfigureQueryRequest.getCode());
 		msgHeader.setMsgVersion(smtp.getVersion());
 		msgHeader.setMsgSeqNum(smtp.getSeqNum());
-		msgHeader.setMsgLength(MyUtils
-				.IntegerToString16For4(PackageData.msgHeaderLength
-						+ mac.length() / 2));
-		packageData.setMsgHeader(msgHeader);
-		String body = String.format("%s%s%s",
-				MyUtils.IntegerToString16For4(General.Mac),
-				MyUtils.IntegerToString16For4(mac.length() / 2), mac);
+
+		String body = null;
 		try {
-			packageData.setMsgBodyBytes(MyExeUtil.getExeRes(
-					Para.BlowFishMode_1, body));
+			body = MyExeUtil.getExeRes(Para.BlowFishMode_1, String.format(
+					"%s%s%s", MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac));
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			logger.info("exception:" + e.getMessage());
 			return Return.FAIL;
+
 		}
+
+		packageData.setMsgBodyBytes(body);
+		msgHeader.setMsgLength(MyUtils
+				.IntegerToString16For4(PackageData.msgHeaderLength
+						+ (body.length() / 2)));
+		packageData.setMsgHeader(msgHeader);
+
 		IoSession session = SessionManager.getManager().get(mac);
 		if (session == null) {
 			logger.info("session is null!");
 			return Return.FAIL;
 		}
+		System.out.println("==query===" + packageData.toString());
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
 		return Return.SUCCESS;
@@ -117,41 +129,39 @@ public class SmallCellController {
 					Upgrade.Version.getCode(), MyUtils
 							.IntegerToString16For4(MyUtils.strTo16(version)
 									.length() / 2), MyUtils.strTo16(version));
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(body.length() / 2),
-					body);
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(body.length() / 2), body);
 
 			break;
 		case Restart:
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For2(1), "01");
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(1), "01");
 			break;
 		case Reset:
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For2(1), "01");
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(1), "01");
 			break;
 		case RouterUpgrade:
 			url = request.getParameter("routerUrl");
 			body = String.format("%s%s%s", Upgrade.Url.getCode(), MyUtils
 					.IntegerToString16For4(MyUtils.strTo16(url).length() / 2),
 					MyUtils.strTo16(url));
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(body.length() / 2),
-					body);
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(body.length() / 2), body);
 			break;
 		}
 		body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
 		msgHeader.setMsgLength(MyUtils
 				.IntegerToString16For4(PackageData.msgHeaderLength
-						+ body.length() / 2));
+						+ (body.length() / 2)));
 		packageData.setMsgHeader(msgHeader);
 		packageData.setMsgBodyBytes(body);
 		IoSession session = SessionManager.getManager().get(mac);
@@ -159,16 +169,74 @@ public class SmallCellController {
 			logger.info("session is null!");
 			return Return.FAIL;
 		}
+		System.out.println("==control===" + packageData.toString());
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
 		return Return.SUCCESS;
 	}
 
+	@RequestMapping("/viewSmtp")
+	public String viewSmtp(HttpServletRequest request, Model model)
+			throws IOException, InterruptedException {
+		String mac = request.getParameter("mac");
+		Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
+		model.addAttribute("smtp", smtp);
+		return "SmtpView";
+	}
+
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/update")
 	@ResponseBody
 	public Integer update(HttpServletRequest request) throws IOException,
 			InterruptedException {
-		String mac=request.getParameter("mac");
+		String mac = request.getParameter("mac");
+		JSONObject jb = JSONObject.fromObject(request.getParameter("username"));
+		Map map = (Map) jb;
+		if (map.size() > 0) {
+			String body = "";
+			Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
+			PackageData packageData = new PackageData();
+			MsgHeader msgHeader = new MsgHeader();
+			msgHeader.setMsgFrameFlag(FrameFlag.Encrypt);
+			msgHeader.setMsgTypeCode(TypeCode.ConfigureUpdateRequest.getCode());
+			msgHeader.setMsgVersion(smtp.getVersion());
+			msgHeader.setMsgSeqNum(smtp.getSeqNum());
+			Iterator<String> iter = map.keySet().iterator();
+
+			while (iter.hasNext()) {
+				String key = iter.next();
+				String value = (String) map.get(key);
+				if (Convert.list1.contains(key)) {
+					body = String.format("%s%s%s%s", body, key, MyUtils
+							.IntegerToString16For4(MyUtils.strTo16(value)
+									.length() / 2), MyUtils.strTo16(value));
+				} else {
+
+					body = String.format("%s%s%s%s", body, key, MyUtils
+							.IntegerToString16For4(value.length() / 2), value);
+				}
+
+			}
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, "0008",
+					MyUtils.IntegerToString16For4(body.length() / 2), body);
+			body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
+			msgHeader.setMsgLength(MyUtils
+					.IntegerToString16For4(PackageData.msgHeaderLength
+							+ (body.length() / 2)));
+			packageData.setMsgHeader(msgHeader);
+			packageData.setMsgBodyBytes(body);
+			System.out.println("==update===" + packageData.toString());
+			IoSession session = SessionManager.getManager().get(mac);
+			if (session == null) {
+				logger.info("session is null!");
+				return Return.FAIL;
+			}
+			session.write(IoBuffer.wrap(ByteAndStr16
+					.HexString2Bytes(packageData.toString())));
+
+		}
 		return Return.SUCCESS;
 	}
 }

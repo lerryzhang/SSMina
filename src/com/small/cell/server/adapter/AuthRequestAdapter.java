@@ -48,7 +48,7 @@ public class AuthRequestAdapter {
 			Smtp smtp = (Smtp) ReflectUtils.setProperty(tlvList);
 			smtp.setVersion(packageData.getMsgHeader().getMsgVersion());
 			smtp.setSeqNum(packageData.getMsgHeader().getMsgSeqNum());
-			if (JedisUtil.get(Smtp.SmtpRedisKey) == null) {
+			if (JedisUtil.hgetAll(Smtp.SmtpRedisKey.getBytes()) == null) {
 				Map<byte[], byte[]> map = new HashMap<byte[], byte[]>();
 				map.put(mac.getBytes(), ObjectUtil.object2Bytes(smtp));
 				JedisUtil.hmset(Smtp.SmtpRedisKey, map);

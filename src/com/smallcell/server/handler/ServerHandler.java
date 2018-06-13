@@ -91,8 +91,7 @@ public class ServerHandler extends IoHandlerAdapter {
 					.HexString2Bytes(packageData.toString())));
 			break;
 		case ControlResponse:
-			mac = ControlResponseAdapter.handler(packageData);
-			GoEasyUtil.send(String.format("MAC地址为%s的终端控制请求得到相应", mac));
+			ControlResponseAdapter.handler(packageData);
 			break;
 		case ConfigureUpdateResponse:
 			ConfigureUpdateResponseAdapter.handler(packageData);

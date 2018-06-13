@@ -16,7 +16,7 @@ import com.small.cell.server.util.ByteAndStr16;
 import com.small.cell.server.util.JedisUtil;
 import com.small.cell.server.util.MyExeUtil;
 import com.small.cell.server.util.MyUtils;
-import com.small.cell.server.util.ObjectUtil;
+
 import com.small.cell.server.util.ReflectUtils;
 
 import com.small.cell.server.util.TlvTools;
@@ -50,8 +50,11 @@ public class ReportRequestAdapter {
 						.IntegerToString16For2(Res.InvalidFormat)));
 			tlvList.addAll(subList);
 			Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
-			ReflectUtils.setProperty(tlvList, smtp);
-			JedisUtil.set(mac.getBytes(), ObjectUtil.object2Bytes(smtp));
+			if (smtp != null)
+				ReflectUtils.setProperty(tlvList, smtp);
+			// JedisUtil.set(mac.getBytes(), ObjectUtil.object2Bytes(smtp));
+
+			JedisUtil.hmset(Smtp.SmtpRedisKey, mac, smtp);
 			try {
 				body = MyExeUtil.getExeRes(Para.BlowFishMode_1, String.format(
 						"%s%s", macTlv, resTlv));

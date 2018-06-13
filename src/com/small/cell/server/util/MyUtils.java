@@ -643,7 +643,11 @@ public class MyUtils {
 	    return str;
 	}
 	
-	
+	public static void main(String args[]){
+		
+		System.out.println("==="+hexStringToString("34363030323532363037333138303000"));
+		
+	}
 	
 
 }

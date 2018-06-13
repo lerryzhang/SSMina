@@ -138,9 +138,12 @@
 				cols : [ [ {
 					title : '序号',
 					templet : '#indexTpl'
+					
+					
 				}, {
 					field : 'mac',
-					title : 'MAC地址'
+					title : 'MAC地址',
+					templet: '#macTpl'
 				}, {
 					field : 'model',
 					title : '设备型号'
@@ -242,5 +245,8 @@
 
 	<script type="text/html" id="indexTpl">
     {{d.LAY_TABLE_INDEX+1}}
+</script>
+<script type="text/html" id="macTpl">
+  <a href="smallCell/viewSmtp?mac={{d.mac}}" class="layui-table-link" target="_blank">{{ d.mac }}</a>
 </script>
 </body>

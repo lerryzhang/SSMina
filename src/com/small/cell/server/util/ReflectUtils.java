@@ -24,13 +24,19 @@ public class ReflectUtils {
 		Smtp smtp = new Smtp();
 		for (int i = 0; i < list.size(); i++) {
 			Tlv tlv = list.get(i);
-			String param = ParaEnum.getName(ByteAndStr16.Bytes2HexString(tlv
-					.getType()));
+			String type = ByteAndStr16.Bytes2HexString(tlv.getType());
+			String param = ParaEnum.getName(type);
 			if (null != param) {
 				if (Convert.list.contains(param))
-					setProperty(smtp, ParaEnum.getName(ByteAndStr16
-							.Bytes2HexString(tlv.getType())), ByteAndStr16
-							.Bytes2HexString(tlv.getValue()));
+					if (ParaEnum.ZL_81X3_D.equals(param))
+						setProperty(smtp, ParaEnum.getName(ByteAndStr16
+								.Bytes2HexString(tlv.getType())), ByteAndStr16
+								.Bytes2HexString(tlv.getType()));
+					else
+
+						setProperty(smtp, ParaEnum.getName(ByteAndStr16
+								.Bytes2HexString(tlv.getType())), ByteAndStr16
+								.Bytes2HexString(tlv.getValue()));
 				else
 					setProperty(smtp, ParaEnum.getName(ByteAndStr16
 							.Bytes2HexString(tlv.getType())), MyUtils

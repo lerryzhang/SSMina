@@ -1,7 +1,6 @@
 package com.small.cell.server.pojo;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Smtp implements Serializable {
 	/**
@@ -20,7 +19,7 @@ public class Smtp implements Serializable {
 	private String tdd;
 	private String routerFw;
 	private String imsi;
-	private Band[] band = new Band[3];
+	private String band;
 	private String tac;
 	private String plmn; // Æµµã
 	private String frequency;
@@ -28,7 +27,11 @@ public class Smtp implements Serializable {
 	private String fieldStrength;
 	private String lnglat;
 	private String corrModel;
-	private List<FrePoint> frePoints;
+	private String frePoints;
+	private String regions;
+	private String frePoint;
+	private String snifferFre;
+	private String imsiTime;
 
 	public String getMac() {
 		return mac;
@@ -86,12 +89,20 @@ public class Smtp implements Serializable {
 		this.imsi = imsi;
 	}
 
-	public Band[] getBand() {
+	public String getBand() {
 		return band;
 	}
 
-	public void setBand(Band[] band) {
+	public void setBand(String band) {
 		this.band = band;
+	}
+
+	public static String getSmtprediskey() {
+		return SmtpRedisKey;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public String getPlmn() {
@@ -172,6 +183,46 @@ public class Smtp implements Serializable {
 
 	public void setCorrModel(String corrModel) {
 		this.corrModel = corrModel;
+	}
+
+	public String getFrePoints() {
+		return frePoints;
+	}
+
+	public void setFrePoints(String frePoints) {
+		this.frePoints = frePoints;
+	}
+
+	public String getRegions() {
+		return regions;
+	}
+
+	public void setRegions(String regions) {
+		this.regions = regions;
+	}
+
+	public String getFrePoint() {
+		return frePoint;
+	}
+
+	public void setFrePoint(String frePoint) {
+		this.frePoint = frePoint;
+	}
+
+	public String getSnifferFre() {
+		return snifferFre;
+	}
+
+	public void setSnifferFre(String snifferFre) {
+		this.snifferFre = snifferFre;
+	}
+
+	public String getImsiTime() {
+		return imsiTime;
+	}
+
+	public void setImsiTime(String imsiTime) {
+		this.imsiTime = imsiTime;
 	}
 
 }
