@@ -35,7 +35,7 @@
 	padding: 5px;
 }
 </style>
-</head>
+
 
 <body class="childrenBody">
 
@@ -68,40 +68,138 @@
 						<td>${smtp.mac}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
 					<tr>
 						<td>协议版本号</td>
 						<td>${smtp.version}</td>
 						<td></td>
+					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
 					</tr>
 					<tr>
 						<td>设备型号</td>
 						<td>${smtp.model}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
 					<tr>
 						<td>固件版本</td>
 						<td>${smtp.fw}</td>
 						<td></td>
+					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
 					</tr>
 					<tr>
 						<td>启动类型</td>
 						<td>${smtp.startType}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li>0 上电</li>
+								<li>1 手动重启</li>
+								<li>2 升级</li>
+								<li>3 恢复出厂设置</li>
+								<li>4 软件重启</li>
+								<li>5 网络重连接</li>
+								<li>6 路由器升级</li>
+								<li>7 异常重启</li>
+							</ul>
+						</td>
+					</tr>
 					<tr>
 						<td>REM扫描状态</td>
 						<td>${smtp.rem}</td>
 						<td></td>
+					</tr>
+						<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li>0 尚未进行REM扫描</li>
+								<li>1 REM扫描完成</li>
+							</ul>
+						</td>
 					</tr>
 					<tr>
 						<td>对应型号</td>
 						<td>${smtp.corrModel}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4>对应型号列表</h4>
+							<ul>
+								<li>0x0007 对应型号：TDD D频（ZL-81X3-D）</li>
+								<li>0x0008 对应型号：TDD E频（ZL-81X3-E）</li>
+								<li>0x0009 对应型号：TDD F频 (ZL-81X3-F)</li>
+								<li>0x000a 对应型号：FDD Band1电信 (ZL-81X3-1)</li>
+								<li>0x000b 对应型号：FDD Band1联通 (保留)</li>
+								<li>0x000c 对应型号：FDD Band3电信 (ZL-81X3-3D)</li>
+								<li>0x000d 对应型号：FDD Band3联通 (ZL-81X3-3L)</li>
+								<li>0x000e 对应所有型号 （全局性配置使用，如服务器IP）</li>
+								<li>0x0010 对应型号：TDD E频（室内普通，ZL-8110）</li>
+								<li>0x0011 对应型号：TDD D频（室内加功放，ZL-8700-D）</li>
+								<li>0x0012 对应型号：TDD E频 (室内加功放，ZL-8700-E)</li>
+								<li>0x0013 对应型号：TDD F频 (室内加功放，ZL-8700-F)</li>
+								<li>0x0014 对应型号：FDD Band1电信 (室内加功放，ZL-8700-1)</li>
+								<li>0x0015 对应型号：FDD Band1联通 (保留)</li>
+								<li>0x0016 对应型号：FDD Band3电信 (室内加功放，ZL-8700-3D)</li>
+								<li>0x0017 对应型号：FDD Band3联通 (室内加功放，ZL-8700-3L)</li>
+							</ul>
+							
+						</td>
+					</tr>
 					<tr>
 						<td>路由器固件版本</td>
 						<td>${smtp.routerFw}</td>
 						<td></td>
+					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
 					</tr>
 
 					<tr>
@@ -109,25 +207,75 @@
 						<td>${smtp.imsi}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
 					<tr>
 						<td>经纬度</td>
 						<td>${smtp.lnglat}</td>
 						<td></td>
+					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
 					</tr>
 					<tr>
 						<td>BAND信息</td>
 						<td>${smtp.band}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
 					<tr>
 						<td>TAC</td>
 						<td>${smtp.tac}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
 					<tr>
 						<td>频点表</td>
 						<td>${smtp.frePoints}</td>
 						<td></td>
+					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
 					</tr>
 
 					<tr>
@@ -135,25 +283,75 @@
 						<td>${smtp.regions}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
 					<tr>
 						<td>PLMN</td>
 						<td>${smtp.plmn}</td>
 						<td></td>
+					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
 					</tr>
 					<tr>
 						<td>频点</td>
 						<td>${smtp.frePoint}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
 					<tr>
 						<td>PCI</td>
 						<td>${smtp.pci}</td>
 						<td></td>
 					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
 					<tr>
 						<td>场强</td>
 						<td>${smtp.fieldStrength}</td>
 						<td></td>
+					</tr>
+						<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
 					</tr>
 
 					<tr>
@@ -166,13 +364,31 @@
 
 					<tr>
 						<td colspan="3">
-							<h4>Additional information</h4>
+							<h4></h4>
 							<ul>
-								<li><a href="http://en.wikipedia.org/wiki/Usa">USA on
-										Wikipedia</a></li>
-								<li><a href="http://nationalatlas.gov/">National Atlas
-										of the United States</a></li>
-								<li><a href="http://www.htmleaf.com/">jQuery之家</a></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
+					
+					
+						<tr>
+
+						<td>系统运行时长</td>
+						<td>${smtp.uptimeSys}</td>
+						<td></td>
+
+					</tr>
+
+					<tr>
+						<td colspan="3">
+							<h4></h4>
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
 							</ul>
 						</td>
 					</tr>

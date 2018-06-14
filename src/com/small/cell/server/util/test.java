@@ -1,6 +1,7 @@
 package com.small.cell.server.util;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
@@ -14,34 +15,11 @@ import com.small.cell.server.pojo.PackageData.MsgHeader;
 import com.small.cell.server.session.SessionManager;
 
 
-public class test {
 
-	/**
-	 * @param args
-	 */
-
-	public static int[] value1 = { 80, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 14, 0, 0 };
-
-	public static void main(String[] args) throws IOException, InterruptedException {
-		// TODO Auto-generated method stub
-		
-		
-		PackageData packageData = new PackageData();
-		MsgHeader msgHeader = new MsgHeader();
-		msgHeader.setMsgFrameFlag(FrameFlag.Encrypt);
-		msgHeader.setMsgTypeCode(TypeCode.ConfigureQueryRequest.getCode());
-		msgHeader.setMsgVersion("000D");
-		msgHeader.setMsgSeqNum("210000FB");
-		msgHeader.setMsgLength("0016");
-		packageData.setMsgHeader(msgHeader);
-		String body = "000100060060B3987654";
-		packageData.setMsgBodyBytes(MyExeUtil.getExeRes(Para.BlowFishMode_1, body));
-		System.out.println("====="+packageData.toString());
-		SessionManager.getManager().get("0060B3987654").write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
-				.toString())));
-		
-		
-
-	}
-
+public class Test {
+    public static void main(String[] args) {
+        String s = "00000011";
+       
+        System.out.println(Integer.valueOf(s,16));
+    }
 }

@@ -1,6 +1,9 @@
 package com.small.cell.server.pojo;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.small.cell.server.util.MyUtils;
 
 public class Smtp implements Serializable {
 	/**
@@ -33,6 +36,7 @@ public class Smtp implements Serializable {
 	private String snifferFre;
 	private String imsiTime;
 	private String nowfrePoint;
+	private String uptimeSys;
 
 	public String getMac() {
 		return mac;
@@ -47,7 +51,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setModel(String model) {
-		this.model = model;
+		this.model = MyUtils.hexStringToString(model);
 	}
 
 	public String getFw() {
@@ -55,7 +59,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setFw(String fw) {
-		this.fw = fw;
+		this.fw = MyUtils.hexStringToString(fw);
 	}
 
 	public String getStartType() {
@@ -143,7 +147,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setRouterFw(String routerFw) {
-		this.routerFw = routerFw;
+		this.routerFw = MyUtils.hexStringToString(routerFw);
 	}
 
 	public String getFieldStrength() {
@@ -159,7 +163,8 @@ public class Smtp implements Serializable {
 	}
 
 	public void setLnglat(String lnglat) {
-		this.lnglat = lnglat;
+		this.lnglat = MyUtils.getStringFromInteger(MyUtils.getStrList(lnglat,
+				32), 2);
 	}
 
 	public String getVersion() {
@@ -191,7 +196,8 @@ public class Smtp implements Serializable {
 	}
 
 	public void setFrePoints(String frePoints) {
-		this.frePoints = frePoints;
+		this.frePoints = MyUtils.getStringFromInteger(MyUtils.getStrList(
+				frePoints, 8), 2);
 	}
 
 	public String getRegions() {
@@ -232,6 +238,16 @@ public class Smtp implements Serializable {
 
 	public void setNowfrePoint(String nowfrePoint) {
 		this.nowfrePoint = nowfrePoint;
+	}
+
+	public String getUptimeSys() {
+		return uptimeSys;
+	}
+
+	public void setUptimeSys(String uptimeSys) {
+
+		this.uptimeSys = MyUtils.getStringFromInteger(MyUtils.getStrList(
+				uptimeSys, 32), 2);
 	}
 
 }

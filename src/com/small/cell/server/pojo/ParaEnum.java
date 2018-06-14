@@ -16,8 +16,7 @@ public enum ParaEnum {
 			"regions"), PLMN("300A", "plmn"), FREPOINT("300B", "frePoint"),
 			PCI("300C", "pci"),FieldStrength("300D","fieldStrength"),
 			SNIFFERFRE("300E","snifferFre"),IMSITIME("300F","imsiTime"),
-			LNGLAT(
-			"3013", "lnglat");
+			LNGLAT("3013", "lnglat"),UPTIMESYS("3014", "uptimeSys");
 	// 成员变量
 	private String code;
 	private String name;

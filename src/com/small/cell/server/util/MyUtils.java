@@ -3,6 +3,7 @@ package com.small.cell.server.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -608,46 +609,142 @@ public class MyUtils {
 		return sb.toString();
 	}
 
-	
-	
 	public static String hexStringToString(String s) {
-	    if (s == null || s.equals("")) {
-	        return null;
-	    }
-	    s = s.replace(" ", "");
-	    byte[] baKeyword = new byte[s.length() / 2];
-	    for (int i = 0; i < baKeyword.length; i++) {
-	        try {
-	            baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(i * 2, i * 2 + 2), 16));
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	    }
-	    try {
-	        s = new String(baKeyword, "UTF-8");
-	        new String();
-	    } catch (Exception e1) {
-	        e1.printStackTrace();
-	    }
-	    return s;
+		if (s == null || s.equals("")) {
+			return null;
+		}
+		s = s.replace(" ", "");
+		byte[] baKeyword = new byte[s.length() / 2];
+		for (int i = 0; i < baKeyword.length; i++) {
+			try {
+				baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(
+						i * 2, i * 2 + 2), 16));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			s = new String(baKeyword, "UTF-8");
+			new String();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		return s;
 	}
-	
-	
+
 	public static String strTo16(String s) {
-	    String str = "";
-	    for (int i = 0; i < s.length(); i++) {
-	        int ch = (int) s.charAt(i);
-	        String s4 = Integer.toHexString(ch);
-	        str = str + s4;
-	    }
-	    return str;
+		String str = "";
+		for (int i = 0; i < s.length(); i++) {
+			int ch = (int) s.charAt(i);
+			String s4 = Integer.toHexString(ch);
+			str = str + s4;
+		}
+		return str;
 	}
-	
-	public static void main(String args[]){
-		
-		System.out.println("==="+hexStringToString("34363030323532363037333138303000"));
-		
+
+	/**
+	 * 把原始字符串分割成指定长度的字符串列表
+	 * 
+	 * @param inputString
+	 *            原始字符串
+	 * @param length
+	 *            指定长度
+	 * @return
+	 */
+	public static List<String> getStrList(String inputString, int length) {
+		int size = inputString.length() / length;
+		if (inputString.length() % length != 0) {
+			size += 1;
+		}
+		return getStrList(inputString, length, size);
 	}
+
+	/**
+	 * 把原始字符串分割成指定长度的字符串列表
+	 * 
+	 * @param inputString
+	 *            原始字符串
+	 * @param length
+	 *            指定长度
+	 * @param size
+	 *            指定列表大小
+	 * @return
+	 */
+	public static List<String> getStrList(String inputString, int length,
+			int size) {
+		List<String> list = new ArrayList<String>();
+		for (int index = 0; index < size; index++) {
+			String childStr = substring(inputString, index * length,
+					(index + 1) * length);
+			list.add(childStr);
+		}
+		return list;
+	}
+
+	/**
+	 * 分割字符串，如果开始位置大于字符串长度，返回空
+	 * 
+	 * @param str
+	 *            原始字符串
+	 * @param f
+	 *            开始位置
+	 * @param t
+	 *            结束位置
+	 * @return
+	 */
+	public static String substring(String str, int f, int t) {
+		if (f > str.length())
+			return null;
+		if (t > str.length()) {
+			return str.substring(f, str.length());
+		} else {
+			return str.substring(f, t);
+		}
+	}
+
+	public static String getStringFromInteger(List<String> list, int len) {
+		StringBuffer temp = new StringBuffer();
+
+		for (int i = 0; i < list.size(); i++) {
+			if (i % len == 0) {
+
+				temp.append("{").append(  hexStringToString(list.get(i)))
+						.append(",");
+
+			} else {
+
+				temp.append(hexStringToString(list.get(i))).append("}");
+			}
+		}
+		return temp.toString();
+	}
+
 	
+	public static String getStringFromString(List<String> list, int len) {
+		StringBuffer temp = new StringBuffer();
+
+		for (int i = 0; i < list.size(); i++) {
+			if (i % len == 0) {
+
+				temp.append("{").append(Integer.valueOf(list.get(i), 16))
+						.append(",");
+
+			} else {
+
+				temp.append(Integer.valueOf(list.get(i), 16)).append("}");
+			}
+		}
+		return temp.toString();
+	}
+
+	
+	
+	public static void main(String args[]) {
+
+		//List<String> list = getStrList("0000000000000000000000000000000000000000", 8);
+		//System.out.println("===" + getStringFromInteger(list, 2));
+		System.out.println("=="+hexStringToString("34363030373735353132313639383100"));
+
+	}
 
 }
