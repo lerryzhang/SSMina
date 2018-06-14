@@ -8,7 +8,9 @@
 %>
 <title>layout 后台大布局 - Layui</title>
 <link href="layui/css/layui.css" rel="stylesheet" type="text/css" />
+<!--  
 <script type="text/javascript" src="https://cdn.goeasy.io/goeasy.js"></script>
+-->
 
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
@@ -95,7 +97,7 @@
 			</div>
 		</div>
 
-		<div class="layui-body">
+		<div class="layui-body" >
 			<!-- 内容主体区域 -->
 			<div style="padding: 15px;">
 
@@ -247,6 +249,6 @@
     {{d.LAY_TABLE_INDEX+1}}
 </script>
 <script type="text/html" id="macTpl">
-  <a href="smallCell/viewSmtp?mac={{d.mac}}" class="layui-table-link" target="_blank">{{ d.mac }}</a>
+  <a href="smallCell/viewSmtp?mac={{d.mac}}" class="layui-table-link" target="_top">{{ d.mac }}</a>
 </script>
 </body>

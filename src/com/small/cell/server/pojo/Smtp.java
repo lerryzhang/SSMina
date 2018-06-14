@@ -32,6 +32,7 @@ public class Smtp implements Serializable {
 	private String frePoint;
 	private String snifferFre;
 	private String imsiTime;
+	private String nowfrePoint;
 
 	public String getMac() {
 		return mac;
@@ -223,6 +224,14 @@ public class Smtp implements Serializable {
 
 	public void setImsiTime(String imsiTime) {
 		this.imsiTime = imsiTime;
+	}
+
+	public String getNowfrePoint() {
+		return nowfrePoint;
+	}
+
+	public void setNowfrePoint(String nowfrePoint) {
+		this.nowfrePoint = nowfrePoint;
 	}
 
 }

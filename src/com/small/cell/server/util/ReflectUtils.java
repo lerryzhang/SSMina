@@ -10,7 +10,7 @@ import com.small.cell.server.pojo.Tlv;
 
 public class ReflectUtils {
 
-	@SuppressWarnings( { "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	public static Object setProperty(Object obj, String propertyName,
 			Object value) throws Exception {
 		Class clazz = obj.getClass(); // 获取字节码对象
@@ -30,18 +30,18 @@ public class ReflectUtils {
 				if (Convert.list.contains(param))
 					if (ParaEnum.ZL_81X3_D.equals(param))
 						setProperty(smtp, ParaEnum.getName(ByteAndStr16
-								.Bytes2HexString(tlv.getType())), ByteAndStr16
-								.Bytes2HexString(tlv.getType()));
+								.Bytes2HexString(tlv.getType())),
+								ByteAndStr16.Bytes2HexString(tlv.getType()));
 					else
 
 						setProperty(smtp, ParaEnum.getName(ByteAndStr16
-								.Bytes2HexString(tlv.getType())), ByteAndStr16
-								.Bytes2HexString(tlv.getValue()));
+								.Bytes2HexString(tlv.getType())),
+								ByteAndStr16.Bytes2HexString(tlv.getValue()));
 				else
 					setProperty(smtp, ParaEnum.getName(ByteAndStr16
-							.Bytes2HexString(tlv.getType())), MyUtils
-							.hexStringToString(ByteAndStr16.Bytes2HexString(tlv
-									.getValue())));
+							.Bytes2HexString(tlv.getType())),
+							MyUtils.hexStringToString(ByteAndStr16
+									.Bytes2HexString(tlv.getValue())));
 
 			}
 		}
@@ -57,9 +57,22 @@ public class ReflectUtils {
 			String param = ParaEnum.getName(ByteAndStr16.Bytes2HexString(tlv
 					.getType()));
 			if (null != param) {
-				setProperty(smtp, ParaEnum.getName(ByteAndStr16
-						.Bytes2HexString(tlv.getType())), ByteAndStr16
-						.Bytes2HexString(tlv.getValue()));
+				if (Convert.list.contains(param))
+					if (ParaEnum.ZL_81X3_D.getName().equals(param))
+						setProperty(smtp, ParaEnum.getName(ByteAndStr16
+								.Bytes2HexString(tlv.getType())),
+								ByteAndStr16.Bytes2HexString(tlv.getType()));
+					else
+
+						setProperty(smtp, ParaEnum.getName(ByteAndStr16
+								.Bytes2HexString(tlv.getType())),
+								ByteAndStr16.Bytes2HexString(tlv.getValue()));
+				else
+					setProperty(smtp, ParaEnum.getName(ByteAndStr16
+							.Bytes2HexString(tlv.getType())),
+							MyUtils.hexStringToString(ByteAndStr16
+									.Bytes2HexString(tlv.getValue())));
+
 			}
 		}
 		return smtp;
