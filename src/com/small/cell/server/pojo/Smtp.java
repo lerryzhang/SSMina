@@ -37,6 +37,9 @@ public class Smtp implements Serializable {
 	private String imsiTime;
 	private String nowfrePoint;
 	private String uptimeSys;
+	private String imsiCaptureTime;
+	private String smtpState;
+	private String imsiTransmit;
 
 	public String getMac() {
 		return mac;
@@ -91,7 +94,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setImsi(String imsi) {
-		this.imsi = imsi;
+		this.imsi = MyUtils.hexStringToString(imsi);
 	}
 
 	public String getBand() {
@@ -99,7 +102,8 @@ public class Smtp implements Serializable {
 	}
 
 	public void setBand(String band) {
-		this.band = band;
+		this.band = MyUtils.getStringFromString(
+				MyUtils.getStrList(frePoints, 8), 4);
 	}
 
 	public static String getSmtprediskey() {
@@ -115,7 +119,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setPlmn(String plmn) {
-		this.plmn = plmn;
+		this.plmn = MyUtils.hexStringToString(plmn);
 	}
 
 	public String getTac() {
@@ -123,7 +127,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setTac(String tac) {
-		this.tac = tac;
+		this.tac = Integer.valueOf(tac, 16).toString();
 	}
 
 	public String getFrequency() {
@@ -139,7 +143,8 @@ public class Smtp implements Serializable {
 	}
 
 	public void setPci(String pci) {
-		this.pci = pci;
+		this.pci = Integer.valueOf(pci, 16).toString();
+
 	}
 
 	public String getRouterFw() {
@@ -155,7 +160,8 @@ public class Smtp implements Serializable {
 	}
 
 	public void setFieldStrength(String fieldStrength) {
-		this.fieldStrength = fieldStrength;
+		this.fieldStrength = MyUtils.hexStringToString(fieldStrength);
+
 	}
 
 	public String getLnglat() {
@@ -163,8 +169,8 @@ public class Smtp implements Serializable {
 	}
 
 	public void setLnglat(String lnglat) {
-		this.lnglat = MyUtils.getStringFromInteger(MyUtils.getStrList(lnglat,
-				32), 2);
+		this.lnglat = MyUtils.getStringFromInteger(
+				MyUtils.getStrList(lnglat, 32), 2);
 	}
 
 	public String getVersion() {
@@ -172,7 +178,8 @@ public class Smtp implements Serializable {
 	}
 
 	public void setVersion(String version) {
-		this.version = version;
+
+		this.version = Integer.valueOf(version, 16).toString();
 	}
 
 	public String getSeqNum() {
@@ -196,8 +203,14 @@ public class Smtp implements Serializable {
 	}
 
 	public void setFrePoints(String frePoints) {
-		this.frePoints = MyUtils.getStringFromInteger(MyUtils.getStrList(
-				frePoints, 8), 2);
+
+		if (frePoints == null || "".equals(frePoints)) {
+			this.frePoints = frePoints;
+		} else {
+			this.frePoints = MyUtils.getStringFromString(
+					MyUtils.getStrList(frePoints, 8), 2);
+		}
+
 	}
 
 	public String getRegions() {
@@ -205,7 +218,15 @@ public class Smtp implements Serializable {
 	}
 
 	public void setRegions(String regions) {
-		this.regions = regions;
+
+		if (regions == null || "".equals(regions)) {
+			this.regions = regions;
+		} else {
+			this.regions =
+
+			MyUtils.getRegins(MyUtils.getStrList(regions, 88));
+
+		}
 	}
 
 	public String getFrePoint() {
@@ -213,7 +234,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setFrePoint(String frePoint) {
-		this.frePoint = frePoint;
+		this.frePoint = Integer.valueOf(frePoint, 16).toString();
 	}
 
 	public String getSnifferFre() {
@@ -237,7 +258,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setNowfrePoint(String nowfrePoint) {
-		this.nowfrePoint = nowfrePoint;
+		this.nowfrePoint = Integer.valueOf(nowfrePoint, 16).toString();
 	}
 
 	public String getUptimeSys() {
@@ -246,8 +267,37 @@ public class Smtp implements Serializable {
 
 	public void setUptimeSys(String uptimeSys) {
 
-		this.uptimeSys = MyUtils.getStringFromInteger(MyUtils.getStrList(
-				uptimeSys, 32), 2);
+		if (uptimeSys == null || "".equals(uptimeSys)) {
+			this.uptimeSys = uptimeSys;
+		} else {
+			this.uptimeSys = MyUtils.getStringFromInteger(
+					MyUtils.getStrList(uptimeSys, 32), 2);
+		}
+
+	}
+
+	public String getImsiCaptureTime() {
+		return imsiCaptureTime;
+	}
+
+	public void setImsiCaptureTime(String imsiCaptureTime) {
+		this.imsiCaptureTime = MyUtils.hexStringToString(imsiCaptureTime);
+	}
+
+	public String getSmtpState() {
+		return smtpState;
+	}
+
+	public void setSmtpState(String smtpState) {
+		this.smtpState = MyUtils.getSmtpState(smtpState);
+	}
+
+	public String getImsiTransmit() {
+		return imsiTransmit;
+	}
+
+	public void setImsiTransmit(String imsiTransmit) {
+		this.imsiTransmit = MyUtils.getImsiTransmit(imsiTransmit);
 	}
 
 }

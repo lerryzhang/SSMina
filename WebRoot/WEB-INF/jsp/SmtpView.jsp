@@ -68,7 +68,7 @@
 						<td>${smtp.mac}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -83,7 +83,7 @@
 						<td>${smtp.version}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -98,7 +98,7 @@
 						<td>${smtp.model}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -113,7 +113,7 @@
 						<td>${smtp.fw}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -128,7 +128,7 @@
 						<td>${smtp.startType}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4>参数列表</h4>
 							<ul>
@@ -148,7 +148,7 @@
 						<td>${smtp.rem}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4>参数列表</h4>
 							<ul>
@@ -162,7 +162,7 @@
 						<td>${smtp.corrModel}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4>对应型号列表</h4>
 							<ul>
@@ -183,7 +183,6 @@
 								<li>0x0016 对应型号：FDD Band3电信 (室内加功放，ZL-8700-3D)</li>
 								<li>0x0017 对应型号：FDD Band3联通 (室内加功放，ZL-8700-3L)</li>
 							</ul>
-							
 						</td>
 					</tr>
 					<tr>
@@ -191,7 +190,7 @@
 						<td>${smtp.routerFw}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -207,7 +206,7 @@
 						<td>${smtp.imsi}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -222,7 +221,7 @@
 						<td>${smtp.lnglat}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -237,7 +236,7 @@
 						<td>${smtp.band}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -252,7 +251,7 @@
 						<td>${smtp.tac}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -267,7 +266,7 @@
 						<td>${smtp.frePoints}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -283,7 +282,7 @@
 						<td>${smtp.regions}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -298,7 +297,7 @@
 						<td>${smtp.plmn}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -313,7 +312,7 @@
 						<td>${smtp.frePoint}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -328,7 +327,7 @@
 						<td>${smtp.pci}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -343,7 +342,7 @@
 						<td>${smtp.fieldStrength}</td>
 						<td></td>
 					</tr>
-						<tr>
+					<tr>
 						<td colspan="3">
 							<h4></h4>
 							<ul>
@@ -372,12 +371,12 @@
 							</ul>
 						</td>
 					</tr>
-					
-					
-						<tr>
 
-						<td>系统运行时长</td>
-						<td>${smtp.uptimeSys}</td>
+
+					<tr>
+
+						<td>IMSI捕获时间</td>
+						<td>${smtp.imsiCaptureTime}</td>
 						<td></td>
 
 					</tr>
@@ -389,6 +388,61 @@
 								<li></li>
 								<li></li>
 								<li></li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>系统运行时长</td>
+						<td>${smtp.uptimeSys}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li>第一个参数为系统启动时长</li>
+								<li>第二个参数为小区启动时长</li>
+								<li></li>
+							</ul>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>状态信息定时上报</td>
+						<td>${smtp.smtpState}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li>小区状态：0:down 1:up</li>
+								<li>电源状态 始终为1</li>
+								<li>空口同步状态：0:未同步 1:同步</li>
+								<li>GPS同步状态：0:未同步 1:同步</li>
+								<li>1588同步状态：0:未同步 1:同步</li>
+								<li>CPU使用率</li>
+								<li>内存使用率</li>
+								<li>CPU温度</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>IMSI缓存与传输状态</td>
+						<td>${smtp.imsiTransmit}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li>1:前30s上报成功计数</li>
+								<li>2:前30s实时数据发送计数</li>
+								<li>3:前30s重传发送计数</li>
+								<li>4:前30s离线缓存数据发送计数</li>
+								<li>5:前30s上报成功百分比</li>
+								<li>6:当前离线缓存数据余量</li>
+								<li>7:当前剩余离线缓存数据中，最老的一条捕获时间</li>
 							</ul>
 						</td>
 					</tr>

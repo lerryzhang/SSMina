@@ -490,9 +490,10 @@ public class JedisUtil {
 
 			jedis = jedisPool.getResource();
 			jedis.auth(JEDIS_PASSWORD);
-		
-			smtp = (Smtp) ObjectUtil.bytes2Object(jedis.hget(key.getBytes(),
-					fields.getBytes()));
+			if (jedis.hget(key.getBytes(), fields.getBytes()) != null)
+
+				smtp = (Smtp) ObjectUtil.bytes2Object(jedis.hget(
+						key.getBytes(), fields.getBytes()));
 
 		} catch (Exception e) {
 

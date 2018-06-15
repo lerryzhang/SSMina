@@ -76,9 +76,8 @@ public class ReflectUtils {
 								.Bytes2HexString(tlv.getValue()));
 				else
 					setProperty(smtp, ParaEnum.getName(ByteAndStr16
-							.Bytes2HexString(tlv.getType())), MyUtils
-							.hexStringToString(ByteAndStr16.Bytes2HexString(tlv
-									.getValue())));
+							.Bytes2HexString(tlv.getType())), ByteAndStr16.Bytes2HexString(tlv
+									.getValue()));
 
 			}
 		}

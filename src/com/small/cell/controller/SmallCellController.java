@@ -54,7 +54,7 @@ public class SmallCellController {
 		MsgHeader msgHeader = new MsgHeader();
 		msgHeader.setMsgFrameFlag(FrameFlag.Encrypt);
 		msgHeader.setMsgTypeCode(TypeCode.ConfigureQueryRequest.getCode());
-		msgHeader.setMsgVersion(smtp.getVersion());
+		msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer.parseInt(smtp.getVersion())));
 		msgHeader.setMsgSeqNum(smtp.getSeqNum());
 
 		String body = null;
@@ -108,7 +108,7 @@ public class SmallCellController {
 		MsgHeader msgHeader = new MsgHeader();
 		msgHeader.setMsgFrameFlag(FrameFlag.Encrypt);
 		msgHeader.setMsgTypeCode(TypeCode.ControlRequest.getCode());
-		msgHeader.setMsgVersion(smtp.getVersion());
+		msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer.parseInt(smtp.getVersion())));
 		msgHeader.setMsgSeqNum(smtp.getSeqNum());
 
 		switch (Control.getByValue(param)) {
@@ -184,7 +184,7 @@ public class SmallCellController {
 		return "SmtpView";
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping("/update")
 	@ResponseBody
 	public Integer update(HttpServletRequest request) throws IOException,
@@ -199,7 +199,7 @@ public class SmallCellController {
 			MsgHeader msgHeader = new MsgHeader();
 			msgHeader.setMsgFrameFlag(FrameFlag.Encrypt);
 			msgHeader.setMsgTypeCode(TypeCode.ConfigureUpdateRequest.getCode());
-			msgHeader.setMsgVersion(smtp.getVersion());
+			msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer.parseInt(smtp.getVersion())));
 			msgHeader.setMsgSeqNum(smtp.getSeqNum());
 			Iterator<String> iter = map.keySet().iterator();
 

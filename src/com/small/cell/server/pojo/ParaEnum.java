@@ -13,10 +13,11 @@ public enum ParaEnum {
 			"corrModel"), ZL_8700_3D("0016", "corrModel"), ZL_8700_3L("0017",
 			"corrModel"), IMSI("3002", "imsi"), BAND("3004", "band"), TAC(
 			"3005", "tac"), FREPOINTS("3006", "frePoints"), REGIONS("3007",
-			"regions"), PLMN("300A", "plmn"), FREPOINT("300B", "frePoint"),
-			PCI("300C", "pci"),FieldStrength("300D","fieldStrength"),
-			SNIFFERFRE("300E","snifferFre"),IMSITIME("300F","imsiTime"),
-			LNGLAT("3013", "lnglat"),UPTIMESYS("3014", "uptimeSys");
+			"regions"), PLMN("300A", "plmn"), FREPOINT("300B", "frePoint"), PCI(
+			"300C", "pci"), FieldStrength("300D", "fieldStrength"), SNIFFERFRE(
+			"300E", "snifferFre"), SMTPSTATE("3010", "smtpState"), IMSITRANSMIT("3012",
+					"imsiTransmit"), UPTIMESYS("3014",
+			"uptimeSys"), IMSICAPTURETIME("300F", "imsiCaptureTime");
 	// 成员变量
 	private String code;
 	private String name;

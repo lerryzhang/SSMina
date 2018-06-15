@@ -617,8 +617,8 @@ public class MyUtils {
 		byte[] baKeyword = new byte[s.length() / 2];
 		for (int i = 0; i < baKeyword.length; i++) {
 			try {
-				baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(
-						i * 2, i * 2 + 2), 16));
+				baKeyword[i] = (byte) (0xff & Integer.parseInt(
+						s.substring(i * 2, i * 2 + 2), 16));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -708,18 +708,21 @@ public class MyUtils {
 		for (int i = 0; i < list.size(); i++) {
 			if (i % len == 0) {
 
-				temp.append("{").append(  hexStringToString(list.get(i)))
+				temp.append("{").append(hexStringToString(list.get(i)))
 						.append(",");
 
-			} else {
+			} else if ((i + 1) % len == 0) {
 
 				temp.append(hexStringToString(list.get(i))).append("}");
+			} else {
+
+				temp.append(hexStringToString(list.get(i))).append(",");
+
 			}
 		}
 		return temp.toString();
 	}
 
-	
 	public static String getStringFromString(List<String> list, int len) {
 		StringBuffer temp = new StringBuffer();
 
@@ -729,21 +732,114 @@ public class MyUtils {
 				temp.append("{").append(Integer.valueOf(list.get(i), 16))
 						.append(",");
 
-			} else {
+			} else if ((i + 1) % len == 0) {
 
 				temp.append(Integer.valueOf(list.get(i), 16)).append("}");
+			} else {
+
+				temp.append(Integer.valueOf(list.get(i), 16)).append(",");
 			}
 		}
 		return temp.toString();
 	}
 
+	public static String getRegins(List<String> list) {
+		StringBuffer temp = new StringBuffer();
+		for (int i = 0; i < list.size(); i++) {
+			String content = list.get(i);
+			temp.append("{")
+					.append(Integer.valueOf(content.substring(0, 8), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(8, 16), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(16, 24), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(24, 32), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(32, 40), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(40, 48), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(48, 56), 16))
+					.append(",")
+					.append(hexStringToString(content.substring(56, 72)))
+					.append(",")
+					.append(hexStringToString(content.substring(72, 84)))
+					.append(",")
+					.append(hexStringToString(content.substring(84, 88)))
+					.append("}");
+
+		}
+		return temp.toString();
+	}
 	
 	
+	public static String getSmtpState(String  content) {
+		StringBuffer temp = new StringBuffer();
+		
+			temp.append("{")
+					.append(Integer.valueOf(content.substring(0, 2), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(2, 4), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(4, 6), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(6, 8), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(8, 10), 16))
+					.append(",")
+					.append(hexStringToString(content.substring(10, 26)))
+					.append(",")
+					.append(hexStringToString(content.substring(26, 42)))
+					.append(",")
+					.append(hexStringToString(content.substring(42, 58)))
+					.append("}");
+
+		
+		return temp.toString();
+	}
+	
+	
+	
+	public static String getImsiTransmit(String  content) {
+		StringBuffer temp = new StringBuffer();
+		
+			temp.append("{")
+					.append(Integer.valueOf(content.substring(0, 8), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(8, 16), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(16, 24), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(24, 32), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(32, 40), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(40, 48), 16))
+					.append(",")
+					.append(hexStringToString(content.substring(48, 88)))
+					.append("}");
+
+		
+		return temp.toString();
+	}
+	
+	
+
 	public static void main(String args[]) {
 
-		//List<String> list = getStrList("0000000000000000000000000000000000000000", 8);
-		//System.out.println("===" + getStringFromInteger(list, 2));
-		System.out.println("=="+hexStringToString("34363030373735353132313639383100"));
+		// List<String> list =
+		// getStrList("0000000000000000000000000000000000000000", 8);
+		// System.out.println("===" + getStringFromInteger(list, 2));
+
+		List<String> list = new ArrayList<String>();
+		list.add("00000001");
+		list.add("00000001");
+		list.add("00000001");
+		list.add("00000001");
+
+		// System.out.println("==" + Integer.valueOf("000d",16).toString());
+		System.out.println("=====" + IntegerToString16For4(Integer.parseInt("13")));
 
 	}
 
