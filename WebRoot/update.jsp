@@ -55,24 +55,101 @@
 			</div>
 
 		</div>
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c3" value="5003" title="LTE 扫描 BAND ">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r3" 
+						autocomplete="off" class="layui-input">
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c4" value="5004" title="LTE 扫描频点列表 ">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r4" 
+						autocomplete="off" class="layui-input">
+				</div>
+			</div>
+		</div>
+		
+		
+	
+		
+		
 		<div class="layui-form-item">
 
 			<div class="layui-input-block">
-				<input type="checkbox" name="c3" value="5005" title="探针开关 ">
+				<input type="checkbox" name="c5" value="5005" title="探针开关 ">
 			</div>
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r3" value="00000000" checked=""
+						<input type="radio" name="r5" value="00000000" checked=""
 							title="关闭">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r3" value="00000001" title="开启">
+						<input type="radio" name="r5" value="00000001" title="开启">
 					</div>
 				</div>
 			</div>
 
 		</div>
+		
+		
+		
+		<div class="layui-form-item">
+
+			<div class="layui-input-block">
+				<input type="checkbox" name="c6" value="5006" title="重定向开关 ">
+			</div>
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<div class="layui-input-inline">
+						<input type="radio" name="r6" value="00" checked=""
+							title="关闭">
+					</div>
+					<div class="layui-input-inline">
+						<input type="radio" name="r6" value="01" title="开启">
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+		
+		<div class="layui-form-item">
+
+			<div class="layui-input-block">
+				<input type="checkbox" name="c7" value="5007" title="重定向选择开关 ">
+			</div>
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<div class="layui-input-inline">
+						<input type="radio" name="r7" value="00" 
+							title="4G">
+					</div>
+					<div class="layui-input-inline">
+						<input type="radio" name="r7" value="01" title="2G">
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
 
 		<div class="layui-form-item">
 			<div class="layui-input-block">
@@ -125,76 +202,67 @@
 	<script src="layui/layui.js"></script>
 	<script src="jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
 	<script>
-	layui
-			.use(
-					'form',
-					function() {
-						var form = layui.form;
+	layui.use('form', function() {
+		var form = layui.form;
 
-						form
-								.on(
-										'submit(formDemo)',
-										function(data) {
-											var map = {}; // Map map = new HashMap();
-											$("input[type='checkbox']")
-													.each(
+		form.on('submit(formDemo)', function(data) {
+			var map = {};
+			$("input[type='checkbox']").each(
 
-															function() {
-																if ($(this)
-																		.is(
-																				":checked")) {
-																	var key = $(
-																			this)
-																			.val();
-																	var name = $(
-																			this)
-																			.prop(
-																					"name");
-																	var index = name
-																			.substring(1);
-																	var key1 = "r"
-																			+ index;
-																	var value;
-																	var type = $(
-																			'input[name=' + key1 + ']')
-																			.prop(
-																					"type");
+			function() {
+				if ($(this).is(":checked")) {
+					var key = $(this).val();
+					var name = $(this).prop("name");
+					var index = name.substring(1);
+					var key1 = "r" + index;
+					var value;
+					var type = $('input[name=' + key1 + ']').prop("type");
 
-																	if (type == "radio") {
+					if (type == "radio") {
 
-																		value = $(
-																				'input[name=' + key1 + ']:checked')
-																				.val();
-																	} else {
-																		value = $(
-																				'input[name=' + key1 + ']')
-																				.val();
-																	}
-																	map[key] = value;
-																}
+						value = $('input[name=' + key1 + ']:checked').val();
+					} else {
+						value = $('input[name=' + key1 + ']').val();
+					}
+					map[key] = value;
+				}
 
-															});
+			});
 
-											$
-													.ajax( {
-														type : "post",
-														url : "smallCell/update",
-														data : {
-															mac : $(
-																	"input[name='mac']")
-																	.val(),
-															username : JSON
-																	.stringify(map)
-														},
-														dataType : "json",
-														success : function(data) {
+			$.ajax( {
+				type : "post",
+				url : "smallCell/update",
+				data : {
+					mac : $("input[name='mac']").val(),
+					username : JSON.stringify(map)
+				},
+				dataType : "json",
+				success : function(data) {
 
-															alert("提交成功");
-														}
-													});
+					if (result == "0") {
+						layer.open( {
+							content : '更新指令下发成功',
+							yes : function(index, layero) {
 
-										});
-					});
+							}
+						});
+
+					} else {
+						layer.open( {
+							content : '更新指令下发操作出现异常',
+							yes : function(index, layero) {
+								layer.closeAll();
+							}
+						});
+
+					}
+
+				}
+			});
+			return false;
+
+		});
+	});
 </script>
 
 

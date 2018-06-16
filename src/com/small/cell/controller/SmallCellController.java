@@ -1,6 +1,7 @@
 package com.small.cell.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.small.cell.collections.Convert;
-import com.small.cell.server.pojo.Config;
+
 import com.small.cell.server.pojo.Control;
 import com.small.cell.server.pojo.FrameFlag;
 import com.small.cell.server.pojo.General;
@@ -48,13 +50,14 @@ public class SmallCellController {
 
 	@RequestMapping(value = "/query", method = RequestMethod.POST)
 	@ResponseBody
-	public Integer configureQuery(@RequestParam("mac") String mac) {
+	public String configureQuery(@RequestParam("mac") String mac) {
 		Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
 		PackageData packageData = new PackageData();
 		MsgHeader msgHeader = new MsgHeader();
 		msgHeader.setMsgFrameFlag(FrameFlag.Encrypt);
 		msgHeader.setMsgTypeCode(TypeCode.ConfigureQueryRequest.getCode());
-		msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer.parseInt(smtp.getVersion())));
+		msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer
+				.parseInt(smtp.getVersion())));
 		msgHeader.setMsgSeqNum(smtp.getSeqNum());
 
 		String body = null;
@@ -97,7 +100,7 @@ public class SmallCellController {
 
 	@RequestMapping("/control")
 	@ResponseBody
-	public Integer control(HttpServletRequest request) throws IOException,
+	public String control(HttpServletRequest request) throws IOException,
 			InterruptedException {
 		String url = null;
 		String body = null;
@@ -108,7 +111,8 @@ public class SmallCellController {
 		MsgHeader msgHeader = new MsgHeader();
 		msgHeader.setMsgFrameFlag(FrameFlag.Encrypt);
 		msgHeader.setMsgTypeCode(TypeCode.ControlRequest.getCode());
-		msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer.parseInt(smtp.getVersion())));
+		msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer
+				.parseInt(smtp.getVersion())));
 		msgHeader.setMsgSeqNum(smtp.getSeqNum());
 
 		switch (Control.getByValue(param)) {
@@ -173,6 +177,7 @@ public class SmallCellController {
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
 		return Return.SUCCESS;
+
 	}
 
 	@RequestMapping("/viewSmtp")
@@ -184,10 +189,10 @@ public class SmallCellController {
 		return "SmtpView";
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/update")
 	@ResponseBody
-	public Integer update(HttpServletRequest request) throws IOException,
+	public String update(HttpServletRequest request) throws IOException,
 			InterruptedException {
 		String mac = request.getParameter("mac");
 		JSONObject jb = JSONObject.fromObject(request.getParameter("username"));
@@ -199,7 +204,8 @@ public class SmallCellController {
 			MsgHeader msgHeader = new MsgHeader();
 			msgHeader.setMsgFrameFlag(FrameFlag.Encrypt);
 			msgHeader.setMsgTypeCode(TypeCode.ConfigureUpdateRequest.getCode());
-			msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer.parseInt(smtp.getVersion())));
+			msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer
+					.parseInt(smtp.getVersion())));
 			msgHeader.setMsgSeqNum(smtp.getSeqNum());
 			Iterator<String> iter = map.keySet().iterator();
 
@@ -237,6 +243,8 @@ public class SmallCellController {
 					.HexString2Bytes(packageData.toString())));
 
 		}
+
 		return Return.SUCCESS;
+
 	}
 }

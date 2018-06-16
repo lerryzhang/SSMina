@@ -19,7 +19,7 @@
 		</legend>
 	</fieldset>
 
-	<form class="layui-form" action="smallCell/control">
+	<form class="layui-form" id="form1" action="">
 		<!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
 		<div class="layui-form-item">
 
@@ -111,7 +111,7 @@
 
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button class="layui-btn" lay-submit lay-filter="*">
+				<button class="layui-btn" lay-submit lay-filter="formDemo">
 					立即提交
 				</button>
 				<button type="reset" class="layui-btn layui-btn-primary">
@@ -122,12 +122,45 @@
 		<!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
 	</form>
 	<script src="layui/layui.js"></script>
+	<script src="jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
 	<script>
 	layui.use('form', function() {
 		var form = layui.form;
+		form.on('submit(formDemo)', function(data) {
 
-		//各种基于事件的操作，下面会有进一步介绍
-		});
+			$.ajax( {
+				type : "POST",
+				dataType : "json",
+				url : "smallCell/control",
+				data : $('#form1').serialize(),
+				success : function(result) {
+					if (result == "0") {
+						layer.open( {
+							content : '控制指令下发成功',
+							yes : function(index, layero) {
+
+							}
+						});
+
+					} else {
+						layer.open( {
+							content : '控制指令下发操作出现异常',
+							yes : function(index, layero) {
+								layer.closeAll();
+							}
+						});
+
+					}
+
+				},
+				error : function() {
+					alert("异常！");
+				}
+			});
+			return false;//只此一句
+			});
+
+	});
 </script>
 
 
