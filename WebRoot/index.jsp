@@ -15,16 +15,22 @@
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
 		<div class="layui-header">
-			<div class="layui-logo">终端管理后台</div>
+			<div class="layui-logo">
+				终端管理后台
+			</div>
 			<!-- 头部区域（可配合layui已有的水平导航） -->
 			<ul class="layui-nav layui-layout-left">
-				<li class="layui-nav-item"><a href="">控制台</a>
+				<li class="layui-nav-item">
+					<a href="">控制台</a>
 				</li>
-				<li class="layui-nav-item"><a href="">商品管理</a>
+				<li class="layui-nav-item">
+					<a href="">商品管理</a>
 				</li>
-				<li class="layui-nav-item"><a href="">用户</a>
+				<li class="layui-nav-item">
+					<a href="">用户</a>
 				</li>
-				<li class="layui-nav-item"><a href="javascript:;">其它系统</a>
+				<li class="layui-nav-item">
+					<a href="javascript:;">其它系统</a>
 					<dl class="layui-nav-child">
 						<dd>
 							<a href="">邮件管理</a>
@@ -39,8 +45,9 @@
 				</li>
 			</ul>
 			<ul class="layui-nav layui-layout-right">
-				<li class="layui-nav-item"><a href="javascript:;"> <img
-						src="http://t.cn/RCzsdCq" class="layui-nav-img"> 贤心 </a>
+				<li class="layui-nav-item">
+					<a href="javascript:;"> <img src="http://t.cn/RCzsdCq"
+							class="layui-nav-img"> 贤心 </a>
 					<dl class="layui-nav-child">
 						<dd>
 							<a href="">基本资料</a>
@@ -50,7 +57,8 @@
 						</dd>
 					</dl>
 				</li>
-				<li class="layui-nav-item"><a href="">退了</a>
+				<li class="layui-nav-item">
+					<a href="">退了</a>
 				</li>
 			</ul>
 		</div>
@@ -59,8 +67,8 @@
 			<div class="layui-side-scroll">
 				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 				<ul class="layui-nav layui-nav-tree" lay-filter="test">
-					<li class="layui-nav-item layui-nav-itemed"><a class=""
-						href="javascript:;">所有商品</a>
+					<li class="layui-nav-item layui-nav-itemed">
+						<a class="" href="javascript:;">所有商品</a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;">列表一</a>
@@ -76,7 +84,8 @@
 							</dd>
 						</dl>
 					</li>
-					<li class="layui-nav-item"><a href="javascript:;">解决方案</a>
+					<li class="layui-nav-item">
+						<a href="javascript:;">解决方案</a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;">列表一</a>
@@ -89,19 +98,30 @@
 							</dd>
 						</dl>
 					</li>
-					<li class="layui-nav-item"><a href="">云市场</a>
+					<li class="layui-nav-item">
+						<a href="">云市场</a>
 					</li>
-					<li class="layui-nav-item"><a href="">发布商品</a>
+					<li class="layui-nav-item">
+						<a href="">发布商品</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 
-		<div class="layui-body" >
+		<div class="layui-body">
 			<!-- 内容主体区域 -->
 			<div style="padding: 15px;">
 
-
+				<div class="demoTable">
+					MAC
+					<div class="layui-inline">
+						<input class="layui-input" name="id" id="demoReload"
+							autocomplete="off">
+					</div>
+					<button class="layui-btn" data-type="reload">
+						搜索
+					</button>
+				</div>
 				<table class="layui-hide" id="test" lay-filter="demo"></table>
 
 			</div>
@@ -157,15 +177,23 @@
 					title : '启动类型'
 
 				}, {
-					field : 'rem',
-					title : 'REM扫描状态'
+					field : 'corrModel',
+					title : '对应型号'
 				}, {
-					field : 'routerFw',
-					title : '路由器固件版本'
+					field : 'version',
+					title : '协议版本号'
 				}, {
-					field : 'tac',
-					title : 'TAC'
-				}, {
+					field : 'status',
+					title : '状态',
+					templet:'#status'
+				}, 
+				{
+					field : 'auth',
+					title : '授权',
+					templet:'#auth'
+				}, 
+				
+				{
 					fixed : 'right',
 					align : 'center',
 					toolbar : '#barDemo',
@@ -173,7 +201,9 @@
 				} ] ]
 
 			});
-
+			
+			 
+		
 			table.on('tool(demo)', function(obj) {
 				var data = obj.data;
 				if (obj.event === 'query') {
@@ -225,8 +255,13 @@
 					});
 				}
 			});
+			
+			
 
 		});
+		
+		
+		
 
 		var goEasy = new GoEasy({
 			appkey : 'BC-fff7f85db34d4e82bd5dc8ab7f5e29fa'
@@ -248,7 +283,29 @@
 	<script type="text/html" id="indexTpl">
     {{d.LAY_TABLE_INDEX+1}}
 </script>
-<script type="text/html" id="macTpl">
+	<script type="text/html" id="macTpl">
   <a href="smallCell/viewSmtp?mac={{d.mac}}" class="layui-table-link" target="_top">{{ d.mac }}</a>
+</script>
+
+	<script id="status" type="text/html">
+    {{#   
+    if(d.status=="0"){
+       return "在线"; 
+    } else {
+      return "离线"; 
+}
+   
+    }} 
+</script>
+
+	<script id="auth" type="text/html">
+    {{#   
+    if(d.auth=="0"){
+       return "通过"; 
+    } else {
+      return "未通过"; 
+}
+   
+    }} 
 </script>
 </body>

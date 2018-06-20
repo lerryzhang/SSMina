@@ -446,6 +446,239 @@
 							</ul>
 						</td>
 					</tr>
+					
+					
+					<tr>
+						<td>周期采集时间</td>
+						<td>${smtp.peTime}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>TAC</td>
+						<td>${smtp.qtac}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>同步模式</td>
+						<td>${smtp.syn}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>无线参数</td>
+						<td>${smtp.wirePara}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>频点表</td>
+						<td>${smtp.qrePoints}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>发射功率</td>
+						<td>${smtp.tranPower}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>重选优先级</td>
+						<td>${smtp.resPri}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>小区最低接入电平</td>
+						<td>${smtp.lowLevel}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>GPS偏置时间</td>
+						<td>${smtp.gpsOffTime}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>GPS偏置时间自动配置开关</td>
+						<td>${smtp.gpsOffTimeSwitch}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>日志级别</td>
+						<td>${smtp.logLevel}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>起始TAC</td>
+						<td>${smtp.startTac}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>结束TAC</td>
+						<td>${smtp.endTac}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>REM自动扫描开关</td>
+						<td>${smtp.remSwitch}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>NTP</td>
+						<td>${smtp.ntp}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>同频干扰</td>
+						<td>${smtp.samLevel}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<h4>参数列表</h4>
+							<ul>
+								<li></li>
+							
+							</ul>
+						</td>
+					</tr>
+					
 
 				</tbody>
 			</table>

@@ -15,9 +15,14 @@ public enum ParaEnum {
 			"3005", "tac"), FREPOINTS("3006", "frePoints"), REGIONS("3007",
 			"regions"), PLMN("300A", "plmn"), FREPOINT("300B", "frePoint"), PCI(
 			"300C", "pci"), FieldStrength("300D", "fieldStrength"), SNIFFERFRE(
-			"300E", "snifferFre"), SMTPSTATE("3010", "smtpState"), IMSITRANSMIT("3012",
-					"imsiTransmit"), UPTIMESYS("3014",
-			"uptimeSys"), IMSICAPTURETIME("300F", "imsiCaptureTime");
+			"300E", "snifferFre"), SMTPSTATE("3010", "smtpState"), IMSITRANSMIT(
+			"3012", "imsiTransmit"), UPTIMESYS("3014", "uptimeSys"), IMSICAPTURETIME(
+			"300F", "imsiCaptureTime"),PETIME("500B","peTime"),QTAC("500C","qtac"),
+			SYN("500D","syn"),WIREPARA("500E","wirePara"),QREPOINTS("500F","qrePoints"),
+			TRANPOWER("5017","tranPower"),RESPRI("5021","resPri"),//LOWLEVEL("5024","lowLevel"),
+			GPSOFFTIME("5027","gpsOffTime"),GPSOFFTIMESWITCH("5028","gpsOffTimeSwitch"),LOGLEVEL("5033","logLevel"),
+			STARTTAC("5035","startTac"),ENDTAC("5036","endTac"),REMSWITCH("5037","remSwitch"),NTP("5038","ntp"),
+			SAMLEVEL("5039","samLevel");
 	// 成员变量
 	private String code;
 	private String name;

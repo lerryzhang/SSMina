@@ -7,12 +7,14 @@ import java.util.Map;
 
 import org.apache.mina.core.session.IoSession;
 
+import com.small.cell.server.pojo.Auth;
 import com.small.cell.server.pojo.FrameFlag;
 import com.small.cell.server.pojo.General;
 import com.small.cell.server.pojo.PackageData;
 import com.small.cell.server.pojo.Para;
 import com.small.cell.server.pojo.Res;
 import com.small.cell.server.pojo.Smtp;
+import com.small.cell.server.pojo.Status;
 import com.small.cell.server.pojo.Tlv;
 import com.small.cell.server.pojo.TypeCode;
 
@@ -48,6 +50,8 @@ public class AuthRequestAdapter {
 			Smtp smtp = (Smtp) ReflectUtils.setProperty(tlvList);
 			smtp.setVersion(packageData.getMsgHeader().getMsgVersion());
 			smtp.setSeqNum(packageData.getMsgHeader().getMsgSeqNum());
+			smtp.setStatus(Status.ONLINE);
+			smtp.setAuth(Auth.SUCCESS);
 			if (JedisUtil.hgetAll(Smtp.SmtpRedisKey.getBytes()) == null) {
 				Map<byte[], byte[]> map = new HashMap<byte[], byte[]>();
 				map.put(mac.getBytes(), ObjectUtil.object2Bytes(smtp));

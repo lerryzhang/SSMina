@@ -3,10 +3,9 @@
  */
 package com.small.cell.server.util;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -625,8 +624,9 @@ public class JedisUtil {
 		try {
 			jedis = jedisPool.getResource();
 			jedis.auth(JEDIS_PASSWORD);
-			jedis.hset(key.getBytes(), mac.getBytes(),
-					ObjectUtil.object2Bytes(smtp));
+			jedis.hset(key.getBytes(), mac.getBytes(), ObjectUtil
+					.object2Bytes(smtp));
+		
 		} catch (Exception e) {
 			jedisPool.returnBrokenResource(jedis);
 			e.printStackTrace();

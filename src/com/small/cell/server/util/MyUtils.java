@@ -825,6 +825,22 @@ public class MyUtils {
 	}
 	
 	
+	
+	public static String getNtp(String  content) {
+		StringBuffer temp = new StringBuffer();
+		
+			temp.append("{")
+					.append(Integer.valueOf(content.substring(0, 8), 16))
+					.append(",")
+					.append(Integer.valueOf(content.substring(8, 16), 16))
+					.append(",")
+					.append(hexStringToString(content.substring(16, 32)))
+					.append("}");
+
+		
+		return temp.toString();
+	}
+	
 
 	public static void main(String args[]) {
 
@@ -838,8 +854,8 @@ public class MyUtils {
 		list.add("00000001");
 		list.add("00000001");
 
-		// System.out.println("==" + Integer.valueOf("000d",16).toString());
-		System.out.println("=====" + IntegerToString16For4(Integer.parseInt("13")));
+		//System.out.println("==" + Integer.valueOf("0000001E",16).toString());
+		System.out.println("=====" + MyUtils.hexStringToString("01"));
 
 	}
 
