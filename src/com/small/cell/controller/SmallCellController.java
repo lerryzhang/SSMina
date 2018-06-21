@@ -13,6 +13,7 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -21,10 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.socket.TextMessage;
 
 import com.small.cell.collections.Convert;
 
+import com.small.cell.server.configure.SpringWebSocketHandler;
 import com.small.cell.server.pojo.Control;
 import com.small.cell.server.pojo.FrameFlag;
 import com.small.cell.server.pojo.General;
@@ -47,6 +49,12 @@ import com.small.cell.server.util.PageUtils;
 @RequestMapping("/smallCell")
 public class SmallCellController {
 	private Logger logger = Logger.getLogger(SmallCellController.class);
+
+	@Bean
+	// 这个注解会从Spring容器拿出Bean
+	public SpringWebSocketHandler infoHandler() {
+		return new SpringWebSocketHandler();
+	}
 
 	@RequestMapping(value = "/query", method = RequestMethod.POST)
 	@ResponseBody
@@ -83,7 +91,7 @@ public class SmallCellController {
 			logger.info("session is null!");
 			return Return.FAIL;
 		}
-		System.out.println("==query===" + packageData.toString());
+		
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
 		return Return.SUCCESS;
@@ -96,6 +104,12 @@ public class SmallCellController {
 		List<Smtp> list = JedisUtil.hvals(Smtp.SmtpRedisKey);
 		PageUtils pageUtil = new PageUtils(list, list.size(), 10, 1);
 		return Layui.data(pageUtil.getTotalCount(), pageUtil.getList());
+	}
+
+	@RequestMapping("/index")
+	public String index() {
+
+		return "index";
 	}
 
 	@RequestMapping("/control")
@@ -133,33 +147,35 @@ public class SmallCellController {
 					Upgrade.Version.getCode(), MyUtils
 							.IntegerToString16For4(MyUtils.strTo16(version)
 									.length() / 2), MyUtils.strTo16(version));
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(body.length() / 2), body);
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(body.length() / 2),
+					body);
 
 			break;
 		case Restart:
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(1), "01");
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(1), "01");
 			break;
 		case Reset:
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(1), "01");
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(1), "01");
 			break;
 		case RouterUpgrade:
 			url = request.getParameter("routerUrl");
 			body = String.format("%s%s%s", Upgrade.Url.getCode(), MyUtils
 					.IntegerToString16For4(MyUtils.strTo16(url).length() / 2),
 					MyUtils.strTo16(url));
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(body.length() / 2), body);
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(body.length() / 2),
+					body);
 			break;
 		}
 		body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
@@ -173,7 +189,8 @@ public class SmallCellController {
 			logger.info("session is null!");
 			return Return.FAIL;
 		}
-		System.out.println("==control===" + packageData.toString());
+
+		infoHandler().sendMessageToUsers(new TextMessage(String.format("%s,%s",mac,param)));
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
 		return Return.SUCCESS;
@@ -218,15 +235,17 @@ public class SmallCellController {
 									.length() / 2), MyUtils.strTo16(value));
 				} else {
 
-					body = String.format("%s%s%s%s", body, key, MyUtils
-							.IntegerToString16For4(value.length() / 2), value);
+					body = String.format("%s%s%s%s", body, key,
+							MyUtils.IntegerToString16For4(value.length() / 2),
+							value);
 				}
 
 			}
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, "0008",
-					MyUtils.IntegerToString16For4(body.length() / 2), body);
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					"0008", MyUtils.IntegerToString16For4(body.length() / 2),
+					body);
 			body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
 			msgHeader.setMsgLength(MyUtils
 					.IntegerToString16For4(PackageData.msgHeaderLength
@@ -241,10 +260,7 @@ public class SmallCellController {
 			}
 			session.write(IoBuffer.wrap(ByteAndStr16
 					.HexString2Bytes(packageData.toString())));
-
 		}
-
 		return Return.SUCCESS;
-
 	}
 }

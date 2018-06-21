@@ -143,7 +143,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setTac(String tac) {
-		this.tac = Integer.valueOf(tac, 16).toString();
+		this.tac =MyUtils.HexStringToInteger(tac);
 	}
 
 	public String getFrequency() {
@@ -159,7 +159,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setPci(String pci) {
-		this.pci = Integer.valueOf(pci, 16).toString();
+		this.pci = MyUtils.HexStringToInteger(pci);
 
 	}
 
@@ -195,7 +195,7 @@ public class Smtp implements Serializable {
 
 	public void setVersion(String version) {
 
-		this.version = Integer.valueOf(version, 16).toString();
+		this.version = MyUtils.HexStringToInteger(version);
 	}
 
 	public String getSeqNum() {
@@ -250,7 +250,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setFrePoint(String frePoint) {
-		this.frePoint = Integer.valueOf(frePoint, 16).toString();
+		this.frePoint =MyUtils.HexStringToInteger(frePoint);
 	}
 
 	public String getSnifferFre() {
@@ -274,7 +274,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setNowfrePoint(String nowfrePoint) {
-		this.nowfrePoint = Integer.valueOf(nowfrePoint, 16).toString();
+		this.nowfrePoint =MyUtils.HexStringToInteger(nowfrePoint);
 	}
 
 	public String getUptimeSys() {
@@ -337,7 +337,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setPeTime(String peTime) {
-		this.peTime = Integer.valueOf(peTime, 16).toString();
+		this.peTime = MyUtils.HexStringToInteger(peTime);
 	}
 
 	public String getQtac() {
@@ -345,7 +345,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setQtac(String qtac) {
-		this.qtac = Integer.valueOf(qtac, 16).toString();
+		this.qtac =  MyUtils.HexStringToInteger(qtac);
 	}
 
 	public String getSyn() {
@@ -353,7 +353,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setSyn(String syn) {
-		this.syn =Integer.valueOf(syn,16).toString();
+		this.syn = MyUtils.HexStringToInteger(syn);
 	}
 	public String getWirePara() {
 		return wirePara;
@@ -386,7 +386,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setResPri(String resPri) {
-		this.resPri = Integer.valueOf(resPri, 16).toString();
+		this.resPri = MyUtils.HexStringToInteger(resPri);
 	}
 
 	public String getLowLevel() {
@@ -394,7 +394,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setLowLevel(String lowLevel) {
-		this.lowLevel = Integer.valueOf(lowLevel, 16).toString();
+		this.lowLevel = MyUtils.HexStringToInteger(lowLevel);
 	}
 
 	public String getGpsOffTime() {
@@ -402,7 +402,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setGpsOffTime(String gpsOffTime) {
-		this.gpsOffTime = Integer.valueOf(gpsOffTime, 16).toString();
+		this.gpsOffTime = MyUtils.HexStringToInteger(gpsOffTime);
 	}
 
 	public String getGpsOffTimeSwitch() {
@@ -410,8 +410,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setGpsOffTimeSwitch(String gpsOffTimeSwitch) {
-		this.gpsOffTimeSwitch = Integer.valueOf(gpsOffTimeSwitch, 16)
-				.toString();
+		this.gpsOffTimeSwitch =  MyUtils.HexStringToInteger(gpsOffTimeSwitch);
 	}
 
 	public String getLogLevel() {
@@ -419,7 +418,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setLogLevel(String logLevel) {
-		this.logLevel = Integer.valueOf(logLevel, 16).toString();
+		this.logLevel =   MyUtils.HexStringToInteger(logLevel);
 	}
 
 	public String getStartTac() {
@@ -427,7 +426,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setStartTac(String startTac) {
-		this.startTac = Integer.valueOf(startTac, 16).toString();
+		this.startTac =  MyUtils.HexStringToInteger(startTac);
 	}
 
 	public String getEndTac() {
@@ -435,7 +434,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setEndTac(String endTac) {
-		this.endTac = Integer.valueOf(endTac, 16).toString();
+		this.endTac =   MyUtils.HexStringToInteger(endTac);
 	}
 
 	public String getRemSwitch() {
@@ -443,7 +442,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setRemSwitch(String remSwitch) {
-		this.remSwitch = Integer.valueOf(remSwitch, 16).toString();
+		this.remSwitch =   MyUtils.HexStringToInteger(remSwitch);
 	}
 
 	public String getNtp() {
@@ -459,7 +458,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setSamLevel(String samLevel) {
-		this.samLevel = Integer.valueOf(samLevel, 16).toString();
+		this.samLevel =   MyUtils.HexStringToInteger(samLevel);
 		
 	}
 

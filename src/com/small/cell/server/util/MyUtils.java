@@ -3,12 +3,15 @@ package com.small.cell.server.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.mina.core.buffer.IoBuffer;
+
+import com.small.cell.collections.Convert;
 
 public class MyUtils {
 
@@ -729,15 +732,21 @@ public class MyUtils {
 		for (int i = 0; i < list.size(); i++) {
 			if (i % len == 0) {
 
-				temp.append("{").append(Integer.valueOf(list.get(i), 16))
+				// temp.append("{").append(Integer.valueOf(list.get(i), 16))
+				// .append(",");
+
+				temp.append("{").append(HexStringToInteger(list.get(i)))
 						.append(",");
 
 			} else if ((i + 1) % len == 0) {
 
-				temp.append(Integer.valueOf(list.get(i), 16)).append("}");
+				// temp.append(Integer.valueOf(list.get(i), 16)).append("}");
+				
+				temp.append(HexStringToInteger(list.get(i))).append("}");
 			} else {
 
-				temp.append(Integer.valueOf(list.get(i), 16)).append(",");
+				// temp.append(Integer.valueOf(list.get(i), 16)).append(",");
+				temp.append(HexStringToInteger(list.get(i))).append(",");
 			}
 		}
 		return temp.toString();
@@ -748,19 +757,19 @@ public class MyUtils {
 		for (int i = 0; i < list.size(); i++) {
 			String content = list.get(i);
 			temp.append("{")
-					.append(Integer.valueOf(content.substring(0, 8), 16))
+					.append(HexStringToInteger(content.substring(0, 8)))
 					.append(",")
-					.append(Integer.valueOf(content.substring(8, 16), 16))
+					.append(HexStringToInteger(content.substring(8, 16)))
 					.append(",")
-					.append(Integer.valueOf(content.substring(16, 24), 16))
+					.append(HexStringToInteger(content.substring(16, 24)))
 					.append(",")
-					.append(Integer.valueOf(content.substring(24, 32), 16))
+					.append(HexStringToInteger(content.substring(24, 32)))
 					.append(",")
-					.append(Integer.valueOf(content.substring(32, 40), 16))
+					.append(HexStringToInteger(content.substring(32, 40)))
 					.append(",")
-					.append(Integer.valueOf(content.substring(40, 48), 16))
+					.append(HexStringToInteger(content.substring(40, 48)))
 					.append(",")
-					.append(Integer.valueOf(content.substring(48, 56), 16))
+					.append(HexStringToInteger(content.substring(48, 56)))
 					.append(",")
 					.append(hexStringToString(content.substring(56, 72)))
 					.append(",")
@@ -772,75 +781,73 @@ public class MyUtils {
 		}
 		return temp.toString();
 	}
-	
-	
-	public static String getSmtpState(String  content) {
-		StringBuffer temp = new StringBuffer();
-		
-			temp.append("{")
-					.append(Integer.valueOf(content.substring(0, 2), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(2, 4), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(4, 6), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(6, 8), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(8, 10), 16))
-					.append(",")
-					.append(hexStringToString(content.substring(10, 26)))
-					.append(",")
-					.append(hexStringToString(content.substring(26, 42)))
-					.append(",")
-					.append(hexStringToString(content.substring(42, 58)))
-					.append("}");
 
-		
+	public static String getSmtpState(String content) {
+		StringBuffer temp = new StringBuffer();
+
+		temp.append("{").append(HexStringToInteger(content.substring(0, 2)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(2, 4)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(4, 6)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(6, 8)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(8, 10)))
+				.append(",")
+				.append(hexStringToString(content.substring(10, 26)))
+				.append(",")
+				.append(hexStringToString(content.substring(26, 42)))
+				.append(",")
+				.append(hexStringToString(content.substring(42, 58)))
+				.append("}");
+
 		return temp.toString();
 	}
-	
-	
-	
-	public static String getImsiTransmit(String  content) {
-		StringBuffer temp = new StringBuffer();
-		
-			temp.append("{")
-					.append(Integer.valueOf(content.substring(0, 8), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(8, 16), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(16, 24), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(24, 32), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(32, 40), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(40, 48), 16))
-					.append(",")
-					.append(hexStringToString(content.substring(48, 88)))
-					.append("}");
 
-		
+	public static String getImsiTransmit(String content) {
+		StringBuffer temp = new StringBuffer();
+
+		temp.append("{").append(HexStringToInteger(content.substring(0, 8)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(8, 16)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(16, 24)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(24, 32)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(32, 40)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(40, 48)))
+				.append(",")
+				.append(hexStringToString(content.substring(48, 88)))
+				.append("}");
+
 		return temp.toString();
 	}
-	
-	
-	
-	public static String getNtp(String  content) {
-		StringBuffer temp = new StringBuffer();
-		
-			temp.append("{")
-					.append(Integer.valueOf(content.substring(0, 8), 16))
-					.append(",")
-					.append(Integer.valueOf(content.substring(8, 16), 16))
-					.append(",")
-					.append(hexStringToString(content.substring(16, 32)))
-					.append("}");
 
-		
+	public static String getNtp(String content) {
+		StringBuffer temp = new StringBuffer();
+
+		temp.append("{").append(HexStringToInteger(content.substring(0, 8)))
+				.append(",")
+				.append(HexStringToInteger(content.substring(8, 16)))
+				.append(",")
+				.append(hexStringToString(content.substring(16, 32)))
+				.append("}");
+
 		return temp.toString();
 	}
-	
+
+	public static String HexStringToInteger(String str) {
+
+		if (str.subSequence(0, 1).equals("F")) {
+			return new BigInteger("FF" + str, 16).intValue() + "";
+		} else {
+			return new BigInteger("00" + str, 16).intValue() + "";
+		}
+
+	}
 
 	public static void main(String args[]) {
 
@@ -853,9 +860,14 @@ public class MyUtils {
 		list.add("00000001");
 		list.add("00000001");
 		list.add("00000001");
+		String str = "FFFFFFFE";
+		/*
+		 * if (str.subSequence(0, 1).equals("F")) { System.out.println(new
+		 * BigInteger("FF" + str, 16).intValue()); } else {
+		 * System.out.println(new BigInteger("00" + str, 16).intValue()); }
+		 */
 
-		//System.out.println("==" + Integer.valueOf("0000001E",16).toString());
-		System.out.println("=====" + MyUtils.hexStringToString("01"));
+		System.out.println("=====" + HexStringToInteger("FFFFFFFF"));
 
 	}
 

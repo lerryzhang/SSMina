@@ -50,7 +50,6 @@ public class ReportRequestAdapter {
 						.IntegerToString16For2(Res.InvalidFormat)));
 			tlvList.addAll(subList);
 			Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
-			System.out.println("==report=="+smtp!=null);
 			if (smtp != null)
 				ReflectUtils.setProperty(tlvList, smtp);
 			// JedisUtil.set(mac.getBytes(), ObjectUtil.object2Bytes(smtp));

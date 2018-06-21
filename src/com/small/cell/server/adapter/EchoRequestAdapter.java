@@ -42,11 +42,6 @@ public class EchoRequestAdapter {
 						.Bytes2HexString(tlvList.get(i).getValue()));
 				list.addAll(subList);
 			}
-            for(int i=0;i<list.size();i++){
-            	
-            	System.out.println("==============="+ByteAndStr16
-						.Bytes2HexString(list.get(i).getValue()));
-            }
 			resTlv.setValue(ByteAndStr16.HexString2Bytes(MyUtils
 					.IntegerToString16For2(Res.SUCCESS)));
 
