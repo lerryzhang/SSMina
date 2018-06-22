@@ -9,6 +9,10 @@
 
 
 <title>layout 后台大布局 - Layui</title>
+
+
+
+
 <!-- 
  <meta http-equiv="refresh" content="10">  
   -->
@@ -119,6 +123,8 @@
 	<script src="../layui/layui.js" type="text/javascript"></script>
 	<script src="../jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
 
+	<script src="../js/DataTableExtend.js"></script>
+
 	<script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="control">控制请求</a>
   <a class="layui-btn layui-btn-xs" lay-event="update">配置更新</a>
@@ -126,6 +132,8 @@
 </script>
 
 	<script>
+	
+	   var   currentRowDataList;
 		//JavaScript代码区域
 		layui.use('element', function() {
 			var element = layui.element;
@@ -139,47 +147,84 @@
 				elem : '#test',
 				url : '<%=basePath%>/smallCell/list',
 				page : true,
-				cellMinWidth : 120,
 				cols : [ [ {
 					title : '序号',
-					templet : '#indexTpl'
+					templet : '#indexTpl',
+					width: '4%'
+				
 
 				}, {
 					field : 'mac',
 					title : 'MAC地址',
-					templet : '#macTpl'
+					templet : '#macTpl',
+					width: '10%'
+					
 				}, {
 					field : 'model',
-					title : '设备型号'
+					title : '设备型号',
+					width: '8%'
+					
 				}, {
 					field : 'fw',
-					title : '固件版本'
+					title : '固件版本',
+					width: '12%',
 				}, {
 					field : 'startType',
-					title : '启动类型'
+					title : '启动类型',
+					width: '7%'
+				
 
 				}, {
 					field : 'corrModel',
-					title : '对应型号'
+					title : '对应型号',
+					width: '7%'
 				}, {
 					field : 'version',
-					title : '协议版本号'
+					title : '协议版本号',
+					width: '8%'
 				}, {
 					field : 'status',
 					title : '状态',
-					templet : '#status'
+					templet : '#status',
+					width: '5%',
 				}, {
 					field : 'auth',
 					title : '授权',
-					templet : '#auth'
+					templet : '#auth',
+					width: '5%',
 				},
 
 				{
-					fixed : 'right',
-					align : 'center',
+					
+			
 					toolbar : '#barDemo',
-					width : 250
-				} ] ]
+					width : '34.3%'
+				} ] ], done: function (res, curr, count) {// 表格渲染完成之后的回调
+
+                      //  $(".layui-table th").css("font-weight", "bold");// 设定表格标题字体加粗
+
+                        LayUIDataTable.SetJqueryObj($);// 第一步：设置jQuery对象
+
+                       // LayUIDataTable.HideField('auth');// 隐藏列-单列模式
+                       // LayUIDataTable.HideField(['auth','auth']);// 隐藏列-多列模式
+
+                        currentRowDataList = LayUIDataTable.ParseDataTable(function (index, currentData, rowData) {
+                            console.log("当前页数据条数:" + currentRowDataList.length)
+                            console.log("当前行索引：" + index);
+                            console.log("触发的当前行单元格：" + currentData);
+                            console.log("当前行数据：" + JSON.stringify(rowData));
+
+                            var msg = '<div style="text-align: left"> 【当前页数据条数】' + currentRowDataList.length + '<br/>【当前行索引】' + index + '<br/>【触发的当前行单元格】' + currentData + '<br/>【当前行数据】' + JSON.stringify(rowData) + '</div>';
+                            layer.msg(msg)
+                        })
+
+                        // 对相关数据进行判断处理--此处对【竞猜数量】大于30的进行高亮显示
+                        $.each(currentRowDataList, function (index, obj) {
+                            if (obj['status'] && obj['status'].value=="在线") {
+                               obj['status'].row.css("background-color", "#FAB000");
+                            }
+                        })
+                    }// end done
 
 			});
 
@@ -204,16 +249,14 @@
 
 				} else if (obj.event === 'update') {
 					layer.open({
-						type : 2 //Page层类型
-						,
+						type : 2,//Page层类型
+					
 						area : [ '800px', '600px' ],
 						title : '更新命令列表',
-						shade : 0.6 //遮罩透明度
-						,
-						maxmin : true //允许全屏最小化
-						,
-						anim : 1 //0-6的动画形式，-1不开启
-						,
+						shade : 0.6, //遮罩透明度
+						maxmin : true, //允许全屏最小化
+						anim : 1 ,//0-6的动画形式，-1不开启
+						
 						content : [ '<%=basePath%>/update.jsp?mac=' + data.mac, 'yes' ], //iframe的url，no代表不显示滚动条
 					});
 
@@ -230,13 +273,13 @@
 						,
 						anim : 1 //0-6的动画形式，-1不开启
 						,
-						content : [ '<%=basePath%>/control.jsp?mac=' + data.mac,
-								'no' ], //iframe的url，no代表不显示滚动条
-					});
-				}
-			});
+						content : [ '<%=basePath%>/control.jsp?mac='
+														+ data.mac, 'no' ], //iframe的url，no代表不显示滚动条
+									});
+								}
+							});
 
-		});
+						});
 
 		var goEasy = new GoEasy({
 			appkey : 'BC-fff7f85db34d4e82bd5dc8ab7f5e29fa'
@@ -253,6 +296,41 @@
 
 			}
 		});
+
+		function dealLighthigh(rowIndexArr, bgColor) {
+			$
+					.each(
+							rowIndexArr,
+							function(index, val) {
+								if (typeof val == "number") {
+									$(
+											$(".layui-table-body.layui-table-main tr")[val])
+											.css(
+													"background-color",
+													bgColor ? bgColor
+															: "yellow");
+									$(
+											$("div .layui-table-fixed.layui-table-fixed-l .layui-table-body tr")[val])
+											.css(
+													"background-color",
+													bgColor ? bgColor
+															: "yellow");
+								} else if (typeof val == 'object') {
+									$(
+											$(".layui-table-body.layui-table-main tr")[val.rowIndex])
+											.css(
+													"background-color",
+													val.bgColor ? val.bgColor
+															: "yellow");
+									$(
+											$("div .layui-table-fixed.layui-table-fixed-l .layui-table-body tr")[val.rowIndex])
+											.css(
+													"background-color",
+													val.bgColor ? val.bgColor
+															: "yellow");
+								}
+							})
+		}
 	</script>
 
 	<script type="text/html" id="indexTpl">
@@ -296,23 +374,25 @@
 			} else if ('MozWebSocket' in window) {
 				alert("此浏览器只支持MozWebSocket");
 			} else {
-		
-		     alert("此浏览器只支持SockJS");
+
+				alert("此浏览器只支持SockJS");
 			}
 			websocket.onopen = function(evnt) {
 
 			};
 
-			websocket.onmessage = function(evnt) {
+		websocket.onmessage = function(evnt) {
 				var message = evnt.data;
 				var values = message.split(",");
+				$.each(currentRowDataList, function(index, obj) {
+				  if(obj['mac'].value.indexOf(values[0]) != -1){
+				     obj['status'].cell.html(values[1]);
+				    
+				     
+				  }
+					
+				})
 
-				$("#test tr").each(function(i) {
-					var a = $(this).children('td').eq(1).text();
-					if (a == values[0]) {
-						$(this).children('td').eq(7).html(values[1]);
-					}
-				});
 			};
 			websocket.onerror = function(evnt) {
 			};

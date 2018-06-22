@@ -91,7 +91,6 @@ public class SmallCellController {
 			logger.info("session is null!");
 			return Return.FAIL;
 		}
-		
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
 		return Return.SUCCESS;
@@ -108,7 +107,6 @@ public class SmallCellController {
 
 	@RequestMapping("/index")
 	public String index() {
-
 		return "index";
 	}
 
@@ -129,7 +127,7 @@ public class SmallCellController {
 				.parseInt(smtp.getVersion())));
 		msgHeader.setMsgSeqNum(smtp.getSeqNum());
 
-		switch (Control.getByValue(param)) {
+		switch (Control.getControl(param)) {
 		case Upgrade:
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
@@ -185,14 +183,17 @@ public class SmallCellController {
 		packageData.setMsgHeader(msgHeader);
 		packageData.setMsgBodyBytes(body);
 		IoSession session = SessionManager.getManager().get(mac);
+
 		if (session == null) {
 			logger.info("session is null!");
 			return Return.FAIL;
 		}
-
-		infoHandler().sendMessageToUsers(new TextMessage(String.format("%s,%s",mac,param)));
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
+
+		infoHandler().sendMessageToUsers(
+				new TextMessage(String.format("%s,%s", mac,
+						Control.getByValue(param))));
 		return Return.SUCCESS;
 
 	}
@@ -252,7 +253,6 @@ public class SmallCellController {
 							+ (body.length() / 2)));
 			packageData.setMsgHeader(msgHeader);
 			packageData.setMsgBodyBytes(body);
-			System.out.println("==update===" + packageData.toString());
 			IoSession session = SessionManager.getManager().get(mac);
 			if (session == null) {
 				logger.info("session is null!");
