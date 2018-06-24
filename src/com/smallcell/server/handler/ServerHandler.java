@@ -24,6 +24,7 @@ import com.small.cell.server.pojo.FrameFlag;
 import com.small.cell.server.pojo.Kamsg;
 import com.small.cell.server.pojo.PackageData;
 import com.small.cell.server.pojo.Para;
+import com.small.cell.server.pojo.Smtp;
 import com.small.cell.server.pojo.Status;
 import com.small.cell.server.pojo.TypeCode;
 import com.small.cell.server.pojo.PackageData.MsgHeader;
@@ -31,6 +32,7 @@ import com.small.cell.server.pojo.PackageData.MsgHeader;
 import com.small.cell.server.session.SessionManager;
 import com.small.cell.server.util.ByteAndStr16;
 import com.small.cell.server.util.GoEasyUtil;
+import com.small.cell.server.util.JedisUtil;
 import com.small.cell.server.util.MyExeUtil;
 import com.small.cell.server.util.MyUtils;
 
@@ -163,12 +165,13 @@ public class ServerHandler extends IoHandlerAdapter {
 
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
-		System.out.println("==222===");
 		
 		String mac=SessionManager.getManager().getKey(session);
-		
 		infoHandler().sendMessageToUsers(
 				new TextMessage(String.format("%s,%s", mac, Status.OFFLINE)));
+		Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
+		smtp.setStatus(Status.OFFLINE);
+		JedisUtil.hmset(Smtp.SmtpRedisKey, mac, smtp);
 		System.out.println("»á»°¹Ø±Õ");
 	}
 

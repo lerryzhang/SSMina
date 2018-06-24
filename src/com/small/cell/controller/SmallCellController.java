@@ -261,6 +261,7 @@ public class SmallCellController {
 			session.write(IoBuffer.wrap(ByteAndStr16
 					.HexString2Bytes(packageData.toString())));
 		}
+		System.out.println("========================================");
 		return Return.SUCCESS;
 	}
 }

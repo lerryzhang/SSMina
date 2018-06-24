@@ -132,7 +132,10 @@
 						}
 					},
 					error : function() {
-						alert("异常！");
+						layer.alert("控制指令下发操作出现异常", {
+								title : "提示",
+								icon : 5
+							});
 					}
 				});
 				return false;//只此一句
