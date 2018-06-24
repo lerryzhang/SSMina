@@ -20,9 +20,11 @@ var LayUIDataTable = (function () {
      * @constructor
      */
     function ConvertDataTable (callback) {
+    	alert("22222");
         if (!checkJquery()) return;
         var dataList = [];
         var rowData = {};
+        alert("5555");
         var trArr = $(".layui-table-body.layui-table-main tr");// 行数据
         if (!trArr || trArr.length == 0) {
             console.log("未获取到相关行数据，请检查数据表格是否渲染完毕！");

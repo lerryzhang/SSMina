@@ -122,7 +122,7 @@
 						if (result == "0") {
 							layer.alert("控制指令下发成功", {
 								title : "提示",
-								icon : 5
+								icon : 6
 							});
 						} else {
 							layer.alert("控制指令下发操作出现异常", {

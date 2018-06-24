@@ -1,9 +1,16 @@
 package com.smallcell.server.handler;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.socket.TextMessage;
+
+
 
 import com.small.cell.server.adapter.AlarmRequestAdapter;
 import com.small.cell.server.adapter.AuthRequestAdapter;
@@ -12,12 +19,16 @@ import com.small.cell.server.adapter.ConfigureUpdateResponseAdapter;
 import com.small.cell.server.adapter.ControlResponseAdapter;
 import com.small.cell.server.adapter.EchoRequestAdapter;
 import com.small.cell.server.adapter.ReportRequestAdapter;
+import com.small.cell.server.configure.SpringWebSocketHandler;
 import com.small.cell.server.pojo.FrameFlag;
+import com.small.cell.server.pojo.Kamsg;
 import com.small.cell.server.pojo.PackageData;
 import com.small.cell.server.pojo.Para;
+import com.small.cell.server.pojo.Status;
 import com.small.cell.server.pojo.TypeCode;
 import com.small.cell.server.pojo.PackageData.MsgHeader;
 
+import com.small.cell.server.session.SessionManager;
 import com.small.cell.server.util.ByteAndStr16;
 import com.small.cell.server.util.GoEasyUtil;
 import com.small.cell.server.util.MyExeUtil;
@@ -29,6 +40,13 @@ import com.small.cell.server.util.MyUtils;
  * @author mazaiting
  */
 public class ServerHandler extends IoHandlerAdapter {
+	
+	@Bean
+	// 这个注解会从Spring容器拿出Bean
+	public static SpringWebSocketHandler infoHandler() {
+		return new SpringWebSocketHandler();
+	}
+
 
 	@Override
 	public void exceptionCaught(IoSession session, Throwable cause)
@@ -47,6 +65,8 @@ public class ServerHandler extends IoHandlerAdapter {
 		 */
 		byte[] bytes = (byte[]) message;
 		System.out.println("=======receive======"
+				+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+						.format(new Date()) + "==="
 				+ ByteAndStr16.Bytes2HexString(bytes));
 		PackageData packageData = new PackageData();
 		MsgHeader msgHeader = new MsgHeader();
@@ -65,19 +85,18 @@ public class ServerHandler extends IoHandlerAdapter {
 				bytes, 10, 2)));
 		packageData.setMsgHeader(msgHeader);
 		if (FrameFlag.Encrypt.equals(msgHeader.getMsgFrameFlag())) {
-			packageData
-					.setMsgBodyBytes(MyExeUtil.getExeRes(Para.BlowFishMode_2,
-							ByteAndStr16.Bytes2HexString(MyUtils.subBytes(
-									bytes,
-									PackageData.msgHeaderLength,
+			packageData.setMsgBodyBytes(MyExeUtil.getExeRes(
+					Para.BlowFishMode_2, ByteAndStr16.Bytes2HexString(MyUtils
+							.subBytes(bytes, PackageData.msgHeaderLength,
 									Integer.valueOf(msgHeader.getMsgLength(),
-											16) - PackageData.msgHeaderLength))));
+											16)
+											- PackageData.msgHeaderLength))));
 		} else if (FrameFlag.NoEncrypt.equals(msgHeader.getMsgFrameFlag())) {
 
 			packageData.setMsgBodyBytes(ByteAndStr16.Bytes2HexString(MyUtils
-					.subBytes(bytes, PackageData.msgHeaderLength,
-							Integer.valueOf(msgHeader.getMsgLength(), 16)
-									- PackageData.msgHeaderLength)));
+					.subBytes(bytes, PackageData.msgHeaderLength, Integer
+							.valueOf(msgHeader.getMsgLength(), 16)
+							- PackageData.msgHeaderLength)));
 		}
 		switch (TypeCode.getByValue(msgHeader.getMsgTypeCode())) {
 		case AuthRequest:
@@ -121,10 +140,35 @@ public class ServerHandler extends IoHandlerAdapter {
 		 * 当Session处于IDLE状态的时候，输出空闲状态次数；
 		 */
 		System.out.println("IDLE:" + session.getIdleCount(status));
+
+		String str = (String) session.getAttribute(Kamsg.CONNECT_STATE);
+		if (str == null || str.equals(Kamsg.CONNECT_START)) {
+			return;
+
+		} else if (str.equals(Kamsg.CONNECT_NO)) {
+			int count = (Integer) session.getAttribute(Kamsg.HeartBeat);
+			count++;
+			session.setAttribute(Kamsg.HeartBeat, count);
+
+			if (count == 2) {
+				System.out.println("=====");
+				session.setAttribute(Kamsg.HeartBeat, 0);
+				session.close();
+			}
+
+		}
+		session.setAttribute(Kamsg.CONNECT_STATE, Kamsg.CONNECT_NO);
+
 	}
 
 	@Override
 	public void sessionClosed(IoSession session) throws Exception {
+		System.out.println("==222===");
+		
+		String mac=SessionManager.getManager().getKey(session);
+		
+		infoHandler().sendMessageToUsers(
+				new TextMessage(String.format("%s,%s", mac, Status.OFFLINE)));
 		System.out.println("会话关闭");
 	}
 
@@ -137,12 +181,15 @@ public class ServerHandler extends IoHandlerAdapter {
 	@Override
 	public void sessionCreated(IoSession iosession) throws Exception {
 		System.out.println("会话创建");
+		iosession.setAttribute(Kamsg.CONNECT_STATE, Kamsg.CONNECT_START);
+		iosession.setAttribute(Kamsg.HeartBeat, 0);
 		super.sessionCreated(iosession);
 	}
 
 	@Override
 	public void sessionOpened(IoSession iosession) throws Exception {
 		System.out.println("会话打开");
+
 		super.sessionOpened(iosession);
 	}
 

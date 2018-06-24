@@ -4,6 +4,10 @@ public enum Control {
 
 	Upgrade("升级", "4001"), Restart("重启", "4003"), Reset("恢复出厂设置", "4005"), RouterUpgrade(
 			"路由器升级", "4007");
+	
+	
+	
+	
 
 	// 定义私有变量
 	private String code;

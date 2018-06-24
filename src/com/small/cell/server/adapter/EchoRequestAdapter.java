@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.socket.TextMessage;
+
+import com.small.cell.server.configure.SpringWebSocketHandler;
 import com.small.cell.server.pojo.FrameFlag;
 import com.small.cell.server.pojo.General;
 import com.small.cell.server.pojo.PackageData;
 import com.small.cell.server.pojo.Para;
 import com.small.cell.server.pojo.Res;
 import com.small.cell.server.pojo.Smtp;
+import com.small.cell.server.pojo.Status;
 import com.small.cell.server.pojo.Tlv;
 import com.small.cell.server.pojo.TypeCode;
 
@@ -17,10 +22,15 @@ import com.small.cell.server.util.ByteAndStr16;
 import com.small.cell.server.util.JedisUtil;
 import com.small.cell.server.util.MyExeUtil;
 import com.small.cell.server.util.MyUtils;
-import com.small.cell.server.util.ReflectUtils;
 import com.small.cell.server.util.TlvTools;
 
 public class EchoRequestAdapter {
+	@Bean
+	// 这个注解会从Spring容器拿出Bean
+	public static SpringWebSocketHandler infoHandler() {
+		return new SpringWebSocketHandler();
+	}
+
 	public static PackageData handler(PackageData packageData) {
 
 		List<Tlv> tlvList = TlvTools.unpack(packageData.getMsgBodyBytes());
@@ -64,6 +74,13 @@ public class EchoRequestAdapter {
 			packageData.getMsgHeader().setMsgLength(
 					MyUtils.IntegerToString16For4(PackageData.msgHeaderLength
 							+ ByteAndStr16.HexString2Bytes(body).length));
+			Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
+			if (smtp != null) {
+				smtp.setStatus(Status.ONLINE);
+				JedisUtil.hmset(Smtp.SmtpRedisKey, mac, smtp);
+			}
+			infoHandler().sendMessageToUsers(
+					new TextMessage(String.format("%s,%s", mac, Status.ONLINE)));
 		}
 		return packageData;
 

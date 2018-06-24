@@ -29,7 +29,7 @@ public class UserController {
 			throws Exception {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if ("123".equals(username) && "123".equals(password)) {
+		if ("admin".equals(username) && "admin".equals(password)) {
 			HttpSession session = request.getSession(false);
 			session.setAttribute("SESSION_USERNAME", username);
 			return Return.SUCCESS;

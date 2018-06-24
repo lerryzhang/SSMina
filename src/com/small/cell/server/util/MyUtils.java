@@ -860,14 +860,14 @@ public class MyUtils {
 		list.add("00000001");
 		list.add("00000001");
 		list.add("00000001");
-		String str = "FFFFFFFE";
+		String str = "FFFFFFBE";
 		/*
 		 * if (str.subSequence(0, 1).equals("F")) { System.out.println(new
 		 * BigInteger("FF" + str, 16).intValue()); } else {
 		 * System.out.println(new BigInteger("00" + str, 16).intValue()); }
 		 */
 
-		System.out.println("=====" + HexStringToInteger("FFFFFFFF"));
+		System.out.println("=====" + HexStringToInteger("FFFFFFBE")+"==="+HexStringToInteger("FFFFFD84")+"====="+HexStringToInteger("000000CC"));
 
 	}
 

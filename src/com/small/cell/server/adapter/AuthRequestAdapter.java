@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.mina.core.session.IoSession;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.socket.TextMessage;
 
+import com.small.cell.server.configure.SpringWebSocketHandler;
 import com.small.cell.server.pojo.Auth;
 import com.small.cell.server.pojo.FrameFlag;
 import com.small.cell.server.pojo.General;
@@ -28,6 +31,12 @@ import com.small.cell.server.util.ReflectUtils;
 import com.small.cell.server.util.TlvTools;
 
 public class AuthRequestAdapter {
+	@Bean
+	// 这个注解会从Spring容器拿出Bean
+	public static SpringWebSocketHandler infoHandler() {
+		return new SpringWebSocketHandler();
+	}
+
 	public static PackageData handler(PackageData packageData, IoSession session)
 			throws Exception {
 
@@ -81,7 +90,8 @@ public class AuthRequestAdapter {
 		packageData.getMsgHeader().setMsgLength(
 				MyUtils.IntegerToString16For4(PackageData.msgHeaderLength
 						+ ByteAndStr16.HexString2Bytes(body).length));
-
+		infoHandler().sendMessageToUsers(
+				new TextMessage(String.format("%s,%s", mac, Status.ONLINE)));
 		return packageData;
 
 	}

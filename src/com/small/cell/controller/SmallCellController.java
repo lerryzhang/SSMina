@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.socket.TextMessage;
 
 import com.small.cell.collections.Convert;
@@ -34,6 +35,7 @@ import com.small.cell.server.pojo.PackageData;
 import com.small.cell.server.pojo.Para;
 import com.small.cell.server.pojo.Return;
 import com.small.cell.server.pojo.Smtp;
+import com.small.cell.server.pojo.Status;
 import com.small.cell.server.pojo.TypeCode;
 import com.small.cell.server.pojo.Upgrade;
 import com.small.cell.server.pojo.PackageData.MsgHeader;
@@ -59,6 +61,7 @@ public class SmallCellController {
 	@RequestMapping(value = "/query", method = RequestMethod.POST)
 	@ResponseBody
 	public String configureQuery(@RequestParam("mac") String mac) {
+		String body = null;
 		Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
 		PackageData packageData = new PackageData();
 		MsgHeader msgHeader = new MsgHeader();
@@ -67,8 +70,6 @@ public class SmallCellController {
 		msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer
 				.parseInt(smtp.getVersion())));
 		msgHeader.setMsgSeqNum(smtp.getSeqNum());
-
-		String body = null;
 		try {
 			body = MyExeUtil.getExeRes(Para.BlowFishMode_1, String.format(
 					"%s%s%s", MyUtils.IntegerToString16For4(General.Mac),
@@ -77,9 +78,7 @@ public class SmallCellController {
 			// TODO Auto-generated catch block
 			logger.info("exception:" + e.getMessage());
 			return Return.FAIL;
-
 		}
-
 		packageData.setMsgBodyBytes(body);
 		msgHeader.setMsgLength(MyUtils
 				.IntegerToString16For4(PackageData.msgHeaderLength
@@ -106,7 +105,9 @@ public class SmallCellController {
 	}
 
 	@RequestMapping("/index")
-	public String index() {
+	public String index(HttpServletRequest request) {
+		List<Smtp> list = JedisUtil.hvals(Smtp.SmtpRedisKey);
+        request.setAttribute("list", list);
 		return "index";
 	}
 
@@ -126,13 +127,13 @@ public class SmallCellController {
 		msgHeader.setMsgVersion(MyUtils.IntegerToString16For4(Integer
 				.parseInt(smtp.getVersion())));
 		msgHeader.setMsgSeqNum(smtp.getSeqNum());
-
 		switch (Control.getControl(param)) {
 		case Upgrade:
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			url = request.getParameter("upgradeUrl");
 			String version = request.getParameter("version");
+			smtp.setStatus(Status.UPGRADE);
 			body = String.format("%s%s%s%s%s%s%s%s%s%s%s%s", Upgrade.Username
 					.getCode(), MyUtils.IntegerToString16For4(MyUtils.strTo16(
 					username).length() / 2), MyUtils.strTo16(username),
@@ -145,35 +146,36 @@ public class SmallCellController {
 					Upgrade.Version.getCode(), MyUtils
 							.IntegerToString16For4(MyUtils.strTo16(version)
 									.length() / 2), MyUtils.strTo16(version));
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(body.length() / 2),
-					body);
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(body.length() / 2), body);
 
 			break;
 		case Restart:
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(1), "01");
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(1), "01");
+			smtp.setStatus(Status.RESTART);
 			break;
 		case Reset:
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(1), "01");
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(1), "01");
+			smtp.setStatus(Status.RESET);
 			break;
 		case RouterUpgrade:
 			url = request.getParameter("routerUrl");
+			smtp.setStatus(Status.ROUTERUPGRADE);
 			body = String.format("%s%s%s", Upgrade.Url.getCode(), MyUtils
 					.IntegerToString16For4(MyUtils.strTo16(url).length() / 2),
 					MyUtils.strTo16(url));
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(body.length() / 2),
-					body);
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(body.length() / 2), body);
 			break;
 		}
 		body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
@@ -183,17 +185,17 @@ public class SmallCellController {
 		packageData.setMsgHeader(msgHeader);
 		packageData.setMsgBodyBytes(body);
 		IoSession session = SessionManager.getManager().get(mac);
-
+		infoHandler().sendMessageToUsers(
+				new TextMessage(String.format("%s,%s", mac, Control
+						.getByValue(param))));
 		if (session == null) {
 			logger.info("session is null!");
 			return Return.FAIL;
 		}
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
-
-		infoHandler().sendMessageToUsers(
-				new TextMessage(String.format("%s,%s", mac,
-						Control.getByValue(param))));
+		JedisUtil.hmset(Smtp.SmtpRedisKey, mac, smtp);
+		
 		return Return.SUCCESS;
 
 	}
@@ -236,17 +238,15 @@ public class SmallCellController {
 									.length() / 2), MyUtils.strTo16(value));
 				} else {
 
-					body = String.format("%s%s%s%s", body, key,
-							MyUtils.IntegerToString16For4(value.length() / 2),
-							value);
+					body = String.format("%s%s%s%s", body, key, MyUtils
+							.IntegerToString16For4(value.length() / 2), value);
 				}
 
 			}
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					"0008", MyUtils.IntegerToString16For4(body.length() / 2),
-					body);
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, "0008",
+					MyUtils.IntegerToString16For4(body.length() / 2), body);
 			body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
 			msgHeader.setMsgLength(MyUtils
 					.IntegerToString16For4(PackageData.msgHeaderLength
