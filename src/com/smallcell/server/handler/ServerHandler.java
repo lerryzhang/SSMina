@@ -172,6 +172,7 @@ public class ServerHandler extends IoHandlerAdapter {
 		Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
 		smtp.setStatus(Status.OFFLINE);
 		JedisUtil.hmset(Smtp.SmtpRedisKey, mac, smtp);
+		SessionManager.getManager().remove(session);
 		System.out.println("»á»°¹Ø±Õ");
 	}
 

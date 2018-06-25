@@ -31,22 +31,13 @@
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
 		<div class="layui-header">
-			<div class="layui-logo">
-				终端管理平台
-			</div>
+			<div class="layui-logo">终端管理平台</div>
 			<!-- 头部区域（可配合layui已有的水平导航） -->
 			<ul class="layui-nav layui-layout-left">
-				<li class="layui-nav-item">
-					<a href="">控制台</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="">终端管理</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="">用户</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="javascript:;">系统</a>
+				<li class="layui-nav-item"><a href="">控制台</a></li>
+				<li class="layui-nav-item"><a href="">终端管理</a></li>
+				<li class="layui-nav-item"><a href="">用户</a></li>
+				<li class="layui-nav-item"><a href="javascript:;">系统</a>
 					<dl class="layui-nav-child">
 						<dd>
 							<a href="">邮件管理</a>
@@ -57,13 +48,12 @@
 						<dd>
 							<a href="">授权管理</a>
 						</dd>
-					</dl>
-				</li>
+					</dl></li>
 			</ul>
 			<ul class="layui-nav layui-layout-right">
-				<li class="layui-nav-item">
-					<a href="javascript:;"> <img src="http://t.cn/RCzsdCq"
-							class="layui-nav-img"> ${ sessionScope.SESSION_USERNAME}</a>
+				<li class="layui-nav-item"><a href="javascript:;"> <img
+						src="http://t.cn/RCzsdCq" class="layui-nav-img"> ${
+						sessionScope.SESSION_USERNAME}</a>
 					<dl class="layui-nav-child">
 						<dd>
 							<a href="">基本资料</a>
@@ -71,11 +61,8 @@
 						<dd>
 							<a href="">安全设置</a>
 						</dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item">
-					<a href="">注销</a>
-				</li>
+					</dl></li>
+				<li class="layui-nav-item"><a href="">注销</a></li>
 			</ul>
 		</div>
 
@@ -83,8 +70,8 @@
 			<div class="layui-side-scroll">
 				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 				<ul class="layui-nav layui-nav-tree" lay-filter="test">
-					<li class="layui-nav-item layui-nav-itemed">
-						<a class="" href="javascript:;">所有商品</a>
+					<li class="layui-nav-item layui-nav-itemed"><a class=""
+						href="javascript:;">所有商品</a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;">列表一</a>
@@ -98,10 +85,8 @@
 							<dd>
 								<a href="">超链接</a>
 							</dd>
-						</dl>
-					</li>
-					<li class="layui-nav-item">
-						<a href="javascript:;">解决方案</a>
+						</dl></li>
+					<li class="layui-nav-item"><a href="javascript:;">解决方案</a>
 						<dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;">列表一</a>
@@ -112,14 +97,9 @@
 							<dd>
 								<a href="">超链接</a>
 							</dd>
-						</dl>
-					</li>
-					<li class="layui-nav-item">
-						<a href="">云市场</a>
-					</li>
-					<li class="layui-nav-item">
-						<a href="">发布商品</a>
-					</li>
+						</dl></li>
+					<li class="layui-nav-item"><a href="">云市场</a></li>
+					<li class="layui-nav-item"><a href="">发布商品</a></li>
 				</ul>
 			</div>
 		</div>
@@ -133,45 +113,26 @@
 					<div class="layui-inline">
 						<input class="layui-input" name="id" id="demoReload">
 					</div>
-					<button class="layui-btn">
-						搜索
-					</button>
+					<button class="layui-btn">搜索</button>
+
+					<input type="hidden" name="total" value="${total}" id="total">
+					<input type="hidden" value="${num}" id="num">
 				</div>
-				<table class="layui-table" id="test" lay-size="sm">
+				<table class="layui-table" id="test" lay-size="sm" >
 
 					<thead>
 						<tr>
-							<th>
-								序号
-							</th>
-							<th>
-								MAC地址
-							</th>
-							<th>
-								设备型号
-							</th>
-							<th>
-								固件版本
-							</th>
-							<th>
-								启动类型
-							</th>
-							<th>
-								对应型号
-							</th>
+							<th>序号</th>
+							<th>MAC地址</th>
+							<th>设备型号</th>
+							<th>固件版本</th>
+							<th>启动类型</th>
+							<th>对应型号</th>
 
-							<th>
-								协议版本号
-							</th>
-							<th>
-								状态
-							</th>
-							<th>
-								授权
-							</th>
-							<th>
-								操作
-							</th>
+							<th>协议版本号</th>
+							<th>状态</th>
+							<th>授权</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -180,56 +141,37 @@
 
 							<tr>
 
-								<td>
-									${status.index+1}
-								</td>
-								<td id="mac">
-									<a href="<%=basePath%>/smallCell/viewSmtp?mac=${smtp.mac }"
-										class="layui-table-link" target="_top">${smtp.mac }</a>
-								</td>
-								<td>
-									${smtp.model }
-								</td>
-								<td>
-									${smtp.fw }
-								</td>
-								<td>
-									${smtp.startType }
-								</td>
-								<td>
-									${smtp.corrModel }
-								</td>
-								<td>
-									${smtp.version }
-								</td>
-								<td id="cstatus">
-									${smtp.status}
-								</td>
-								<td>
-
-
-									<c:choose>
+								<td>${status.index+1}</td>
+								<td id="mac"><a
+									href="<%=basePath%>/smallCell/viewSmtp?mac=${smtp.mac }"
+									class="layui-table-link" target="_top">${smtp.mac }</a></td>
+								<td>${smtp.model }</td>
+								<td>${smtp.fw }</td>
+								<td>${smtp.startType }</td>
+								<td>${smtp.corrModel }</td>
+								<td>${smtp.version }</td>
+								<td id="cstatus">${smtp.status}</td>
+								<td><c:choose>
 										<c:when test="${smtp.auth== '0'}">  
                                                                                                     通过
 										</c:when>
 										<c:otherwise>
 											未通过
 										</c:otherwise>
-									</c:choose>
+									</c:choose></td>
 
-								</td>
-
-								<td>
-									<a class="layui-btn layui-btn-primary layui-btn-xs"
-										onclick="control('${smtp.mac }')">控制请求</a>
-									<a class="layui-btn layui-btn-xs"
-										onclick="update('${smtp.mac }')">配置更新</a>
+								<td><a class="layui-btn layui-btn-primary layui-btn-xs"
+									onclick="control('${smtp.mac }')">控制请求</a> <a
+									class="layui-btn layui-btn-xs" onclick="update('${smtp.mac }')">配置更新</a>
 									<a class="layui-btn layui-btn-danger layui-btn-xs"
-										onclick="query('${smtp.mac }')">配置查询</a>
+									onclick="query('${smtp.mac }')">配置查询</a>
 								</td>
 							</tr>
 
 						</c:forEach>
+
+
+
 
 
 					</tbody>
@@ -259,16 +201,14 @@
         layer = layui.layer;
         laypage.render({
              elem: 'demo8'
-             ,count: 100
-             ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+             ,count: $("#total").val()
+             ,pages: Math.ceil( $("#total").val()/20)
+             ,layout: ['count', 'prev', 'page', 'next', 'refresh']
              ,jump: function(obj){
-                //alert(obj.curr);  //得到当前页，以便向服务端请求对应页的数据。
-               // alert(obj.limit); //得到每页显示的条数
-                //首次不执行,使用原始的curr,后面需要自己通过回传来更新
-                var curr = obj.curr;
-                if(!first){
-                    //location.href='index.php?&a=adminLogList&page='+obj.curr;
-                }
+              var curr = obj.curr;
+              if(!first){  
+                   location.href='<%=basePath%>smallCell/index?&page='+curr;
+              }
              }
         });
        });
@@ -369,19 +309,16 @@
 		layer.open({
 						type : 2,//Page层类型
 					
-						area : [ '800px', '600px' ],
+						area : [ '1000px', '600px' ],
 						title : '更新命令列表',
 						shade : 0.6, //遮罩透明度
 						maxmin : true, //允许全屏最小化
 						anim : 1 ,//0-6的动画形式，-1不开启
 						
-					content : [ '<%=basePath%>/update.jsp?mac='+mac, 'yes' ], //iframe的url，no代表不显示滚动条
-					});
+					content : [ '<%=basePath%>/update.jsp?mac=' + mac, 'yes' ], //iframe的url，no代表不显示滚动条
+		});
 
 	}
-	
-	
-	
 </script>
 
 

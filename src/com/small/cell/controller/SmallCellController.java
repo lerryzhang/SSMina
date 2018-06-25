@@ -108,6 +108,7 @@ public class SmallCellController {
 	public String index(HttpServletRequest request) {
 		List<Smtp> list = JedisUtil.hvals(Smtp.SmtpRedisKey);
         request.setAttribute("list", list);
+        request.setAttribute("total",list.size());
 		return "index";
 	}
 
@@ -209,7 +210,8 @@ public class SmallCellController {
 		return "SmtpView";
 	}
 
-	@SuppressWarnings("unchecked")
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/update")
 	@ResponseBody
 	public String update(HttpServletRequest request) throws IOException,
@@ -261,7 +263,7 @@ public class SmallCellController {
 			session.write(IoBuffer.wrap(ByteAndStr16
 					.HexString2Bytes(packageData.toString())));
 		}
-		System.out.println("========================================");
+	
 		return Return.SUCCESS;
 	}
 }

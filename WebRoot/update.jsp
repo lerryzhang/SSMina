@@ -164,7 +164,7 @@
 			</div>
 		</div>
 
-
+ 
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c9" value="5009" title="重定向到 2G 频点 ">
@@ -267,16 +267,121 @@
 		</div>
 
 
+<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c14" value="500E" title="无线参数">
+			</div>
+			
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r14" placeholder="请输入IMSI"
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					4个整型数，中间以逗号隔开
+				</div>
 
+			</div>
+		</div>
+
+
+
+
+
+          <div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c15" value="500F" title="频点表">
+			</div>
+			
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r15" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					整型数组列表，格式如{1，2，3}，{3，4，5}最多支持16组
+				</div>
+
+			</div>
+		</div>
+		
+		
+		
+		
+		 <div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c16" value="5010" title="邻区表">
+			</div>
+			
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r16" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+				   列表，格式如{1，2，3，4，4，‘123456’，‘78’}最多支持16组
+				</div>
+
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<input type="checkbox" name="c4" value="5015" title="白名单 ">
+				<input type="checkbox" name="c17" value="5013" title="重定向到2G Band">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<div class="layui-input-inline">
+						<input type="radio" name="r17" value="0" checked="" title="DCS1800">
+					</div>
+					<div class="layui-input-inline">
+						<input type="radio" name="r17" value="1" title="PCS1900">
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+
+
+
+<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c18" value="5014" title="定位IMSI ">
 			</div>
 
 
 			<div class="layui-input-block">
 				<div class="layui-input-inline">
-					<input type="text" name="r4" placeholder="请输入IMSI"
+					<input type="text" name="r18" placeholder="请输入IMSI"
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					字符串，长度16
+				</div>
+
+			</div>
+		</div>
+
+
+
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c19" value="5015" title="白名单 ">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r19" placeholder="请输入IMSI"
 						autocomplete="off" class="layui-input">
 				</div>
 				<div class="layui-form-mid layui-word-aux">
@@ -289,13 +394,13 @@
 
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<input type="checkbox" name="c5" value="5015" title="黑名单 ">
+				<input type="checkbox" name="c20" value="5016" title="黑名单 ">
 			</div>
 
 
 			<div class="layui-input-block">
 				<div class="layui-input-inline">
-					<input type="text" name="r5" placeholder="请输入IMSI"
+					<input type="text" name="r20" 
 						autocomplete="off" class="layui-input">
 				</div>
 				<div class="layui-form-mid layui-word-aux">
@@ -304,6 +409,308 @@
 
 			</div>
 		</div>
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c21" value="5017" title="发射功率 ">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r21" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					字符串，格式为多组用逗号隔开的 15 位 IMSI
+				</div>
+
+			</div>
+		</div>
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c22" value="5018" title="查询IMSI">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r22" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					字符串，格式为多组用逗号隔开的 15 位 IMSI
+				</div>
+
+			</div>
+		</div>
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c23" value="5019" title="重启小区">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r23" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					
+				</div>
+
+			</div>
+		</div>
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c23" value="5019" title="重启小区">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r23" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					
+				</div>
+
+			</div>
+		</div>
+		
+		
+			<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c24" value="5020" title="PLMN">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r24" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					
+				</div>
+
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c25" value="5021" title="重选优先级">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r25" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					
+				</div>
+
+			</div>
+		</div>
+		
+		
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c26" value="5022" title="设备出口IP地址">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r26" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					
+				</div>
+
+			</div>
+		</div>
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c27" value="5023" title="服务器IP地址">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r27" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					
+				</div>
+
+			</div>
+		</div>
+		
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c28" value="5024" title="小区最低接入电平">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r28" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					
+				</div>
+
+			</div>
+		</div>
+		
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c29" value="5025" title="TAU/Attach Reject原因值">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<div class="layui-input-inline">
+						<input type="radio" name="r29" value="11" checked="" title="11">
+					</div>
+					<div class="layui-input-inline">
+						<input type="radio" name="r29" value="13" title="13">
+					</div>
+					<div class="layui-input-inline">
+						<input type="radio" name="r29" value="15" title="15">
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c30" value="5026" title="关闭小区">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r30" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					
+				</div>
+
+			</div>
+		</div>
+		
+		
+			
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c31" value="5027" title="GPS偏置时间">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r31" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					
+				</div>
+
+			</div>
+		</div>
+		
+		
+		
+			<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c32" value="5028" title="GPS偏置时间开关">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<div class="layui-input-inline">
+						<input type="radio" name="r32" value="1" checked="" title="开启">
+					</div>
+					<div class="layui-input-inline">
+						<input type="radio" name="r32" value="0" title="关闭">
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+		
+		
+		
+			
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c33" value="5029" title="路由器联网方式">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r33" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					{类型方式,IP，掩码，网关，DNS}
+				</div>
+
+			</div>
+		</div>
+		
+		
+		
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<input type="checkbox" name="c34" value="5030" title="开启远程协助">
+			</div>
+
+
+			<div class="layui-input-block">
+				<div class="layui-input-inline">
+					<input type="text" name="r34" 
+						autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-form-mid layui-word-aux">
+					{用户名,ssh 密钥 id_rsa,密钥长度,服务器的公网 ip 地址，,服务器 ssh 端口号,设备映射到服务器的 ssh端口号。}
+				</div>
+
+			</div>
+		</div>
+		
 
 		<div class="layui-form-item">
 			<div class="layui-input-block">
@@ -315,6 +722,13 @@
 				</button>
 			</div>
 		</div>
+		
+		
+		
+		
+		
+		
+		
 	</form>
 	<script src="layui/layui.js"></script>
 	<script src="jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
@@ -355,15 +769,19 @@
 				},
 				dataType : "json",
 				success : function(data) {
-
+                 
 					if (data == "0") {
+					
 						layer.alert("更新指令下发成功", {
 								title : "提示",
+								offset: 't',
 								icon : 6
 							});
 					} else {
+					
 						layer.alert("更新指令下发操作出现异常", {
 								title : "提示",
+								offset: 't',
 								icon : 5
 							});
 
