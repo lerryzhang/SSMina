@@ -111,7 +111,15 @@ public class SmallCellController {
         request.setAttribute("total",list.size());
 		return "index";
 	}
-
+	
+	@RequestMapping("/termList")
+	public String termList(HttpServletRequest request) {
+		List<Smtp> list = JedisUtil.hvals(Smtp.SmtpRedisKey);
+        request.setAttribute("list", list);
+        request.setAttribute("total",list.size());
+		return "term";
+	}
+	
 	@RequestMapping("/control")
 	@ResponseBody
 	public String control(HttpServletRequest request) throws IOException,

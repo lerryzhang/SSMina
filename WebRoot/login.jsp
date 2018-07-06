@@ -49,7 +49,7 @@
 			</div>
 
 			<div class='login_fields__submit'>
-				<button class="layui-btn" lay-submit lay-filter="formDemo">登陆</button>
+				<button class="layui-btn" lay-submit lay-filter="formDemo" type="submit">登陆</button>
 			</div>
 		</div>
 		<div class='success'></div>

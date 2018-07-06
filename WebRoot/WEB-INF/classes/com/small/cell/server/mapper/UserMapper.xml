@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.small.cell.server.dao.UserDao">
+	<select id="listUser" resultType="com.small.cell.server.pojo.User">
+		select
+		username,password,tel,lastip,lasttime from
+		user
+	</select>
+
+
+	<select id="getUser" parameterType="String"
+		resultType="com.small.cell.server.pojo.User">
+		select username,password from user where
+		username=#{username}
+	</select>
+
+
+	<update id="updateUser" parameterType="com.small.cell.server.pojo.User">
+		update user set
+		lastip=#{lastip},lasttime=#{lasttime} where
+		username=#{username}
+	</update>
+
+
+	<insert id="saveUser" parameterType="com.small.cell.server.pojo.User">
+		insert into user(username,
+		password,email,tel,lastip,lasttime,desc) values(#{username},
+		#{password}, #{email}, #{tel}, #{lastip}, #{lasttime}, #{desc})
+
+	</insert>
+
+</mapper>
