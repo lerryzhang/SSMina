@@ -13,4 +13,6 @@ public interface UserDao {
 	void updateUser(User user);
 
 	void saveUser(User user);
+	
+	int selectUserCount();
 }

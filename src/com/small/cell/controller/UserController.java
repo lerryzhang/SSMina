@@ -72,12 +72,17 @@ public class UserController {
 
 	@RequestMapping("/index")
 	public String index() {
-		return "user";
+		return "user/user";
 	}
 
 	@RequestMapping("/add")
-	@ResponseBody
 	public String add(HttpServletRequest request, User user) {
+		return "user/useradd";
+	}
+	
+	@RequestMapping("/save")
+	@ResponseBody
+	public String save(HttpServletRequest request, User user) {
 		userService.saveUser(user);
 		return Return.SUCCESS;
 	}

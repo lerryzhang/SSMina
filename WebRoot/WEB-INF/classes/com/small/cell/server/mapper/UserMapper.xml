@@ -11,26 +11,23 @@
 		user
 	</select>
 
-
+	<select id="selectUserCount" resultType="java.lang.Integer">
+		select count(*) from user
+	</select>
 	<select id="getUser" parameterType="String"
 		resultType="com.small.cell.server.pojo.User">
 		select username,password from user where
 		username=#{username}
 	</select>
-
-
 	<update id="updateUser" parameterType="com.small.cell.server.pojo.User">
 		update user set
 		lastip=#{lastip},lasttime=#{lasttime} where
 		username=#{username}
 	</update>
-
-
 	<insert id="saveUser" parameterType="com.small.cell.server.pojo.User">
-		insert into user(username,
-		password,email,tel,lastip,lasttime,desc) values(#{username},
-		#{password}, #{email}, #{tel}, #{lastip}, #{lasttime}, #{desc})
-
+		insert into
+		user(username,password,email,tel,lastip,lasttime,descr)
+		values(#{username},#{password}, #{email}, #{tel}, #{lastip},
+		#{lasttime}, #{descr})
 	</insert>
-
 </mapper>

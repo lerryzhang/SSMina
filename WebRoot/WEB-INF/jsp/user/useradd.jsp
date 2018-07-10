@@ -3,12 +3,12 @@
 <%
 	String mac = request.getParameter("mac");
 %>
-<link href="layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
 
 <body>
 	<fieldset class="layui-elem-field layui-field-title"
 		style="margin-top: 20px;">
-		<legend> 列表展示 </legend>
+		<legend>填写用户信息 </legend>
 	</fieldset>
 	<form class="layui-form" action="" id="form1" lay-filter="example">
 		<div class="layui-form-item">
@@ -38,16 +38,15 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">手机</label>
 			<div class="layui-input-block">
-				<input type="text" name="tel" autocomplete="off" class="layui-input"
-					>
+				<input type="text" name="tel" autocomplete="off" class="layui-input">
 			</div>
 		</div>
 
-	
+
 		<div class="layui-form-item layui-form-text">
 			<label class="layui-form-label">描述</label>
 			<div class="layui-input-block">
-				<textarea placeholder="请输入内容" class="layui-textarea" name="desc"></textarea>
+				<textarea placeholder="请输入内容" class="layui-textarea" name="descr"></textarea>
 			</div>
 		</div>
 
@@ -57,17 +56,17 @@
 			</div>
 		</div>
 	</form>
-	<script src="layui/layui.js"></script>
-	<script src="jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
+	<script src="../layui/layui.js"></script>
+	<script src="../jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
 	<script>
 		layui.use('form', function() {
 			var form = layui.form;
+			var index = parent.layer.getFrameIndex(window.name);
 			form.on('submit(formDemo)', function(data) {
-
 				$.ajax({
 					type : "POST",
 					dataType : "json",
-					url : "user/add",
+					url : "user/save",
 					data : $('#form1').serialize(),
 					success : function(result) {
 						if (result == "0") {
@@ -75,6 +74,8 @@
 								title : "提示",
 								icon : 6
 							});
+							parent.location.reload(); //刷新父窗口
+							parent.layer.close(index);
 						} else {
 							layer.alert("新增用户操作出现异常", {
 								title : "提示",

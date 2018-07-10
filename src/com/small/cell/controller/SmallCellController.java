@@ -6,9 +6,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
+
+import org.apache.commons.httpclient.util.DateParseException;
 
 import org.apache.log4j.Logger;
 import org.apache.mina.core.buffer.IoBuffer;
@@ -22,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.socket.TextMessage;
 
 import com.small.cell.collections.Convert;
@@ -39,6 +42,7 @@ import com.small.cell.server.pojo.Status;
 import com.small.cell.server.pojo.TypeCode;
 import com.small.cell.server.pojo.Upgrade;
 import com.small.cell.server.pojo.PackageData.MsgHeader;
+import com.small.cell.server.service.UserService;
 import com.small.cell.server.session.SessionManager;
 import com.small.cell.server.util.ByteAndStr16;
 import com.small.cell.server.util.JedisUtil;
@@ -57,6 +61,9 @@ public class SmallCellController {
 	public SpringWebSocketHandler infoHandler() {
 		return new SpringWebSocketHandler();
 	}
+	
+	@Resource
+	private UserService userService;
 
 	@RequestMapping(value = "/query", method = RequestMethod.POST)
 	@ResponseBody
@@ -107,19 +114,73 @@ public class SmallCellController {
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request) {
 		List<Smtp> list = JedisUtil.hvals(Smtp.SmtpRedisKey);
-        request.setAttribute("list", list);
-        request.setAttribute("total",list.size());
+		request.setAttribute("list", list);
+		request.setAttribute("total", list.size());
 		return "index";
 	}
-	
+
 	@RequestMapping("/termList")
 	public String termList(HttpServletRequest request) {
 		List<Smtp> list = JedisUtil.hvals(Smtp.SmtpRedisKey);
-        request.setAttribute("list", list);
-        request.setAttribute("total",list.size());
-		return "term";
+		request.setAttribute("list", list);
+		request.setAttribute("total", list.size());
+		return "terminal/term";
 	}
-	
+
+	@RequestMapping("/updateIndex")
+	public String updateIndex(HttpServletRequest request, Model model) {
+		String mac = request.getParameter("mac");
+		model.addAttribute("mac", mac);
+		return "terminal/termUpdate";
+	}
+
+	@RequestMapping("/controlIndex")
+	public String controlIndex(HttpServletRequest request, Model model) {
+		String mac = request.getParameter("mac");
+		model.addAttribute("mac", mac);
+		return "terminal/termControl";
+	}
+
+	@RequestMapping("/console")
+	public String console() {
+		return "console";
+	}
+
+	/**
+	 * @throws DateParseException
+	 * 
+	 * 
+	 * @Title: getKuNameAndCount
+	 * @Description: TODO(这里用一句话描述这个方法的作用)
+	 * @param @param request
+	 * @param @param response
+	 * @param @return 设定文件
+	 * @author lerry
+	 * @date 2018-7-9 上午10:30:16
+	 * @return String 返回类型
+	 * @throws
+	 */
+	@RequestMapping("/getKuNameAndCount")
+	@ResponseBody
+	public String getKuNameAndCount(HttpServletRequest request,
+			HttpServletResponse response){
+		JSONObject jsonobject = new JSONObject();
+		int  ccount = 0, shouru = 0, zhichu = 0;
+        Map map=JedisUtil.hgetAll(Smtp.SmtpRedisKey.getBytes());
+        try {
+			ccount= MyUtils.getOnlineSum(map);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jsonobject.put("tcount", map.size());
+		jsonobject.put("ocount",ccount);
+		jsonobject.put("ghichu", zhichu);
+		jsonobject.put("ucount", userService.selectUserCount());
+		return jsonobject.toString();
+
+	}
+
 	@RequestMapping("/control")
 	@ResponseBody
 	public String control(HttpServletRequest request) throws IOException,
@@ -155,24 +216,25 @@ public class SmallCellController {
 					Upgrade.Version.getCode(), MyUtils
 							.IntegerToString16For4(MyUtils.strTo16(version)
 									.length() / 2), MyUtils.strTo16(version));
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(body.length() / 2), body);
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(body.length() / 2),
+					body);
 
 			break;
 		case Restart:
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(1), "01");
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(1), "01");
 			smtp.setStatus(Status.RESTART);
 			break;
 		case Reset:
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(1), "01");
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(1), "01");
 			smtp.setStatus(Status.RESET);
 			break;
 		case RouterUpgrade:
@@ -181,10 +243,11 @@ public class SmallCellController {
 			body = String.format("%s%s%s", Upgrade.Url.getCode(), MyUtils
 					.IntegerToString16For4(MyUtils.strTo16(url).length() / 2),
 					MyUtils.strTo16(url));
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, param,
-					MyUtils.IntegerToString16For4(body.length() / 2), body);
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					param, MyUtils.IntegerToString16For4(body.length() / 2),
+					body);
 			break;
 		}
 		body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
@@ -195,8 +258,8 @@ public class SmallCellController {
 		packageData.setMsgBodyBytes(body);
 		IoSession session = SessionManager.getManager().get(mac);
 		infoHandler().sendMessageToUsers(
-				new TextMessage(String.format("%s,%s", mac, Control
-						.getByValue(param))));
+				new TextMessage(String.format("%s,%s", mac,
+						Control.getByValue(param))));
 		if (session == null) {
 			logger.info("session is null!");
 			return Return.FAIL;
@@ -204,7 +267,7 @@ public class SmallCellController {
 		session.write(IoBuffer.wrap(ByteAndStr16.HexString2Bytes(packageData
 				.toString())));
 		JedisUtil.hmset(Smtp.SmtpRedisKey, mac, smtp);
-		
+
 		return Return.SUCCESS;
 
 	}
@@ -215,10 +278,9 @@ public class SmallCellController {
 		String mac = request.getParameter("mac");
 		Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
 		model.addAttribute("smtp", smtp);
-		return "SmtpView";
+		return "terminal/termView";
 	}
 
-	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("/update")
 	@ResponseBody
@@ -248,15 +310,17 @@ public class SmallCellController {
 									.length() / 2), MyUtils.strTo16(value));
 				} else {
 
-					body = String.format("%s%s%s%s", body, key, MyUtils
-							.IntegerToString16For4(value.length() / 2), value);
+					body = String.format("%s%s%s%s", body, key,
+							MyUtils.IntegerToString16For4(value.length() / 2),
+							value);
 				}
 
 			}
-			body = String.format("%s%s%s%s%s%s", MyUtils
-					.IntegerToString16For4(General.Mac), MyUtils
-					.IntegerToString16For4(mac.length() / 2), mac, "0008",
-					MyUtils.IntegerToString16For4(body.length() / 2), body);
+			body = String.format("%s%s%s%s%s%s",
+					MyUtils.IntegerToString16For4(General.Mac),
+					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
+					"0008", MyUtils.IntegerToString16For4(body.length() / 2),
+					body);
 			body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
 			msgHeader.setMsgLength(MyUtils
 					.IntegerToString16For4(PackageData.msgHeaderLength
@@ -271,7 +335,7 @@ public class SmallCellController {
 			session.write(IoBuffer.wrap(ByteAndStr16
 					.HexString2Bytes(packageData.toString())));
 		}
-	
+
 		return Return.SUCCESS;
 	}
 }

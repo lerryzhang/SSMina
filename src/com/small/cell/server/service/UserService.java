@@ -9,4 +9,5 @@ public interface UserService {
 	public User getUser(String username);
 	public void updateUser(User user);
 	public void saveUser(User user) ;
+	public int selectUserCount();
 }

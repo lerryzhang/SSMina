@@ -3,7 +3,7 @@
 <%
 	String mac = request.getParameter("mac");
 %>
-<link href="layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
 
 
 <body>
@@ -106,8 +106,8 @@
 		</div>
 		<!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
 	</form>
-	<script src="layui/layui.js"></script>
-	<script src="jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
+	<script src="../layui/layui.js"></script>
+	<script src="../jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
 	<script>
 		layui.use('form', function() {
 			var form = layui.form;

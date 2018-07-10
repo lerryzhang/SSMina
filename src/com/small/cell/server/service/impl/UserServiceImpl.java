@@ -53,4 +53,10 @@ public class UserServiceImpl implements UserService {
 		userDao.saveUser(user);
 	}
 
+	@Override
+	public int selectUserCount() {
+		// TODO Auto-generated method stub
+		return userDao.selectUserCount();
+	}
+
 }

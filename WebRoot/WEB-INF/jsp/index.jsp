@@ -34,9 +34,9 @@
 			<div class="layui-logo">终端管理平台</div>
 			<!-- 头部区域（可配合layui已有的水平导航） -->
 			<ul class="layui-nav layui-layout-left">
-				<li class="layui-nav-item"><a href="">控制台</a>
+				<li class="layui-nav-item"><a href="<%=basePath%>/smallCell/console" target="option">控制台</a>
 				</li>
-				<li class="layui-nav-item"><a href="termList" target="option">终端管理</a>
+				<li class="layui-nav-item"><a href="<%=basePath%>/smallCell/termList" target="option">终端管理</a>
 				</li>
 				<li class="layui-nav-item"><a href="<%=basePath%>/user/index"
 					target="option">用户</a>
@@ -103,7 +103,7 @@
 		<div class="layui-body">
 			<!-- 内容主体区域 -->
 			  <div style="padding: 15px;height:100%">
-				 <iframe id="option" name="option" src="" style="overflow: visible;" scrolling="yes" frameborder="no" width="100%" height="100%"></iframe>
+				 <iframe id="option" name="option" src="<%=basePath%>/smallCell/console" style="overflow: visible;" scrolling="yes" frameborder="no" width="100%" height="100%"></iframe>
 			</div>
 
 		</div>

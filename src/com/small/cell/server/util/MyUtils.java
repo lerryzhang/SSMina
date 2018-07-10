@@ -6,12 +6,17 @@ import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import org.apache.mina.core.buffer.IoBuffer;
 
 import com.small.cell.collections.Convert;
+import com.small.cell.server.pojo.Smtp;
+import com.small.cell.server.pojo.Status;
 
 public class MyUtils {
 
@@ -599,6 +604,18 @@ public class MyUtils {
 
 	}
 
+	public static int getOnlineSum(Map<byte[], byte[]> map) throws Exception {
+		int sum = 0;
+		for (Entry<byte[], byte[]> entry : map.entrySet()) {
+			Smtp smtp = (Smtp) ObjectUtil.bytes2Object(entry.getValue());
+			if (Status.ONLINE.equals(smtp.getStatus()))
+				sum++;
+
+		}
+		return sum;
+
+	}
+
 	public static String ConvertStrToMac(String mac) {
 
 		StringBuffer sb = new StringBuffer("");
@@ -741,7 +758,7 @@ public class MyUtils {
 			} else if ((i + 1) % len == 0) {
 
 				// temp.append(Integer.valueOf(list.get(i), 16)).append("}");
-				
+
 				temp.append(HexStringToInteger(list.get(i))).append("}");
 			} else {
 
@@ -867,7 +884,9 @@ public class MyUtils {
 		 * System.out.println(new BigInteger("00" + str, 16).intValue()); }
 		 */
 
-		System.out.println("=====" + HexStringToInteger("FFFFFFBE")+"==="+HexStringToInteger("FFFFFD84")+"====="+HexStringToInteger("000000CC"));
+		System.out.println("=====" + HexStringToInteger("FFFFFFBE") + "==="
+				+ HexStringToInteger("FFFFFD84") + "====="
+				+ HexStringToInteger("000000CC"));
 
 	}
 

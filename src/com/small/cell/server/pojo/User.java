@@ -6,6 +6,8 @@ public class User {
 	private String tel;
 	private String lastip;
 	private String lasttime;
+	private String email;
+	private String descr;
 
 	public String getUsername() {
 		return username;
@@ -47,6 +49,20 @@ public class User {
 		this.lasttime = lasttime;
 	}
 
-	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getDescr() {
+		return descr;
+	}
+
+	public void setDescr(String descr) {
+		this.descr = descr;
+	}
 
 }

@@ -195,7 +195,7 @@
 						,
 						anim : 1 //0-6的动画形式，-1不开启
 						,
-						content : [ '<%=basePath%>/control.jsp?mac='
+						content : [ '<%=basePath%>/smallCell/controlIndex?mac='
 														+ mac, 'no' ], //iframe的url，no代表不显示滚动条
 									});
 		
@@ -234,8 +234,7 @@
 						shade : 0.6, //遮罩透明度
 						maxmin : true, //允许全屏最小化
 						anim : 1 ,//0-6的动画形式，-1不开启
-						
-					content : [ '<%=basePath%>/update.jsp?mac=' + mac, 'yes' ], //iframe的url，no代表不显示滚动条
+					    content : [ '<%=basePath%>/smallCell/updateIndex?mac=' + mac, 'yes' ], //iframe的url，no代表不显示滚动条
 		});
 
 	}

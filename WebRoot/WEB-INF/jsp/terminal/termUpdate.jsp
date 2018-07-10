@@ -3,16 +3,15 @@
 <%
 	String mac = request.getParameter("mac");
 %>
-<link href="layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
 
 <body>
 
-	<blockquote class="layui-elem-quote layui-text">方向：服务器
-		->设备</blockquote>
+	<blockquote class="layui-elem-quote layui-text">方向：服务器->设备</blockquote>
 
 	<fieldset class="layui-elem-field layui-field-title"
 		style="margin-top: 20px;">
-		<legend> 列表展示 </legend>
+		<legend>列表展示 </legend>
 	</fieldset>
 
 	<form class="layui-form" action="">
@@ -908,8 +907,8 @@
 
 
 	</form>
-	<script src="layui/layui.js"></script>
-	<script src="jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
+	<script src="../layui/layui.js"></script>
+	<script src="../jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
 	<script>
 		layui
 				.use(

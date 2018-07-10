@@ -36,9 +36,9 @@
 			</div>
 			<button class="layui-btn" data-type="reload" id="reload">搜索</button>
 			<button class="layui-btn layui-btn-normal" id="add">新建用户</button>
-			<button class="layui-btn layui-btn-warm">暖色按钮</button>
-			<button class="layui-btn layui-btn-danger">警告按钮</button>
-			<button class="layui-btn layui-btn-disabled">禁用按钮</button>
+			<button class="layui-btn layui-btn-warm">修改用户</button>
+			<button class="layui-btn layui-btn-danger">删除用户</button>
+			<button class="layui-btn layui-btn-primary">导出报表</button>
 		</div>
 
 
@@ -98,14 +98,17 @@
 						type : 2 //Page层类型
 						,
 						area : [ '800px', '600px' ],
-						title : '控制命令列表',
+						title : '新增用户',
 						shade : 0.6 //遮罩透明度
 						,
 						maxmin : true //允许全屏最小化
 						,
 						anim : 1 //0-6的动画形式，-1不开启
 						,
-						content : [ '<%=basePath%>/useradd.jsp', 'no' ], //iframe的url，no代表不显示滚动条
+						content : [ '<%=basePath%>/user/add', 'no' ], //iframe的url，no代表不显示滚动条
+						
+						
+						
 				});
 
 			});
