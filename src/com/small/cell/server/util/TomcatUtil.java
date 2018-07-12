@@ -50,6 +50,12 @@ public class TomcatUtil {
 
 	}
 
+	public static void main(String args[]) {
+
+		getTomcatStatus();
+
+	}
+
 	public static TomcatStatus getTomcatStatus() {
 		String result = "";
 		Document document = null;// 引入org.dom4j包
@@ -58,6 +64,8 @@ public class TomcatUtil {
 			result = getHtmlContext(
 					"http://127.0.0.1:8080/manager/status?XML=true", "tomcat",
 					"tomcat");
+			System.out.println("===" + result);
+
 			document = DocumentHelper.parseText(result);// 将字符串转化为XML的Document
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -71,13 +79,28 @@ public class TomcatUtil {
 		tomcatStatus.setMaxMemory(element.attribute("max").getText());
 		tomcatStatus.setTotalMemory(element.attribute("total").getText());
 		tomcatStatus.setFreeMemory(element.attribute("free").getText());
+
 		element = rootElement.element("connector");
+
 		element = element.element("threadInfo");
 		tomcatStatus.setMaxThreads(element.attribute("maxThreads").getText());
 		tomcatStatus.setCurrentThreadCount(element.attribute(
 				"currentThreadCount").getText());
 		tomcatStatus.setCurrentThreadBusy(element.attribute(
 				"currentThreadsBusy").getText());
+		element = rootElement.element("connector");
+
+		element = element.element("requestInfo");
+		tomcatStatus.setMaxProcessingTime(element.attribute("maxTime")
+				.getText());
+		tomcatStatus.setMsProcessingTime(element.attribute("processingTime")
+				.getText());
+		tomcatStatus.setRequestCount(element.attribute("requestCount")
+				.getText());
+		tomcatStatus.setErrCount(element.attribute("errorCount").getText());
+		tomcatStatus.setBytesReceived(element.attribute("bytesReceived")
+				.getText());
+		tomcatStatus.setBytesSent(element.attribute("bytesSent").getText());
 
 		return tomcatStatus;
 

@@ -888,7 +888,7 @@ public class MyUtils {
 	    * @return              日期数组 
 	    */  
 	   public static ArrayList<String> getBeforeDays(int intervals ) {  
-	       ArrayList<String> pastDaysList = new ArrayList<>();  
+	       ArrayList<String> pastDaysList = new ArrayList<String>();  
 	       for (int i = 0; i <intervals; i++) {  
 	           pastDaysList.add(getPastDate(i));  
 	       }  

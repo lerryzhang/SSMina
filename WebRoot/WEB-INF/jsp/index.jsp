@@ -79,11 +79,11 @@
 				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 				<ul class="layui-nav layui-nav-tree" lay-filter="test">
 					<li class="layui-nav-item layui-nav-itemed"><a href="<%=basePath%>/smallCell/termList" target="option">所有终端</a></li>
-					<li class="layui-nav-item"><a href="javascript:;">解决方案</a>	
+					<li class="layui-nav-item"><a href="javascript:;">数据中心</a>	
 					</li>
-					<li class="layui-nav-item"><a href="">云市场</a>
+					<li class="layui-nav-item"><a href="">版本信息</a>
 					</li>
-					<li class="layui-nav-item"><a href="">发布商品</a>
+					<li class="layui-nav-item"><a href="">网站信息</a>
 					</li>
 				</ul>
 			</div>

@@ -146,7 +146,6 @@
 		alert("此浏览器只支持SockJS");
 	}
 	websocket.onopen = function(evnt) {
-
 	};
 
 	websocket.onmessage = function(evnt) {

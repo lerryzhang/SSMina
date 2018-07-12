@@ -2,6 +2,12 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	String mac = request.getParameter("mac");
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+
+	
 %>
 <link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
 
@@ -116,7 +122,7 @@
 				$.ajax({
 					type : "POST",
 					dataType : "json",
-					url : "smallCell/control",
+					url : "<%=basePath%>/smallCell/control",
 					data : $('#form1').serialize(),
 					success : function(result) {
 						if (result == "0") {

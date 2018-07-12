@@ -2,6 +2,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	String mac = request.getParameter("mac");
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	
 %>
 <link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
 
@@ -986,7 +991,7 @@
 												$
 														.ajax({
 															type : "post",
-															url : "smallCell/update",
+															url : "<%=basePath%>/smallCell/update",
 															data : {
 																mac : $(
 																		"input[name='mac']")

@@ -201,6 +201,7 @@ public class SmallCellController {
 	@ResponseBody
 	public String control(HttpServletRequest request) throws IOException,
 			InterruptedException {
+		
 		String url = null;
 		String body = null;
 		String param = request.getParameter("control");
@@ -302,10 +303,12 @@ public class SmallCellController {
 	@ResponseBody
 	public String update(HttpServletRequest request) throws IOException,
 			InterruptedException {
+		System.out.println("=========================================================");
 		String mac = request.getParameter("mac");
 		JSONObject jb = JSONObject.fromObject(request.getParameter("username"));
 		Map map = (Map) jb;
 		if (map.size() > 0) {
+			System.out.println("========3333=================================================");
 			String body = "";
 			Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
 			PackageData packageData = new PackageData();
@@ -348,6 +351,8 @@ public class SmallCellController {
 				logger.info("session is null!");
 				return Return.FAIL;
 			}
+			
+			System.out.println("=====uuu="+packageData.toString());
 			session.write(IoBuffer.wrap(ByteAndStr16
 					.HexString2Bytes(packageData.toString())));
 		}
