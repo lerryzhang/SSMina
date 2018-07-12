@@ -8,6 +8,7 @@ public class User {
 	private String lasttime;
 	private String email;
 	private String descr;
+	private String ptime;
 
 	public String getUsername() {
 		return username;
@@ -65,4 +66,12 @@ public class User {
 		this.descr = descr;
 	}
 
+	public String getPtime() {
+		return ptime;
+	}
+
+	public void setPtime(String ptime) {
+		this.ptime = ptime;
+	}
+   
 }

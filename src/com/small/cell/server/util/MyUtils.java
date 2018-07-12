@@ -4,8 +4,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -610,10 +613,23 @@ public class MyUtils {
 			Smtp smtp = (Smtp) ObjectUtil.bytes2Object(entry.getValue());
 			if (Status.ONLINE.equals(smtp.getStatus()))
 				sum++;
-
 		}
 		return sum;
 
+	}
+
+	public static String[] getLast12Months() {
+
+		String[] lastSixMonths = new String[6];
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) + 1); // 要先+1,才能把本月的算进去</span>
+		for (int i = 0; i < 6; i++) {
+			cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) - 1); // 逐次往前推1个月
+			lastSixMonths[5 - i] = cal.get(Calendar.YEAR) + "-"
+					+ String.format("%02d", (cal.get(Calendar.MONTH) + 1));
+		}
+
+		return lastSixMonths;
 	}
 
 	public static String ConvertStrToMac(String mac) {
@@ -865,6 +881,49 @@ public class MyUtils {
 		}
 
 	}
+	
+	/** 
+	    * 获取过去或者未来 任意天内的日期数组 
+	    * @param intervals      intervals天内 
+	    * @return              日期数组 
+	    */  
+	   public static ArrayList<String> getBeforeDays(int intervals ) {  
+	       ArrayList<String> pastDaysList = new ArrayList<>();  
+	       for (int i = 0; i <intervals; i++) {  
+	           pastDaysList.add(getPastDate(i));  
+	       }  
+	       return pastDaysList;  
+	   }  
+	  
+	   /** 
+	    * 获取过去第几天的日期 
+	    * 
+	    * @param past 
+	    * @return 
+	    */  
+	   public static String getPastDate(int past) {  
+	       Calendar calendar = Calendar.getInstance();  
+	       calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - past);  
+	       Date today = calendar.getTime();  
+	       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
+	       String result = format.format(today);  
+	       return result;  
+	   }  
+	  
+	   /** 
+	    * 获取未来 第 past 天的日期 
+	    * @param past 
+	    * @return 
+	    */  
+	   public static String getFetureDate(int past) {  
+	       Calendar calendar = Calendar.getInstance();  
+	       calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);  
+	       Date today = calendar.getTime();  
+	       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
+	       String result = format.format(today);  
+	       return result;  
+	   }  
+	
 
 	public static void main(String args[]) {
 
@@ -872,21 +931,28 @@ public class MyUtils {
 		// getStrList("0000000000000000000000000000000000000000", 8);
 		// System.out.println("===" + getStringFromInteger(list, 2));
 
-		List<String> list = new ArrayList<String>();
-		list.add("00000001");
-		list.add("00000001");
-		list.add("00000001");
-		list.add("00000001");
-		String str = "FFFFFFBE";
+		/*
+		 * List<String> list = new ArrayList<String>(); list.add("00000001");
+		 * list.add("00000001"); list.add("00000001"); list.add("00000001");
+		 * String str = "FFFFFFBE";
+		 */
 		/*
 		 * if (str.subSequence(0, 1).equals("F")) { System.out.println(new
 		 * BigInteger("FF" + str, 16).intValue()); } else {
 		 * System.out.println(new BigInteger("00" + str, 16).intValue()); }
 		 */
 
-		System.out.println("=====" + HexStringToInteger("FFFFFFBE") + "==="
-				+ HexStringToInteger("FFFFFD84") + "====="
-				+ HexStringToInteger("000000CC"));
+		/*
+		 * System.out.println("=====" + HexStringToInteger("FFFFFFBE") + "===" +
+		 * HexStringToInteger("FFFFFD84") + "=====" +
+		 * HexStringToInteger("000000CC"));
+		 */
+
+		List list=getBeforeDays(7);
+		for(int i=0;i<list.size();i++){
+			
+			System.out.println("===="+list.get(i));
+		}
 
 	}
 

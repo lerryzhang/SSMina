@@ -624,9 +624,9 @@ public class JedisUtil {
 		try {
 			jedis = jedisPool.getResource();
 			jedis.auth(JEDIS_PASSWORD);
-			jedis.hset(key.getBytes(), mac.getBytes(), ObjectUtil
-					.object2Bytes(smtp));
-		
+			jedis.hset(key.getBytes(), mac.getBytes(),
+					ObjectUtil.object2Bytes(smtp));
+
 		} catch (Exception e) {
 			jedisPool.returnBrokenResource(jedis);
 			e.printStackTrace();
@@ -638,21 +638,15 @@ public class JedisUtil {
 	}
 
 	public static List<Smtp> hvals(String key) {
-
 		Jedis jedis = null;
 		List<Smtp> list = new ArrayList<Smtp>();
-
 		try {
 			jedis = jedisPool.getResource();
 			jedis.auth(JEDIS_PASSWORD);
 			List<byte[]> byteList = jedis.hvals(key.getBytes());
-
 			for (int i = 0; i < byteList.size(); i++) {
-
 				list.add((Smtp) ObjectUtil.bytes2Object(byteList.get(i)));
-
 			}
-
 		} catch (Exception e) {
 			jedisPool.returnBrokenResource(jedis);
 			e.printStackTrace();

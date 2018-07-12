@@ -30,12 +30,6 @@ public class UserServiceImpl implements UserService {
 	public UserDao userDao;
 
 	@Override
-	public List<User> listUser() {
-		// TODO Auto-generated method stub
-		return userDao.listUser();
-	}
-
-	@Override
 	public User getUser(String username) {
 		// TODO Auto-generated method stub
 		return userDao.getUser(username);
@@ -57,6 +51,12 @@ public class UserServiceImpl implements UserService {
 	public int selectUserCount() {
 		// TODO Auto-generated method stub
 		return userDao.selectUserCount();
+	}
+
+	@Override
+	public List<User> listUser(int pageNo, int pageSize) {
+		// TODO Auto-generated method stub
+		return userDao.listUser(pageNo, pageSize);
 	}
 
 }

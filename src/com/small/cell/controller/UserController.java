@@ -64,9 +64,12 @@ public class UserController {
 
 	@RequestMapping("/list")
 	@ResponseBody
-	public Layui list() {
-		List<User> list = userService.listUser();
-		PageUtils pageUtil = new PageUtils(list, list.size(), 10, 1);
+	public Layui list(HttpServletRequest request) {
+		
+		int page=Integer.parseInt(request.getParameter("page"));
+		int limit=Integer.parseInt(request.getParameter("limit")) ;
+		List<User> list = userService.listUser(page,limit);
+		PageUtils pageUtil = new PageUtils(list, userService.selectUserCount(), limit, page);
 		return Layui.data(pageUtil.getTotalCount(), pageUtil.getList());
 	}
 
@@ -79,11 +82,19 @@ public class UserController {
 	public String add(HttpServletRequest request, User user) {
 		return "user/useradd";
 	}
-	
+
 	@RequestMapping("/save")
 	@ResponseBody
 	public String save(HttpServletRequest request, User user) {
+		user.setPtime(format.format(new Date()));
 		userService.saveUser(user);
 		return Return.SUCCESS;
+	}
+
+	@RequestMapping("/cancel")
+	public String cancel(HttpServletRequest request) {
+		request.getSession().removeAttribute("SESSION_USERNAME");
+		request.getSession().invalidate();
+		return "login";
 	}
 }

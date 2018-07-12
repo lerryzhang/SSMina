@@ -7,10 +7,12 @@
 <mapper namespace="com.small.cell.server.dao.UserDao">
 	<select id="listUser" resultType="com.small.cell.server.pojo.User">
 		select
-		username,password,tel,lastip,lasttime from
-		user
+		username,password,tel,lastip,lasttime,ptime from
+		user 
+		order by ptime desc
+		
+		LIMIT ${(pageNo-1)*pageSize},${pageSize};
 	</select>
-
 	<select id="selectUserCount" resultType="java.lang.Integer">
 		select count(*) from user
 	</select>

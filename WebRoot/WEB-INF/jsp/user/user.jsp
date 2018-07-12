@@ -46,6 +46,8 @@
 
 	</div>
 
+	<div id="notice_pages"></div>
+
 	<script src="../layui/layui.js" type="text/javascript"></script>
 	<script src="../jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
 
@@ -55,14 +57,13 @@
 
 	<script>
 	
-	 
-		layui.use('table', function() {
-			var table = layui.table;
-
-			table.render({
+		layui.use(['laypage', 'layer', 'table'], function() {
+			var table = layui.table
+			,laypage = layui.laypage;
+			 table.render({
 				elem : '#test',
 				url : '<%=basePath%>/user/list',
-				page : true,
+				page:true,
 				cols : [ [ {
 					title : '序号',
 					templet : '#indexTpl'
@@ -82,7 +83,15 @@
 					field : 'tel',
 					title : 'Tel'
 
-				}, {
+				}, 
+				
+				{
+					field : 'ptime',
+					title : '创建时间'
+
+				},
+				
+				{
 					field : 'lastip',
 					title : '上一次登陆IP'
 
@@ -92,27 +101,38 @@
 
 				} ] ]
 			});
+			
+			
+		/* laypage.render({
+				elem : 'notice_pages',
+				count : 100,
+				skin : '#1E9FFF',
+				skip: true,
+				jump : function(obj, first) {
+					if (!first) {
+						layer.msg('第' + obj.curr + '页'+obj.limit);
+
+					}
+				}
+			}); */
 
 			$(document).on('click', '#add', function() {
 				layer.open({
-						type : 2 //Page层类型
-						,
-						area : [ '800px', '600px' ],
-						title : '新增用户',
-						shade : 0.6 //遮罩透明度
-						,
-						maxmin : true //允许全屏最小化
-						,
-						anim : 1 //0-6的动画形式，-1不开启
-						,
-						content : [ '<%=basePath%>/user/add', 'no' ], //iframe的url，no代表不显示滚动条
-						
-						
-						
+					type : 2 //Page层类型
+					,
+					area : [ '60%', '80%' ],
+					title : '新增用户',
+					shade : 0.6 //遮罩透明度
+					,
+					maxmin : true //允许全屏最小化
+					,
+					anim : 1 //0-6的动画形式，-1不开启
+					,
+					content : [ '<%=basePath%>/user/add', 'no' ], //iframe的url，no代表不显示滚动条
+
 				});
 
 			});
-
 		})
 	</script>
 

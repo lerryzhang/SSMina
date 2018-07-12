@@ -2,7 +2,19 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	String mac = request.getParameter("mac");
+	
+	
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	
 %>
+
+
+
+
+
 <link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
 
 <body>
@@ -51,8 +63,8 @@
 		</div>
 
 		<div class="layui-form-item">
-			<div class="layui-input-block">
-				<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+			<div class="layui-input-block" >
+				<button class="layui-btn" lay-submit lay-filter="formDemo"  >立即提交</button>
 			</div>
 		</div>
 	</form>
@@ -66,7 +78,7 @@
 				$.ajax({
 					type : "POST",
 					dataType : "json",
-					url : "user/save",
+					url : "<%=basePath%>/user/save",
 					data : $('#form1').serialize(),
 					success : function(result) {
 						if (result == "0") {

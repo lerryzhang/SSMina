@@ -2,6 +2,7 @@ package com.small.cell.controller;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,7 @@ import com.small.cell.server.pojo.Status;
 import com.small.cell.server.pojo.TypeCode;
 import com.small.cell.server.pojo.Upgrade;
 import com.small.cell.server.pojo.PackageData.MsgHeader;
+import com.small.cell.server.service.AlarmService;
 import com.small.cell.server.service.UserService;
 import com.small.cell.server.session.SessionManager;
 import com.small.cell.server.util.ByteAndStr16;
@@ -61,9 +63,12 @@ public class SmallCellController {
 	public SpringWebSocketHandler infoHandler() {
 		return new SpringWebSocketHandler();
 	}
-	
+
 	@Resource
 	private UserService userService;
+
+	@Resource
+	private AlarmService alarmService;
 
 	@RequestMapping(value = "/query", method = RequestMethod.POST)
 	@ResponseBody
@@ -160,23 +165,34 @@ public class SmallCellController {
 	 * @return String ∑µªÿ¿‡–Õ
 	 * @throws
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/getKuNameAndCount")
 	@ResponseBody
 	public String getKuNameAndCount(HttpServletRequest request,
-			HttpServletResponse response){
+			HttpServletResponse response) {
 		JSONObject jsonobject = new JSONObject();
-		int  ccount = 0, shouru = 0, zhichu = 0;
-        Map map=JedisUtil.hgetAll(Smtp.SmtpRedisKey.getBytes());
-        try {
-			ccount= MyUtils.getOnlineSum(map);
+		int ccount = 0, zhichu = 0;
+		@SuppressWarnings("rawtypes")
+		Map map = JedisUtil.hgetAll(Smtp.SmtpRedisKey.getBytes());
+		try {
+			ccount = MyUtils.getOnlineSum(map);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		jsonobject.put("tcount", map.size());
-		jsonobject.put("ocount",ccount);
+		jsonobject.put("ocount", ccount);
 		jsonobject.put("ghichu", zhichu);
 		jsonobject.put("ucount", userService.selectUserCount());
+		jsonobject.put("month", MyUtils.getLast12Months());
+		List<String> pastDayList = MyUtils.getBeforeDays(7);
+		jsonobject.put("week", pastDayList);
+		List<Integer> countList = new ArrayList<Integer>();
+		for (int i = 0; i < pastDayList.size(); i++) {
+			int count = alarmService.selectAlarmCountByDay(pastDayList.get(i));
+			countList.add(count);
+		}
+		jsonobject.put("countList", countList);
 		return jsonobject.toString();
 
 	}
