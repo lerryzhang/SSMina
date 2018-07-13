@@ -201,7 +201,7 @@ public class SmallCellController {
 	@ResponseBody
 	public String control(HttpServletRequest request) throws IOException,
 			InterruptedException {
-		
+
 		String url = null;
 		String body = null;
 		String param = request.getParameter("control");
@@ -303,12 +303,12 @@ public class SmallCellController {
 	@ResponseBody
 	public String update(HttpServletRequest request) throws IOException,
 			InterruptedException {
-		System.out.println("=========================================================");
+		System.out
+				.println("=========================================================");
 		String mac = request.getParameter("mac");
 		JSONObject jb = JSONObject.fromObject(request.getParameter("username"));
 		Map map = (Map) jb;
 		if (map.size() > 0) {
-			System.out.println("========3333=================================================");
 			String body = "";
 			Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
 			PackageData packageData = new PackageData();
@@ -327,13 +327,34 @@ public class SmallCellController {
 					body = String.format("%s%s%s%s", body, key, MyUtils
 							.IntegerToString16For4(MyUtils.strTo16(value)
 									.length() / 2), MyUtils.strTo16(value));
-				} else {
+				} else if (Convert.list2.contains(key)) {
+
+					body = String.format("%s%s%s%s", body, key, MyUtils
+							.IntegerToString16For4(ByteAndStr16
+									.Bytes2HexString(
+											MyUtils.integerTo4Bytes(123))
+									.length() / 2), ByteAndStr16
+							.Bytes2HexString(MyUtils.integerTo4Bytes(123)));
+
+				} else if (Convert.list3.contains(key)) {
+					String[] strArr = value.split(",");
+					for (int i = 0; i < strArr.length; i++) {
+						body = String.format("%s%s", body, ByteAndStr16
+								.Bytes2HexString(MyUtils.integerTo4Bytes(123)));
+
+					}
+					
+					body=String.format("%s%s", body, ByteAndStr16
+							.Bytes2HexString(MyUtils.integerTo4Bytes(123)));
+
+				}
+
+				else {
 
 					body = String.format("%s%s%s%s", body, key,
 							MyUtils.IntegerToString16For4(value.length() / 2),
 							value);
 				}
-
 			}
 			body = String.format("%s%s%s%s%s%s",
 					MyUtils.IntegerToString16For4(General.Mac),
@@ -347,12 +368,12 @@ public class SmallCellController {
 			packageData.setMsgHeader(msgHeader);
 			packageData.setMsgBodyBytes(body);
 			IoSession session = SessionManager.getManager().get(mac);
+
+			System.out.println("=====uuu=====" + packageData.toString());
 			if (session == null) {
 				logger.info("session is null!");
 				return Return.FAIL;
 			}
-			
-			System.out.println("=====uuu="+packageData.toString());
 			session.write(IoBuffer.wrap(ByteAndStr16
 					.HexString2Bytes(packageData.toString())));
 		}

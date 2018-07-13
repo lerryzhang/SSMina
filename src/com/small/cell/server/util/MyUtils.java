@@ -948,11 +948,8 @@ public class MyUtils {
 		 * HexStringToInteger("000000CC"));
 		 */
 
-		List list=getBeforeDays(7);
-		for(int i=0;i<list.size();i++){
-			
-			System.out.println("===="+list.get(i));
-		}
+		String str="545a4c2d303130";
+		System.out.println("====="+ByteAndStr16.Bytes2HexString(integerTo4Bytes(123)));
 
 	}
 

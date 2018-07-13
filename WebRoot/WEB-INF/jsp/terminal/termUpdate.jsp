@@ -177,7 +177,7 @@
 					<input type="text" name="r9" autocomplete="off" class="layui-input">
 				</div>
 				<div class="layui-form-mid layui-word-aux">整型数组，频点范围 0~1023，个数
-					1~31 个。格式：{1,2,3.。。。。}</div>
+					1~31 个。格式：1,2,3.。。。。</div>
 			</div>
 		</div>
 
