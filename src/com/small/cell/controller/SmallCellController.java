@@ -233,25 +233,24 @@ public class SmallCellController {
 					Upgrade.Version.getCode(), MyUtils
 							.IntegerToString16For4(MyUtils.strTo16(version)
 									.length() / 2), MyUtils.strTo16(version));
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(body.length() / 2),
-					body);
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(body.length() / 2), body);
 
 			break;
 		case Restart:
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(1), "01");
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(1), "01");
 			smtp.setStatus(Status.RESTART);
 			break;
 		case Reset:
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(1), "01");
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(1), "01");
 			smtp.setStatus(Status.RESET);
 			break;
 		case RouterUpgrade:
@@ -260,11 +259,10 @@ public class SmallCellController {
 			body = String.format("%s%s%s", Upgrade.Url.getCode(), MyUtils
 					.IntegerToString16For4(MyUtils.strTo16(url).length() / 2),
 					MyUtils.strTo16(url));
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(body.length() / 2),
-					body);
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, param,
+					MyUtils.IntegerToString16For4(body.length() / 2), body);
 			break;
 		}
 		body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
@@ -275,8 +273,8 @@ public class SmallCellController {
 		packageData.setMsgBodyBytes(body);
 		IoSession session = SessionManager.getManager().get(mac);
 		infoHandler().sendMessageToUsers(
-				new TextMessage(String.format("%s,%s", mac,
-						Control.getByValue(param))));
+				new TextMessage(String.format("%s,%s", mac, Control
+						.getByValue(param))));
 		if (session == null) {
 			logger.info("session is null!");
 			return Return.FAIL;
@@ -298,13 +296,11 @@ public class SmallCellController {
 		return "terminal/termView";
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings( { "rawtypes", "unchecked" })
 	@RequestMapping("/update")
 	@ResponseBody
 	public String update(HttpServletRequest request) throws IOException,
 			InterruptedException {
-		System.out
-				.println("=========================================================");
 		String mac = request.getParameter("mac");
 		JSONObject jb = JSONObject.fromObject(request.getParameter("username"));
 		Map map = (Map) jb;
@@ -319,48 +315,82 @@ public class SmallCellController {
 					.parseInt(smtp.getVersion())));
 			msgHeader.setMsgSeqNum(smtp.getSeqNum());
 			Iterator<String> iter = map.keySet().iterator();
-
 			while (iter.hasNext()) {
 				String key = iter.next();
 				String value = (String) map.get(key);
+				
+				System.out.println("===="+value);
 				if (Convert.list1.contains(key)) {
 					body = String.format("%s%s%s%s", body, key, MyUtils
 							.IntegerToString16For4(MyUtils.strTo16(value)
 									.length() / 2), MyUtils.strTo16(value));
 				} else if (Convert.list2.contains(key)) {
-
-					body = String.format("%s%s%s%s", body, key, MyUtils
-							.IntegerToString16For4(ByteAndStr16
-									.Bytes2HexString(
-											MyUtils.integerTo4Bytes(123))
-									.length() / 2), ByteAndStr16
-							.Bytes2HexString(MyUtils.integerTo4Bytes(123)));
-
+					body = String
+							.format(
+									"%s%s%s%s",
+									body,
+									key,
+									MyUtils
+											.IntegerToString16For4(ByteAndStr16
+													.Bytes2HexString(
+															MyUtils
+																	.integerTo4Bytes(Integer
+																			.parseInt(value)))
+													.length() / 2),
+									ByteAndStr16.Bytes2HexString(MyUtils
+											.integerTo4Bytes(Integer
+													.parseInt(value))));
 				} else if (Convert.list3.contains(key)) {
 					String[] strArr = value.split(",");
 					for (int i = 0; i < strArr.length; i++) {
 						body = String.format("%s%s", body, ByteAndStr16
-								.Bytes2HexString(MyUtils.integerTo4Bytes(123)));
-
+								.Bytes2HexString(MyUtils
+										.integerTo4Bytes(Integer
+												.parseInt(strArr[i]))));
 					}
-					
-					body=String.format("%s%s", body, ByteAndStr16
-							.Bytes2HexString(MyUtils.integerTo4Bytes(123)));
-
+					body = String.format("%s%s%s", key, MyUtils
+							.IntegerToString16For4(body.length() / 2), body);
+				} else if (Convert.list4.contains(key)) {
+					List<String> list = MyUtils.getAarray(value);
+					for (int i = 0; i < list.size(); i++) {
+						body = String.format("%s%s", body, ByteAndStr16
+								.Bytes2HexString(MyUtils
+										.integerTo4Bytes(Integer.parseInt(list
+												.get(i)))));
+					}
+					body = String.format("%s%s%s", key, MyUtils
+							.IntegerToString16For4(body.length() / 2), body);
 				}
 
-				else {
-
-					body = String.format("%s%s%s%s", body, key,
-							MyUtils.IntegerToString16For4(value.length() / 2),
-							value);
+				else if (Convert.list5.contains(key)) {
+					String[] strArr = value.split(",");
+					for (int i = 0; i < strArr.length; i++) {
+						body = String.format("%s%s", body, MyUtils
+								.strTo16(strArr[i]));
+					}
+					body = String.format("%s%s%s", key, MyUtils
+							.IntegerToString16For4(body.length() / 2), body);
+				}else if (Convert.Regions.equals(key)) {
+					body = MyUtils.getRegions(value);
+					body = String.format("%s%s%s", key, MyUtils
+							.IntegerToString16For4(body.length() / 2),body);
+				}
+				
+				else if (Convert.Ntp.equals(key)) {
+					
+					body = MyUtils.getNtpToClient(value);
+					body = String.format("%s%s%s", key, MyUtils
+							.IntegerToString16For4(body.length() / 2),body);
+				}else {
+					body = String.format("%s%s%s%s", body, key, MyUtils
+							.IntegerToString16For4(value.length() / 2), value);
 				}
 			}
-			body = String.format("%s%s%s%s%s%s",
-					MyUtils.IntegerToString16For4(General.Mac),
-					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					"0008", MyUtils.IntegerToString16For4(body.length() / 2),
-					body);
+			body = String.format("%s%s%s%s%s%s", MyUtils
+					.IntegerToString16For4(General.Mac), MyUtils
+					.IntegerToString16For4(mac.length() / 2), mac, smtp
+					.getCorrModel(), MyUtils.IntegerToString16For4(body
+					.length() / 2), body);
 			body = MyExeUtil.getExeRes(Para.BlowFishMode_1, body);
 			msgHeader.setMsgLength(MyUtils
 					.IntegerToString16For4(PackageData.msgHeaderLength

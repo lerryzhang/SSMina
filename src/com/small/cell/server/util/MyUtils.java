@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.mina.core.buffer.IoBuffer;
@@ -653,8 +654,8 @@ public class MyUtils {
 		byte[] baKeyword = new byte[s.length() / 2];
 		for (int i = 0; i < baKeyword.length; i++) {
 			try {
-				baKeyword[i] = (byte) (0xff & Integer.parseInt(
-						s.substring(i * 2, i * 2 + 2), 16));
+				baKeyword[i] = (byte) (0xff & Integer.parseInt(s.substring(
+						i * 2, i * 2 + 2), 16));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -744,8 +745,8 @@ public class MyUtils {
 		for (int i = 0; i < list.size(); i++) {
 			if (i % len == 0) {
 
-				temp.append("{").append(hexStringToString(list.get(i)))
-						.append(",");
+				temp.append("{").append(hexStringToString(list.get(i))).append(
+						",");
 
 			} else if ((i + 1) % len == 0) {
 
@@ -791,24 +792,24 @@ public class MyUtils {
 			String content = list.get(i);
 			temp.append("{")
 					.append(HexStringToInteger(content.substring(0, 8)))
-					.append(",")
-					.append(HexStringToInteger(content.substring(8, 16)))
-					.append(",")
-					.append(HexStringToInteger(content.substring(16, 24)))
-					.append(",")
-					.append(HexStringToInteger(content.substring(24, 32)))
-					.append(",")
-					.append(HexStringToInteger(content.substring(32, 40)))
-					.append(",")
-					.append(HexStringToInteger(content.substring(40, 48)))
-					.append(",")
-					.append(HexStringToInteger(content.substring(48, 56)))
-					.append(",")
-					.append(hexStringToString(content.substring(56, 72)))
-					.append(",")
-					.append(hexStringToString(content.substring(72, 84)))
-					.append(",")
-					.append(hexStringToString(content.substring(84, 88)))
+					.append(",").append(
+							HexStringToInteger(content.substring(8, 16)))
+					.append(",").append(
+							HexStringToInteger(content.substring(16, 24)))
+					.append(",").append(
+							HexStringToInteger(content.substring(24, 32)))
+					.append(",").append(
+							HexStringToInteger(content.substring(32, 40)))
+					.append(",").append(
+							HexStringToInteger(content.substring(40, 48)))
+					.append(",").append(
+							HexStringToInteger(content.substring(48, 56)))
+					.append(",").append(
+							hexStringToString(content.substring(56, 72)))
+					.append(",").append(
+							hexStringToString(content.substring(72, 84)))
+					.append(",").append(
+							hexStringToString(content.substring(84, 88)))
 					.append("}");
 
 		}
@@ -825,15 +826,15 @@ public class MyUtils {
 				.append(HexStringToInteger(content.substring(4, 6)))
 				.append(",")
 				.append(HexStringToInteger(content.substring(6, 8)))
-				.append(",")
-				.append(HexStringToInteger(content.substring(8, 10)))
-				.append(",")
-				.append(hexStringToString(content.substring(10, 26)))
-				.append(",")
-				.append(hexStringToString(content.substring(26, 42)))
-				.append(",")
-				.append(hexStringToString(content.substring(42, 58)))
-				.append("}");
+				.append(",").append(
+						HexStringToInteger(content.substring(8, 10))).append(
+						",").append(
+						hexStringToString(content.substring(10, 26))).append(
+						",").append(
+						hexStringToString(content.substring(26, 42))).append(
+						",").append(
+						hexStringToString(content.substring(42, 58))).append(
+						"}");
 
 		return temp.toString();
 	}
@@ -842,19 +843,19 @@ public class MyUtils {
 		StringBuffer temp = new StringBuffer();
 
 		temp.append("{").append(HexStringToInteger(content.substring(0, 8)))
-				.append(",")
-				.append(HexStringToInteger(content.substring(8, 16)))
-				.append(",")
-				.append(HexStringToInteger(content.substring(16, 24)))
-				.append(",")
-				.append(HexStringToInteger(content.substring(24, 32)))
-				.append(",")
-				.append(HexStringToInteger(content.substring(32, 40)))
-				.append(",")
-				.append(HexStringToInteger(content.substring(40, 48)))
-				.append(",")
-				.append(hexStringToString(content.substring(48, 88)))
-				.append("}");
+				.append(",").append(
+						HexStringToInteger(content.substring(8, 16))).append(
+						",").append(
+						HexStringToInteger(content.substring(16, 24))).append(
+						",").append(
+						HexStringToInteger(content.substring(24, 32))).append(
+						",").append(
+						HexStringToInteger(content.substring(32, 40))).append(
+						",").append(
+						HexStringToInteger(content.substring(40, 48))).append(
+						",").append(
+						hexStringToString(content.substring(48, 88))).append(
+						"}");
 
 		return temp.toString();
 	}
@@ -863,11 +864,11 @@ public class MyUtils {
 		StringBuffer temp = new StringBuffer();
 
 		temp.append("{").append(HexStringToInteger(content.substring(0, 8)))
-				.append(",")
-				.append(HexStringToInteger(content.substring(8, 16)))
-				.append(",")
-				.append(hexStringToString(content.substring(16, 32)))
-				.append("}");
+				.append(",").append(
+						HexStringToInteger(content.substring(8, 16))).append(
+						",").append(
+						hexStringToString(content.substring(16, 32))).append(
+						"}");
 
 		return temp.toString();
 	}
@@ -881,49 +882,137 @@ public class MyUtils {
 		}
 
 	}
+
+	/**
+	 * 获取过去或者未来 任意天内的日期数组
+	 * 
+	 * @param intervals
+	 *            intervals天内
+	 * @return 日期数组
+	 */
+	public static ArrayList<String> getBeforeDays(int intervals) {
+		ArrayList<String> pastDaysList = new ArrayList<String>();
+		for (int i = 0; i < intervals; i++) {
+			pastDaysList.add(getPastDate(i));
+		}
+		return pastDaysList;
+	}
+
+	/**
+	 * 获取过去第几天的日期
+	 * 
+	 * @param past
+	 * @return
+	 */
+	public static String getPastDate(int past) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR)
+				- past);
+		Date today = calendar.getTime();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String result = format.format(today);
+		return result;
+	}
+
+	/**
+	 * 获取未来 第 past 天的日期
+	 * 
+	 * @param past
+	 * @return
+	 */
+	public static String getFetureDate(int past) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR)
+				+ past);
+		Date today = calendar.getTime();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String result = format.format(today);
+		return result;
+	}
+
+	public static List<String> getAarray(String str) {
+		List<String> ls = new ArrayList<String>();
+		Pattern pattern = Pattern.compile("(?<=\\()(.+?)(?=\\))");
+		Matcher matcher = pattern.matcher(str);
+		while (matcher.find()) {
+			ls.addAll(Arrays.asList(matcher.group().split(",")));
+		}
+		return ls;
+	}
+
+	public static String getRegions(String str) {
+		Pattern pattern = Pattern.compile("(?<=\\()(.+?)(?=\\))");
+		Matcher matcher = pattern.matcher(str);
+		String body = "";
+		while (matcher.find()) {
+			String region = matcher.group();
+			String[] arr = region.split(",");
+			body = String.format("%s%s%s%s%s%s%s%s",body,
+					ByteAndStr16.Bytes2HexString(integerTo4Bytes(Integer
+							.parseInt(arr[0]))), ByteAndStr16
+							.Bytes2HexString(integerTo4Bytes(Integer
+									.parseInt(arr[1]))), ByteAndStr16
+							.Bytes2HexString(integerTo4Bytes(Integer
+									.parseInt(arr[2]))), ByteAndStr16
+							.Bytes2HexString(integerTo4Bytes(Integer
+									.parseInt(arr[3]))), ByteAndStr16
+							.Bytes2HexString(integerTo4Bytes(Integer
+									.parseInt(arr[4]))), strTo16(arr[5]),strTo16(arr[6]));
+
+		}
+		return body;
+
+	}
 	
-	/** 
-	    * 获取过去或者未来 任意天内的日期数组 
-	    * @param intervals      intervals天内 
-	    * @return              日期数组 
-	    */  
-	   public static ArrayList<String> getBeforeDays(int intervals ) {  
-	       ArrayList<String> pastDaysList = new ArrayList<String>();  
-	       for (int i = 0; i <intervals; i++) {  
-	           pastDaysList.add(getPastDate(i));  
-	       }  
-	       return pastDaysList;  
-	   }  
-	  
-	   /** 
-	    * 获取过去第几天的日期 
-	    * 
-	    * @param past 
-	    * @return 
-	    */  
-	   public static String getPastDate(int past) {  
-	       Calendar calendar = Calendar.getInstance();  
-	       calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - past);  
-	       Date today = calendar.getTime();  
-	       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
-	       String result = format.format(today);  
-	       return result;  
-	   }  
-	  
-	   /** 
-	    * 获取未来 第 past 天的日期 
-	    * @param past 
-	    * @return 
-	    */  
-	   public static String getFetureDate(int past) {  
-	       Calendar calendar = Calendar.getInstance();  
-	       calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);  
-	       Date today = calendar.getTime();  
-	       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
-	       String result = format.format(today);  
-	       return result;  
-	   }  
+	public static String getNtpToClient(String str) {
+		Pattern pattern = Pattern.compile("(?<=\\()(.+?)(?=\\))");
+		Matcher matcher = pattern.matcher(str);
+		String body = "";
+		while (matcher.find()) {
+			String region = matcher.group();
+			String[] arr = region.split(",");
+			body = String.format("%s%s%s%s%s%s%s%s",body,
+					ByteAndStr16.Bytes2HexString(integerTo4Bytes(Integer
+							.parseInt(arr[0]))), ByteAndStr16
+							.Bytes2HexString(integerTo4Bytes(Integer
+									.parseInt(arr[1]))),  strTo16(arr[3]));
+
+		}
+		return body;
+
+	}
 	
+	
+	public static long ipToLong(String strIp) {  
+        String[]ip = strIp.split("\\.");  
+        return (Long.parseLong(ip[0]) << 24) + (Long.parseLong(ip[1]) << 16) + (Long.parseLong(ip[2]) << 8) + Long.parseLong(ip[3]);  
+    }  
+  
+    /** 
+     * 将十进制整数形式转换成127.0.0.1形式的ip地址 
+     * 将整数形式的IP地址转化成字符串的方法如下： 
+     * 1、将整数值进行右移位操作（>>>），右移24位，右移时高位补0，得到的数字即为第一段IP。 
+     * 2、通过与操作符（&）将整数值的高8位设为0，再右移16位，得到的数字即为第二段IP。 
+     * 3、通过与操作符吧整数值的高16位设为0，再右移8位，得到的数字即为第三段IP。 
+     * 4、通过与操作符吧整数值的高24位设为0，得到的数字即为第四段IP。 
+     * @param longIp 
+     * @return 
+     */  
+    public static String longToIP(long longIp) {  
+        StringBuffer sb = new StringBuffer("");  
+        // 直接右移24位  
+        sb.append(String.valueOf((longIp >>> 24)));  
+        sb.append(".");  
+        // 将高8位置0，然后右移16位  
+        sb.append(String.valueOf((longIp & 0x00FFFFFF) >>> 16));  
+        sb.append(".");  
+        // 将高16位置0，然后右移8位  
+        sb.append(String.valueOf((longIp & 0x0000FFFF) >>> 8));  
+        sb.append(".");  
+        // 将高24位置0  
+        sb.append(String.valueOf((longIp & 0x000000FF)));  
+        return sb.toString();  
+    }  
 
 	public static void main(String args[]) {
 
@@ -948,9 +1037,13 @@ public class MyUtils {
 		 * HexStringToInteger("000000CC"));
 		 */
 
-		String str="545a4c2d303130";
-		System.out.println("====="+ByteAndStr16.Bytes2HexString(integerTo4Bytes(123)));
-
+		/*
+		 * String str="545a4c2d303130";
+		 * System.out.println("====="+ByteAndStr16.Bytes2HexString
+		 * (integerTo4Bytes(123)));
+		 */
+	  String str="127.0.0.1";
+	  System.out.println(ipToLong(str));
 	}
 
 }

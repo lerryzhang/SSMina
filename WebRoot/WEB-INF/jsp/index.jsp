@@ -58,7 +58,7 @@
 			</ul>
 			<ul class="layui-nav layui-layout-right">
 				<li class="layui-nav-item"><a href="javascript:;"> <img
-						src="http://t.cn/RCzsdCq" class="layui-nav-img"> ${
+						src="../img/1.jpg" class="layui-nav-img"> ${
 						sessionScope.SESSION_USERNAME}</a>
 					<dl class="layui-nav-child">
 						<dd>
