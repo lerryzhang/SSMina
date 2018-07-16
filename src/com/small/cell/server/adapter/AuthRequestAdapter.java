@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.mina.core.session.IoSession;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 
 import com.small.cell.server.configure.SpringWebSocketHandler;
@@ -30,6 +31,8 @@ import com.small.cell.server.util.ObjectUtil;
 import com.small.cell.server.util.ReflectUtils;
 import com.small.cell.server.util.TlvTools;
 
+
+@Service("authRequestAdapter")
 public class AuthRequestAdapter {
 	@Bean
 	// 这个注解会从Spring容器拿出Bean
@@ -37,8 +40,10 @@ public class AuthRequestAdapter {
 		return new SpringWebSocketHandler();
 	}
 
-	public static PackageData handler(PackageData packageData, IoSession session)
-			throws Exception {
+	//public static PackageData handler(PackageData packageData, IoSession session)
+		//	throws Exception {
+	
+	public  PackageData handler(PackageData packageData, IoSession session) throws Exception{
 
 		List<Tlv> tlvList = TlvTools.unpack(packageData.getMsgBodyBytes());
 		Tlv macTlv = tlvList.get(0);

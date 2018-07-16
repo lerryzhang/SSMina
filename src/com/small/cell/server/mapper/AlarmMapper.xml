@@ -10,5 +10,26 @@
 		select count(*) from alarm where left(ptime, 10)=#{ptime};
 	</select>
 	
+	<insert id="saveAlarm" parameterType="com.small.cell.server.pojo.Alarm">
+		insert into
+		alarm(mac,code,version,process,restart,tip,ptime)
+		values(#{mac},#{code},#{version}, #{process}, #{restart}, #{tip},
+		#{ptime})
+	</insert>
+	
+	
+	<select id="listAlarm" resultType="com.small.cell.server.pojo.Alarm">
+		select
+		id,mac,code,version,process,restart,tip,ptime from
+		alarm 
+		order by ptime desc
+		
+		LIMIT ${(pageNo-1)*pageSize},${pageSize};
+	</select>
+	
+	
+	<select id="selectAlarmCount" resultType="java.lang.Integer">
+		select count(*) from alarm
+	</select>
 	
 </mapper>

@@ -35,16 +35,16 @@
 				</div>
 				<input name="username" maxlength="16" type='text' autocomplete="off" />
 				<div class='validation'>
-					<img alt="" src='img/tick.png'>
+					<img alt="" src='../img/tick.png'>
 				</div>
 			</div>
 			<div class='login_fields__password'>
 				<div class='icon'>
-					<img alt="" src='img/lock_icon_copy.png'>
+					<img alt="" src='../img/lock_icon_copy.png'>
 				</div>
 				<input name="password" maxlength="16" type='text' autocomplete="off">
 				<div class='validation'>
-					<img alt="" src='img/tick.png'>
+					<img alt="" src='../img/tick.png'>
 				</div>
 			</div>
 

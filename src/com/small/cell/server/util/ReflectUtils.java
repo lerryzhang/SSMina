@@ -1,16 +1,15 @@
 package com.small.cell.server.util;
 
-
 import java.lang.reflect.Method;
 import java.util.List;
 
 import com.small.cell.collections.Convert;
+import com.small.cell.server.pojo.Alarm;
 import com.small.cell.server.pojo.ParaEnum;
 import com.small.cell.server.pojo.Smtp;
 import com.small.cell.server.pojo.Tlv;
 
 public class ReflectUtils {
-
 
 	public static Object setProperty(Object obj, String propertyName,
 			Object value) throws Exception {
@@ -21,11 +20,10 @@ public class ReflectUtils {
 
 		String strMethod = "set" + propertyName.substring(0, 1).toUpperCase()
 				+ propertyName.substring(1);
-		System.out.println("====" + strMethod);
 		Method method = obj.getClass().getMethod(strMethod, String.class);
 		method.invoke(obj, value);
 		return obj;
-	
+
 	}
 
 	public static Object setProperty(List<Tlv> list) throws Exception {
@@ -38,21 +36,37 @@ public class ReflectUtils {
 				if (Convert.list.contains(param))
 					if (ParaEnum.ZL_81X3_D.equals(param))
 						setProperty(smtp, ParaEnum.getName(ByteAndStr16
-								.Bytes2HexString(tlv.getType())), ByteAndStr16
-								.Bytes2HexString(tlv.getType()));
+								.Bytes2HexString(tlv.getType())),
+								ByteAndStr16.Bytes2HexString(tlv.getType()));
 					else
 
 						setProperty(smtp, ParaEnum.getName(ByteAndStr16
-								.Bytes2HexString(tlv.getType())), ByteAndStr16
-								.Bytes2HexString(tlv.getValue()));
+								.Bytes2HexString(tlv.getType())),
+								ByteAndStr16.Bytes2HexString(tlv.getValue()));
 				else
 					setProperty(smtp, ParaEnum.getName(ByteAndStr16
-							.Bytes2HexString(tlv.getType())),ByteAndStr16.Bytes2HexString(tlv
-									.getValue()));
+							.Bytes2HexString(tlv.getType())),
+							ByteAndStr16.Bytes2HexString(tlv.getValue()));
 
 			}
 		}
 		return smtp;
+
+	}
+
+	public static Object setAlarmProperty(List<Tlv> list) throws Exception {
+		Alarm alarm = new Alarm();
+		for (int i = 0; i < list.size(); i++) {
+			Tlv tlv = list.get(i);
+			String type = ByteAndStr16.Bytes2HexString(tlv.getType());
+			String param = ParaEnum.getName(type);
+			if (null != param) {
+				setProperty(alarm, ParaEnum.getName(ByteAndStr16
+						.Bytes2HexString(tlv.getType())),
+						ByteAndStr16.Bytes2HexString(tlv.getValue()));
+			}
+		}
+		return alarm;
 
 	}
 
@@ -67,17 +81,17 @@ public class ReflectUtils {
 				if (Convert.list.contains(param))
 					if (ParaEnum.ZL_81X3_D.getName().equals(param))
 						setProperty(smtp, ParaEnum.getName(ByteAndStr16
-								.Bytes2HexString(tlv.getType())), ByteAndStr16
-								.Bytes2HexString(tlv.getType()));
+								.Bytes2HexString(tlv.getType())),
+								ByteAndStr16.Bytes2HexString(tlv.getType()));
 					else
 
 						setProperty(smtp, ParaEnum.getName(ByteAndStr16
-								.Bytes2HexString(tlv.getType())), ByteAndStr16
-								.Bytes2HexString(tlv.getValue()));
+								.Bytes2HexString(tlv.getType())),
+								ByteAndStr16.Bytes2HexString(tlv.getValue()));
 				else
 					setProperty(smtp, ParaEnum.getName(ByteAndStr16
-							.Bytes2HexString(tlv.getType())), ByteAndStr16.Bytes2HexString(tlv
-									.getValue()));
+							.Bytes2HexString(tlv.getType())),
+							ByteAndStr16.Bytes2HexString(tlv.getValue()));
 
 			}
 		}

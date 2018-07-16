@@ -23,7 +23,7 @@ public class SocketServiceLoader implements ServletContextListener {
 
 	/** 30秒后超时 */
 	private static final int IDELTIMEOUT = 30;
-	/** 15秒发送一次心跳包 */
+	/** 30秒发送一次心跳包 */
 	private static final int HEARTBEATRATE = 30;
 	/** 心跳包内容 */
 	private static final String HEARTBEATREQUEST = "0x11";

@@ -17,12 +17,17 @@ public enum ParaEnum {
 			"300C", "pci"), FieldStrength("300D", "fieldStrength"), SNIFFERFRE(
 			"300E", "snifferFre"), SMTPSTATE("3010", "smtpState"), IMSITRANSMIT(
 			"3012", "imsiTransmit"), UPTIMESYS("3014", "uptimeSys"), IMSICAPTURETIME(
-			"300F", "imsiCaptureTime"),PETIME("500B","peTime"),QTAC("500C","qtac"),
-			SYN("500D","syn"),WIREPARA("500E","wirePara"),QREPOINTS("500F","qrePoints"),
-			TRANPOWER("5017","tranPower"),RESPRI("5021","resPri"),LOWLEVEL("5024","lowLevel"),
-			GPSOFFTIME("5027","gpsOffTime"),GPSOFFTIMESWITCH("5028","gpsOffTimeSwitch"),LOGLEVEL("5033","logLevel"),
-			STARTTAC("5035","startTac"),ENDTAC("5036","endTac"),REMSWITCH("5037","remSwitch"),NTP("5038","ntp"),
-			SAMLEVEL("5039","samLevel");
+			"300F", "imsiCaptureTime"), PETIME("500B", "peTime"), QTAC("500C",
+			"qtac"), SYN("500D", "syn"), WIREPARA("500E", "wirePara"), QREPOINTS(
+			"500F", "qrePoints"), TRANPOWER("5017", "tranPower"), RESPRI(
+			"5021", "resPri"), LOWLEVEL("5024", "lowLevel"), GPSOFFTIME("5027",
+			"gpsOffTime"), GPSOFFTIMESWITCH("5028", "gpsOffTimeSwitch"), LOGLEVEL(
+			"5033", "logLevel"), STARTTAC("5035", "startTac"), ENDTAC("5036",
+			"endTac"), REMSWITCH("5037", "remSwitch"), NTP("5038", "ntp"), SAMLEVEL(
+			"5039", "samLevel"), EXCEPTIONCODE("7000", "code"), EXCEPTIONVERSION(
+			"7001", "exception"), EXCEPTIONPROCESS("7002", "process"), EXCEPTIONRESTART(
+			"7003", "restart"), EXCEPTIONTIP("7004", "tip");
+
 	// 成员变量
 	private String code;
 	private String name;

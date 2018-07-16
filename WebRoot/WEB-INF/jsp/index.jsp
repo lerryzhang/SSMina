@@ -38,6 +38,9 @@
 				</li>
 				<li class="layui-nav-item"><a href="<%=basePath%>/smallCell/termList" target="option">终端管理</a>
 				</li>
+				<li class="layui-nav-item"><a href="<%=basePath%>/alarm/index" target="option">告警管理</a>
+				</li>
+				
 				<li class="layui-nav-item"><a href="<%=basePath%>/user/index"
 					target="option">用户</a>
 				</li>

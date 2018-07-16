@@ -24,5 +24,9 @@ public class Convert {
 	public final static String Regions = "5010";
 
 	public final static String Ntp = "5038";
+	
+	public final static String Remote = "5030";
+	
+	public final static String Router = "5029";
 
 }

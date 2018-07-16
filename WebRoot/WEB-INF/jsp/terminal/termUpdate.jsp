@@ -6,7 +6,6 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
 %>
 <link href="../layui/css/layui.css" rel="stylesheet" type="text/css" />
 
@@ -66,10 +65,10 @@
 
 			<div class="layui-input-block">
 				<div class="layui-input-inline">
-					<input type="text" name="r3" autocomplete="off" 
-						class="layui-input">
+					<input type="text" name="r3" autocomplete="off" class="layui-input">
 				</div>
-				<div class="layui-form-mid layui-word-aux">字符串，长度：1~16 字节,默认值为模块自身 Band，即 E 频默认扫描 band40。</div>
+				<div class="layui-form-mid layui-word-aux">字符串，长度：1~16
+					字节,默认值为模块自身 Band，即 E 频默认扫描 band40。</div>
 			</div>
 		</div>
 
@@ -190,7 +189,8 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r10" value="00" checked="" title="只抓一次模式">
+						<input type="radio" name="r10" value="00" checked=""
+							title="只抓一次模式">
 					</div>
 					<div class="layui-input-inline">
 						<input type="radio" name="r10" value="01" title="周期模式">
@@ -271,8 +271,8 @@
 
 			<div class="layui-input-block">
 				<div class="layui-input-inline">
-					<input type="text" name="r14" 
-						autocomplete="off" class="layui-input">
+					<input type="text" name="r14" autocomplete="off"
+						class="layui-input">
 				</div>
 				<div class="layui-form-mid layui-word-aux">4个整型数，值分别对应band、ulfreq、dlfreq、pci,中间以逗号隔开</div>
 
@@ -298,10 +298,6 @@
 
 			</div>
 		</div>
-
-
-
-
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c16" value="5010" title="邻区表">
@@ -314,16 +310,12 @@
 				</div>
 				<div class="layui-form-mid layui-word-aux">
 					列表，格式如(1,2,3,4,4,"123456","78"}最多支持16组</div>
-
 			</div>
 		</div>
-
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c17" value="5013" title="重定向到2G Band">
 			</div>
-
-
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
@@ -337,28 +329,18 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c18" value="5014" title="定位IMSI ">
 			</div>
-
-
 			<div class="layui-input-block">
 				<div class="layui-input-inline">
-					<input type="text" name="r18"
-						autocomplete="off" class="layui-input">
+					<input type="text" name="r18" autocomplete="off"
+						class="layui-input">
 				</div>
 				<div class="layui-form-mid layui-word-aux">字符串,长度16</div>
-
 			</div>
 		</div>
-
-
-
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c19" value="5015" title="白名单 ">
@@ -438,11 +420,10 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r23" value="00" 
-							title="首次下发">
+						<input type="radio" name="r23" value="00" title="首次下发">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r23" value="01"   checked="" title="后续下发">
+						<input type="radio" name="r23" value="01" checked="" title="后续下发">
 					</div>
 
 				</div>
@@ -450,7 +431,7 @@
 		</div>
 
 
-		
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c24" value="5020" title="PLMN">
@@ -462,8 +443,7 @@
 					<input type="text" name="r24" autocomplete="off"
 						class="layui-input">
 				</div>
-				<div class="layui-form-mid layui-word-aux">长度为 6 的字符串。
-				</div>
+				<div class="layui-form-mid layui-word-aux">长度为 6 的字符串。</div>
 
 			</div>
 		</div>
@@ -477,36 +457,28 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r25" value="00" 
-							title="0">
+						<input type="radio" name="r25" value="00" title="0">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r25" value="01" 
-							title="1">
+						<input type="radio" name="r25" value="01" title="1">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r25" value="02" 
-							title="2">
+						<input type="radio" name="r25" value="02" title="2">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r25" value="03" 
-							title="3">
+						<input type="radio" name="r25" value="03" title="3">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r25" value="04" 
-							title="4">
+						<input type="radio" name="r25" value="04" title="4">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r25" value="05" 
-							title="5">
+						<input type="radio" name="r25" value="05" title="5">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r25" value="06" 
-							title="6">
+						<input type="radio" name="r25" value="06" title="6">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r25" value="07" 
-							title="7">
+						<input type="radio" name="r25" value="07" title="7">
 					</div>
 
 				</div>
@@ -562,8 +534,7 @@
 					<input type="text" name="r28" autocomplete="off"
 						class="layui-input">
 				</div>
-				<div class="layui-form-mid layui-word-aux">整型数据，范围-22 ～ -77。
-				</div>
+				<div class="layui-form-mid layui-word-aux">整型数据，范围-22 ～ -77。</div>
 
 			</div>
 		</div>
@@ -580,7 +551,8 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r29" value="0000000B" checked="" title="11">
+						<input type="radio" name="r29" value="0000000B" checked=""
+							title="11">
 					</div>
 					<div class="layui-input-inline">
 						<input type="radio" name="r29" value="0000000D" title="13">
@@ -602,10 +574,11 @@
 			</div>
 
 
-		<div class="layui-input-block">
+			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r30" value="00000001" checked="" title="是">
+						<input type="radio" name="r30" value="00000001" checked=""
+							title="是">
 					</div>
 				</div>
 			</div>
@@ -624,8 +597,8 @@
 					<input type="text" name="r31" autocomplete="off"
 						class="layui-input">
 				</div>
-				<div class="layui-form-mid layui-word-aux">整型数据，取值范围： -10000～10000，单位 us。
-				</div>
+				<div class="layui-form-mid layui-word-aux">整型数据，取值范围：
+					-10000～10000，单位 us。</div>
 
 			</div>
 		</div>
@@ -661,76 +634,161 @@
 			</div>
 
 
-			<div class="layui-input-block">
-				<div class="layui-input-inline">
-					<input type="text" name="r33" autocomplete="off"
-						class="layui-input">
-				</div>
-				<div class="layui-form-mid layui-word-aux">
-					{类型方式,IP，掩码，网关，DNS}</div>
-
-			</div>
-		</div>
-
-
-
-		<div class="layui-form-item">
-			<div class="layui-input-block">
-				<input type="checkbox" name="c34" value="5030" title="开启远程协助">
-			</div>
-
-
-			<div class="layui-input-block">
-				<div class="layui-input-inline">
-					<input type="text" name="r34" autocomplete="off"
-						class="layui-input">
-						
-						<input type="text" name="r34" autocomplete="off"
-						class="layui-input">
-						
-						
-						<input type="text" name="r34" autocomplete="off"
-						class="layui-input">
-						
-						<input type="text" name="r34" autocomplete="off"
-						class="layui-input">
-				</div>
-				<div class="layui-form-mid layui-word-aux">{用户名,ssh 密钥
-					id_rsa,密钥长度,服务器的公网 ip 地址，,服务器 ssh 端口号,设备映射到服务器的 ssh端口号。}</div>
-
-			</div>
-		</div>
-		
-		
-		<div class="layui-form-item">
-			<div class="layui-input-block">
-				<input type="checkbox" name="c35" value="5031" title="关闭远程协助">
-				
-				<input type="hidden" name="r35" autocomplete="off" value="00000001"
-						class="layui-input">
-			</div>
-
-
 			
+				<div class="layui-input-block">
+				<div class="layui-inline">
+					<label class="layui-form-label">网络类型 </label>
+					<div class="layui-input-inline">
+						<input type="text" name="r33" autocomplete="off"
+							class="layui-input">
+
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">IP</label>
+					<div class="layui-input-inline">
+						<input type="text" name="r33" autocomplete="off"
+							class="layui-input">
+					</div>
+				</div>
+			</div>
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<label class="layui-form-label">子网掩码</label>
+					<div class="layui-input-inline">
+						<input type="text" name="r33" autocomplete="off"
+							class="layui-input">
+
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">网关</label>
+					<div class="layui-input-inline">
+						<input type="text" name="r33" autocomplete="off"
+							class="layui-input">
+					</div>
+				</div>
+			</div>
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<label class="layui-form-label">DNS</label>
+					<div class="layui-input-inline">
+						<input type="text" name="r33" autocomplete="off"
+							class="layui-input">
+					</div>
+				</div>	
+			</div>
 		</div>
-		
-		
+
+
+		<div class="site-text site-block">
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<input type="checkbox" name="c34" value="5030" title="开启远程协助">
+				</div>
+				
+				
+				
+				
+				<div class="layui-input-block">
+				<div class="layui-inline">
+					<label class="layui-form-label"> 用户名 </label>
+					<div class="layui-input-inline">
+						<input type="text" name="r34" autocomplete="off"
+							class="layui-input">
+
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">SSH密钥 </label>
+					<div class="layui-input-inline">
+						<input type="text" name="r34" autocomplete="off"
+							class="layui-input">
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<label class="layui-form-label">密钥长度</label>
+					<div class="layui-input-inline">
+						<input type="text" name="r34" autocomplete="off"
+							class="layui-input">
+
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">服务器IP </label>
+					<div class="layui-input-inline">
+						<input type="text" name="r34" autocomplete="off"
+							class="layui-input">
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<label class="layui-form-label">服务器端口 </label>
+					<div class="layui-input-inline">
+						<input type="text" name="r34" autocomplete="off"
+							class="layui-input">
+
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">设备端口 </label>
+					<div class="layui-input-inline">
+						<input type="text" name="r34" autocomplete="off"
+							class="layui-input">
+					</div>
+				</div>
+			</div>
+			
+			</div>
+
+
+
+
+
+
+
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<input type="checkbox" name="c35" value="5031" title="关闭远程协助">
+
+					<input type="hidden" name="r35" autocomplete="off" value="00000001"
+						class="layui-input">
+				</div>
+
+
+
+			</div>
+		</div>
+
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c36" value="5032" title="保存配置">
-				
+
 				<input type="hidden" name="r36" autocomplete="off" value="00000001"
-						class="layui-input">
+					class="layui-input">
 			</div>
 
 
-			
+
 		</div>
-		
-		
-		
-		
-		
+
+
+
+
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c37" value="5033" title="日志级别">
@@ -740,7 +798,7 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r37" value="00000001"  title="ALERT">
+						<input type="radio" name="r37" value="00000001" title="ALERT">
 					</div>
 					<div class="layui-input-inline">
 						<input type="radio" name="r37" value="00000002" title="CRIT">
@@ -749,23 +807,24 @@
 						<input type="radio" name="r37" value="00000003" title="ERROR">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r37" value="00000006"  title="INFO">
+						<input type="radio" name="r37" value="00000006" title="INFO">
 					</div>
 					<div class="layui-input-inline">
 						<input type="radio" name="r37" value="00000007" title="DEBUG">
 					</div>
-					
+
 
 
 				</div>
 			</div>
 		</div>
-		
-		
-		
+
+
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<input type="checkbox" name="c38" value="5034" title="重定向到 2G 列表（IMSI） ">
+				<input type="checkbox" name="c38" value="5034"
+					title="重定向到 2G 列表（IMSI） ">
 			</div>
 
 
@@ -774,14 +833,13 @@
 					<input type="text" name="r38" autocomplete="off"
 						class="layui-input">
 				</div>
-				<div class="layui-form-mid layui-word-aux">
-					多条IMSI，中间以逗号隔开</div>
+				<div class="layui-form-mid layui-word-aux">多条IMSI，中间以逗号隔开</div>
 
 			</div>
 		</div>
-		
-		
-		
+
+
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c39" value="5035" title="起始 TAC">
@@ -797,7 +855,7 @@
 
 			</div>
 		</div>
-		
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c40" value="5036" title="结束 TAC">
@@ -813,12 +871,7 @@
 
 			</div>
 		</div>
-		
-		
-		
-		
-		
-			<div class="layui-form-item">
+		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c41" value="5037" title=" REM 开机自动扫描开关">
 			</div>
@@ -827,40 +880,62 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r41" value="00000001" checked="" title="开启">
+						<input type="radio" name="r41" value="00000001" checked=""
+							title="开启">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r41" value="00000000" checked="" title="关闭">
+						<input type="radio" name="r41" value="00000000" checked=""
+							title="关闭">
 					</div>
-					
-					
-
-
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c42" value="5038" title="NTP">
 			</div>
 
 
+			
 			<div class="layui-input-block">
-				<div class="layui-input-inline">
-					<input type="text" name="r42" autocomplete="off"
-						class="layui-input">
-				</div>
-				<div class="layui-form-mid layui-word-aux">{int enable; //1 使能，0 关闭   int period; //同步周期，单位分钟,取值：1/5/10/15/25/30/50/60/180/360/720 char serverIp[16])/</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">开启</label>
+					<div class="layui-input-inline">
+						<input type="text" name="r42" autocomplete="off"
+							class="layui-input">
 
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">同步周期</label>
+					<div class="layui-input-inline">
+						<input type="text" name="r42" autocomplete="off"
+							class="layui-input">
+					</div>
+				</div>
 			</div>
+			
+			
+			<div class="layui-input-block">
+				<div class="layui-inline">
+					<label class="layui-form-label">Ntp服务器IP</label>
+					<div class="layui-input-inline">
+						<input type="text" name="r42" autocomplete="off"
+							class="layui-input">
+
+					</div>
+				</div>
+				
+			</div>
+			
+			
+			
+			
 		</div>
-		
-		
-		
+
+
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c43" value="5039" title="同频干扰抑制级别">
@@ -870,34 +945,41 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r43" value="00000000" checked="" title="0">
+						<input type="radio" name="r43" value="00000000" checked=""
+							title="0">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r43" value="00000001" checked="" title="1">
+						<input type="radio" name="r43" value="00000001" checked=""
+							title="1">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r43" value="00000002" checked="" title="2">
+						<input type="radio" name="r43" value="00000002" checked=""
+							title="2">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r43" value="00000003" checked="" title="3">
-					</div>
-                    <div class="layui-input-inline">
-						<input type="radio" name="r43" value="00000004" checked="" title="4">
+						<input type="radio" name="r43" value="00000003" checked=""
+							title="3">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r43" value="00000005" checked="" title="5">
+						<input type="radio" name="r43" value="00000004" checked=""
+							title="4">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r43" value="00000006" checked="" title="6">
+						<input type="radio" name="r43" value="00000005" checked=""
+							title="5">
+					</div>
+					<div class="layui-input-inline">
+						<input type="radio" name="r43" value="00000006" checked=""
+							title="6">
 					</div>
 
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
+
+
+
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c44" value="5040" title=" 开箱告警开关 ">
@@ -907,22 +989,24 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r44" value="00000001" checked="" title="开启">
+						<input type="radio" name="r44" value="00000001" checked=""
+							title="开启">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r44" value="00000000" checked="" title="关闭">
+						<input type="radio" name="r44" value="00000000" checked=""
+							title="关闭">
 					</div>
-					
-					
+
+
 
 
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
+
+
+
+
 		<div class="layui-form-item">
 			<div class="layui-input-block">
 				<input type="checkbox" name="c45" value="5041" title="同步守护开关 ">
@@ -932,19 +1016,21 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r45" value="00000001" checked="" title="开启">
+						<input type="radio" name="r45" value="00000001" checked=""
+							title="开启">
 					</div>
 					<div class="layui-input-inline">
-						<input type="radio" name="r45" value="00000000" checked="" title="关闭">
+						<input type="radio" name="r45" value="00000000" checked=""
+							title="关闭">
 					</div>
-					
-					
+
+
 
 
 				</div>
 			</div>
 		</div>
-		
+
 
 
 		<div class="layui-form-item">
@@ -955,13 +1041,6 @@
 					重置</button>
 			</div>
 		</div>
-
-
-
-
-
-
-
 	</form>
 	<script src="../layui/layui.js"></script>
 	<script src="../jquery/jquery-2.0.3.min.js" type="text/javascript"></script>
@@ -1027,11 +1106,22 @@
 																							+ ']:checked')
 																					.val();
 																		} else {
-																			value = $(
-																					'input[name='
+																		
+																		var value="";
+																		var arr=$('[name='
 																							+ key1
-																							+ ']')
-																					.val();
+																							+ ']');//获取相同name的对象，然后再遍历这个数组就行了。
+																		for(var i=0;i<arr.length;i++){
+                                                                           value=value+","+$(arr[i]).val();
+                                                                         }	
+                                                                         value=value.substring(1);		
+
+									
+																			//value = $(
+																			//		'input[name='
+																				//			+ key1
+																				//			+ ']')
+																				//	.val();
 
 																		}
 																		map[key] = value;
@@ -1043,55 +1133,42 @@
 														.ajax({
 															type : "post",
 															url : "<%=basePath%>/smallCell/update",
-															data : {
-																mac : $(
-																		"input[name='mac']")
-																		.val(),
-																username : JSON
-																		.stringify(map)
-															},
-															dataType : "json",
-															success : function(
-																	data) {
+					data : {
+						mac : $("input[name='mac']").val(),
+						username : JSON.stringify(map)
+					},
+					dataType : "json",
+					success : function(data) {
 
-																if (data == "0") {
+						if (data == "0") {
 
-																	layer
-																			.alert(
-																					"更新指令下发成功",
-																					{
-																						title : "提示",
-																						offset : 't',
-																						icon : 6
-																					});
-																} else {
+							layer.alert("更新指令下发成功", {
+								title : "提示",
+								offset : 't',
+								icon : 6
+							});
+						} else {
 
-																	layer
-																			.alert(
-																					"更新指令下发操作出现异常",
-																					{
-																						title : "提示",
-																						offset : 't',
-																						icon : 5
-																					});
+							layer.alert("更新指令下发操作出现异常", {
+								title : "提示",
+								offset : 't',
+								icon : 5
+							});
 
-																}
+						}
 
-															},
-															error : function() {
-																layer
-																		.alert(
-																				"更新指令下发操作出现异常",
-																				{
-																					title : "提示",
-																					icon : 5
-																				});
-															}
-														});
-												return false;
-
-											});
+					},
+					error : function() {
+						layer.alert("更新指令下发操作出现异常", {
+							title : "提示",
+							icon : 5
 						});
+					}
+				});
+				return false;
+
+			});
+		});
 	</script>
 
 
