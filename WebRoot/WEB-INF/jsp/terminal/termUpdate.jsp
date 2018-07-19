@@ -309,7 +309,7 @@
 						class="layui-input">
 				</div>
 				<div class="layui-form-mid layui-word-aux">
-					列表，格式如(1,2,3,4,4,"123456","78"}最多支持16组</div>
+					列表，格式如(1,2,3,4,4,abcdef,ab),最多支持16组,多组之间以逗号隔开,前五项为整数，后两项为字符串，长度分别为6、4</div>
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -457,7 +457,7 @@
 			<div class="layui-input-block">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input type="radio" name="r25" value="00" title="0">
+						<input type="radio" name="r25" value="00"  checked="" title="0">
 					</div>
 					<div class="layui-input-inline">
 						<input type="radio" name="r25" value="01" title="1">

@@ -3,7 +3,10 @@ package com.small.cell.server.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,11 +19,13 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.mina.core.buffer.IoBuffer;
 
 import com.small.cell.collections.Convert;
 import com.small.cell.server.pojo.Smtp;
 import com.small.cell.server.pojo.Status;
+import com.uwantsoft.goeasy.client.goeasyclient.encoder.base64.BASE64Encoder;
 
 public class MyUtils {
 
@@ -608,6 +613,8 @@ public class MyUtils {
 
 	}
 
+	
+	/*
 	public static int getOnlineSum(Map<byte[], byte[]> map) throws Exception {
 		int sum = 0;
 		for (Entry<byte[], byte[]> entry : map.entrySet()) {
@@ -618,7 +625,7 @@ public class MyUtils {
 		return sum;
 
 	}
-
+*/
 	public static String[] getLast12Months() {
 
 		String[] lastSixMonths = new String[6];
@@ -744,17 +751,13 @@ public class MyUtils {
 
 		for (int i = 0; i < list.size(); i++) {
 			if (i % len == 0) {
-
 				temp.append("{").append(hexStringToString(list.get(i)))
 						.append(",");
 
 			} else if ((i + 1) % len == 0) {
-
 				temp.append(hexStringToString(list.get(i))).append("}");
 			} else {
-
 				temp.append(hexStringToString(list.get(i))).append(",");
-
 			}
 		}
 		return temp.toString();
@@ -786,6 +789,7 @@ public class MyUtils {
 		return temp.toString();
 	}
 
+	/*
 	public static String getRegins(List<String> list) {
 		StringBuffer temp = new StringBuffer();
 		for (int i = 0; i < list.size(); i++) {
@@ -815,7 +819,10 @@ public class MyUtils {
 		}
 		return temp.toString();
 	}
+	
+	*/
 
+	/*
 	public static String getSmtpState(String content) {
 		StringBuffer temp = new StringBuffer();
 
@@ -838,7 +845,9 @@ public class MyUtils {
 
 		return temp.toString();
 	}
-
+*/
+	
+	/*
 	public static String getImsiTransmit(String content) {
 		StringBuffer temp = new StringBuffer();
 
@@ -859,7 +868,10 @@ public class MyUtils {
 
 		return temp.toString();
 	}
+	
+	*/
 
+	/*
 	public static String getNtp(String content) {
 		StringBuffer temp = new StringBuffer();
 
@@ -872,6 +884,7 @@ public class MyUtils {
 
 		return temp.toString();
 	}
+	*/
 
 	public static String HexStringToInteger(String str) {
 
@@ -940,6 +953,8 @@ public class MyUtils {
 		return ls;
 	}
 
+	
+	/*
 	public static String getRegions(String str) {
 		Pattern pattern = Pattern.compile("(?<=\\()(.+?)(?=\\))");
 		Matcher matcher = pattern.matcher(str);
@@ -964,7 +979,11 @@ public class MyUtils {
 		return body;
 
 	}
+	
+	*/
 
+	
+	/*
 	public static String getRemote(String str) {
 		String body = "";
 		String[] arr = str.split(",");
@@ -979,7 +998,11 @@ public class MyUtils {
 								.parseInt(arr[5]))));
 		return body;
 	}
+	
+	*/
 
+	
+	/*
 	public static String getNtpToClient(String str) {
 
 		String body = "";
@@ -991,7 +1014,11 @@ public class MyUtils {
 
 		return body;
 	}
+	
+	*/
 
+	
+	/*
 	public static String getRouter(String str) {
 		String body = "";
 		String[] arr = str.split(",");
@@ -1006,7 +1033,7 @@ public class MyUtils {
 		);
 		return body;
 	}
-
+*/
 	public static long ipToLong(String strIp) {
 		String[] ip = strIp.split("\\.");
 		return (Long.parseLong(ip[0]) << 24) + (Long.parseLong(ip[1]) << 16)
@@ -1039,7 +1066,8 @@ public class MyUtils {
 		return sb.toString();
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws NoSuchAlgorithmException,
+			UnsupportedEncodingException {
 
 		// List<String> list =
 		// getStrList("0000000000000000000000000000000000000000", 8);
@@ -1067,9 +1095,22 @@ public class MyUtils {
 		 * System.out.println("====="+ByteAndStr16.Bytes2HexString
 		 * (integerTo4Bytes(123)));
 		 */
-		String str = "192.168.1.5";
-		System.out.println(Long.toHexString(ipToLong(str)).toUpperCase()
-				.toString());
+		//MessageDigest md5 = MessageDigest.getInstance("MD5");
+		//BASE64Encoder base64en = new BASE64Encoder();
+
+		//String newstr = base64en.encode(md5.digest("123".getBytes("utf-8")));
+		//System.out.println("====" + newstr);
+		
+		String str="1.5";
+		//System.out.println("===="+  StringUtils.leftPad(strTo16(str),10, "0").toUpperCase());
+		
+		System.out.println("====="+  Long.toHexString(ipToLong("192.168.1.9")));
+		
+		
+		
+		
+		
+		
 	}
 
 }

@@ -11,7 +11,7 @@ public class Convert {
 			"5018", "5020");
 
 	public final static List list2 = Arrays.asList("5008", "500B", "500C",
-			"5024", "5027", "5035", "5036");
+			 "5027", "5035", "5036");
 
 	public final static List list3 = Arrays.asList("5009", "500E");
 
@@ -28,5 +28,11 @@ public class Convert {
 	public final static String Remote = "5030";
 	
 	public final static String Router = "5029";
+	
+	public final static List Ip = Arrays.asList("5023", "5024");
+	
+	public final static String Restart="01";
+	
+	public final static String Reset="01";
 
 }

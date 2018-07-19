@@ -184,18 +184,24 @@
 	
 	function control(mac){
 	layer.open({
-						type : 2 //Page层类型
+						type : 2//Page层类型
 						,
-						area : [ '800px', '600px' ],
+						offset: '1%',
+						area : [ '60%','90%' ],
+						//area : 'auto',
 						title : '控制命令列表',
 						shade : 0.6 //遮罩透明度
 						,
+			      	maxmin : true, //允许全屏最小化,
 						maxmin : true //允许全屏最小化
 						,
 						anim : 1 //0-6的动画形式，-1不开启
 						,
 						content : [ '<%=basePath%>/smallCell/controlIndex?mac='
 														+ mac, 'no' ], //iframe的url，no代表不显示滚动条
+														
+						
+														
 									});
 		
 									
@@ -228,7 +234,9 @@
 		layer.open({
 						type : 2,//Page层类型
 					
-						area : [ '1000px', '600px' ],
+						//area : [ '1000px', '600px' ],
+						offset: '1%',
+						area : [ '80%','90%' ],
 						title : '更新命令列表',
 						shade : 0.6, //遮罩透明度
 						maxmin : true, //允许全屏最小化

@@ -44,6 +44,7 @@ import com.small.cell.server.pojo.TypeCode;
 import com.small.cell.server.pojo.Upgrade;
 import com.small.cell.server.pojo.PackageData.MsgHeader;
 import com.small.cell.server.service.AlarmService;
+import com.small.cell.server.service.ParsService;
 import com.small.cell.server.service.UserService;
 import com.small.cell.server.session.SessionManager;
 import com.small.cell.server.util.ByteAndStr16;
@@ -69,6 +70,9 @@ public class SmallCellController {
 
 	@Resource
 	private AlarmService alarmService;
+
+	@Resource
+	private ParsService parsService;
 
 	@RequestMapping(value = "/query", method = RequestMethod.POST)
 	@ResponseBody
@@ -174,12 +178,7 @@ public class SmallCellController {
 		int ccount = 0, zhichu = 0;
 		@SuppressWarnings("rawtypes")
 		Map map = JedisUtil.hgetAll(Smtp.SmtpRedisKey.getBytes());
-		try {
-			ccount = MyUtils.getOnlineSum(map);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ccount = parsService.getOnlineSum(map);
 		jsonobject.put("tcount", map.size());
 		jsonobject.put("ocount", ccount);
 		jsonobject.put("ghichu", zhichu);
@@ -244,14 +243,14 @@ public class SmallCellController {
 			body = String.format("%s%s%s%s%s%s",
 					MyUtils.IntegerToString16For4(General.Mac),
 					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(1), "01");
+					param, MyUtils.IntegerToString16For4(1), Convert.Restart);
 			smtp.setStatus(Status.RESTART);
 			break;
 		case Reset:
 			body = String.format("%s%s%s%s%s%s",
 					MyUtils.IntegerToString16For4(General.Mac),
 					MyUtils.IntegerToString16For4(mac.length() / 2), mac,
-					param, MyUtils.IntegerToString16For4(1), "01");
+					param, MyUtils.IntegerToString16For4(1), Convert.Reset);
 			smtp.setStatus(Status.RESET);
 			break;
 		case RouterUpgrade:
@@ -307,7 +306,7 @@ public class SmallCellController {
 		JSONObject jb = JSONObject.fromObject(request.getParameter("username"));
 		Map map = (Map) jb;
 		if (map.size() > 0) {
-			String body = "";
+			String body = null;
 			Smtp smtp = JedisUtil.hmget(Smtp.SmtpRedisKey, mac);
 			PackageData packageData = new PackageData();
 			MsgHeader msgHeader = new MsgHeader();
@@ -320,80 +319,38 @@ public class SmallCellController {
 			while (iter.hasNext()) {
 				String key = iter.next();
 				String value = (String) map.get(key);
-
-				System.out.println("====" + value);
 				if (Convert.list1.contains(key)) {
-					body = String.format("%s%s%s%s", body, key, MyUtils
-							.IntegerToString16For4(MyUtils.strTo16(value)
-									.length() / 2), MyUtils.strTo16(value));
+					body = parsService.getString(key, value);
 				} else if (Convert.list2.contains(key)) {
-					body = String
-							.format("%s%s%s%s",
-									body,
-									key,
-									MyUtils.IntegerToString16For4(ByteAndStr16
-											.Bytes2HexString(
-													MyUtils.integerTo4Bytes(Integer
-															.parseInt(value)))
-											.length() / 2), ByteAndStr16
-											.Bytes2HexString(MyUtils
-													.integerTo4Bytes(Integer
-															.parseInt(value))));
+					body = parsService.getInteger(key, value);
 				} else if (Convert.list3.contains(key)) {
-					String[] strArr = value.split(",");
-					for (int i = 0; i < strArr.length; i++) {
-						body = String.format("%s%s", body, ByteAndStr16
-								.Bytes2HexString(MyUtils
-										.integerTo4Bytes(Integer
-												.parseInt(strArr[i]))));
-					}
-					body = String.format("%s%s%s", key,
-							MyUtils.IntegerToString16For4(body.length() / 2),
-							body);
+					body=parsService.getIntegerArray(key, value);
 				} else if (Convert.list4.contains(key)) {
-					List<String> list = MyUtils.getAarray(value);
-					for (int i = 0; i < list.size(); i++) {
-						body = String.format("%s%s", body, ByteAndStr16
-								.Bytes2HexString(MyUtils
-										.integerTo4Bytes(Integer.parseInt(list
-												.get(i)))));
-					}
-					body = String.format("%s%s%s", key,
-							MyUtils.IntegerToString16For4(body.length() / 2),
-							body);
-				}else if (Convert.list5.contains(key)) {
-					String[] strArr = value.split(",");
-					for (int i = 0; i < strArr.length; i++) {
-						body = String.format("%s%s", body,
-								MyUtils.strTo16(strArr[i]));
-					}
-					body = String.format("%s%s%s", key,
-							MyUtils.IntegerToString16For4(body.length() / 2),
-							body);
+					body=parsService.getFrequencyTable(key, value);
+				} else if (Convert.list5.contains(key)) {
+					body = parsService.getStringArray(key, value);
 				} else if (Convert.Regions.equals(key)) {
-					body = MyUtils.getRegions(value);
-					body = String.format("%s%s%s", key,
-							MyUtils.IntegerToString16For4(body.length() / 2),
-							body);
+					body = parsService.getRegions(key, value);
 				} else if (Convert.Remote.equals(key)) {
-					body = MyUtils.getRemote(value);
-					body = String.format("%s%s%s", key,
-							MyUtils.IntegerToString16For4(body.length() / 2),
-							body);
+					body = parsService.getRemote(key, value);
 				} else if (Convert.Ntp.equals(key)) {
-					body = MyUtils.getNtpToClient(value);
-					body = String.format("%s%s%s", key,
-							MyUtils.IntegerToString16For4(body.length() / 2),
-							body);
+					body = parsService.getNtpToClient(key, value);
 				} else if (Convert.Router.equals(key)) {
-					body = MyUtils.getNtpToClient(value);
-					body = String.format("%s%s%s", key,
-							MyUtils.IntegerToString16For4(body.length() / 2),
-							body);
-				} else {
-					body = String.format("%s%s%s%s", body, key,
+					body = parsService.getRouter(key, value);
+				}else if (Convert.Ip.contains(key)) {
+					body = parsService.getIp(key, value);
+				}  
+				
+				else {
+						
+					body=String.format("%s%s%s", key,
 							MyUtils.IntegerToString16For4(value.length() / 2),
 							value);
+					
+					/*
+					body = String.format("%s%s%s%s", body, key,
+							MyUtils.IntegerToString16For4(value.length() / 2),
+							value);*/
 				}
 			}
 			body = String.format("%s%s%s%s%s%s",
@@ -408,7 +365,6 @@ public class SmallCellController {
 			packageData.setMsgHeader(msgHeader);
 			packageData.setMsgBodyBytes(body);
 			IoSession session = SessionManager.getManager().get(mac);
-
 			System.out.println("=====uuu=====" + packageData.toString());
 			if (session == null) {
 				logger.info("session is null!");
