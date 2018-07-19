@@ -28,21 +28,16 @@ import com.small.cell.server.util.ReflectUtils;
 import com.small.cell.server.util.TlvTools;
 
 
-@Service("alarmRequestAdapter")
 public class AlarmRequestAdapter {
 
-	@Resource
-	private AlarmService alarmService;
-	
-	private SimpleDateFormat format = new SimpleDateFormat(
+	private static SimpleDateFormat format = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
 
+	
 
-	// public static PackageData handler(PackageData packageData) throws
-	// Exception {
 
-	public PackageData handler(PackageData packageData) throws Exception {
-
+	public static PackageData handler(PackageData packageData) {
+		// TODO Auto-generated method stub
 		List<Tlv> tlvList = TlvTools.unpack(packageData.getMsgBodyBytes());
 		List<Tlv> list = new ArrayList<Tlv>();
 		Tlv macTlv = tlvList.get(0);
@@ -66,8 +61,8 @@ public class AlarmRequestAdapter {
 
 		String body = null;
 		try {
-			body = MyExeUtil.getExeRes(Para.BlowFishMode_1,
-					String.format("%s%s", macTlv, resTlv));
+			body = MyExeUtil.getExeRes(Para.BlowFishMode_1, String.format(
+					"%s%s", macTlv, resTlv));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,9 +77,15 @@ public class AlarmRequestAdapter {
 			list.addAll(subList);
 		}
 
-		Alarm alarm = (Alarm) ReflectUtils.setAlarmProperty(list);
+		Alarm alarm = null;
+		try {
+			alarm = (Alarm) ReflectUtils.setAlarmProperty(list);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		alarm.setPtime(format.format(new Date()));
-		alarmService.saveAlarm(alarm);
+		//alarmService.saveAlarm(alarm);
 		packageData.setMsgBodyBytes(body);
 		packageData.getMsgHeader().setMsgFrameFlag(FrameFlag.Encrypt);
 		packageData.getMsgHeader().setMsgTypeCode(
@@ -94,6 +95,6 @@ public class AlarmRequestAdapter {
 						+ ByteAndStr16.HexString2Bytes(body).length));
 
 		return packageData;
-
 	}
+
 }

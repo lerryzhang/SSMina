@@ -789,7 +789,7 @@ public class MyUtils {
 		return temp.toString();
 	}
 
-	/*
+	
 	public static String getRegins(List<String> list) {
 		StringBuffer temp = new StringBuffer();
 		for (int i = 0; i < list.size(); i++) {
@@ -820,9 +820,9 @@ public class MyUtils {
 		return temp.toString();
 	}
 	
-	*/
+	
 
-	/*
+	
 	public static String getSmtpState(String content) {
 		StringBuffer temp = new StringBuffer();
 
@@ -845,9 +845,9 @@ public class MyUtils {
 
 		return temp.toString();
 	}
-*/
+
 	
-	/*
+	
 	public static String getImsiTransmit(String content) {
 		StringBuffer temp = new StringBuffer();
 
@@ -869,9 +869,9 @@ public class MyUtils {
 		return temp.toString();
 	}
 	
-	*/
 
-	/*
+
+	
 	public static String getNtp(String content) {
 		StringBuffer temp = new StringBuffer();
 
@@ -884,7 +884,7 @@ public class MyUtils {
 
 		return temp.toString();
 	}
-	*/
+	
 
 	public static String HexStringToInteger(String str) {
 

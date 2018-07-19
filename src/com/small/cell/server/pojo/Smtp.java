@@ -13,6 +13,9 @@ public class Smtp implements Serializable {
 	 */
 	@Resource
 	private ParsService parsService;
+	
+	
+	
 	public static final String SmtpRedisKey = "SmtpRedisKey";
 	private static final long serialVersionUID = 1L;
 	private String mac;
@@ -242,8 +245,10 @@ public class Smtp implements Serializable {
 		if (regions == null || "".equals(regions)) {
 			this.regions = regions;
 		} else {
-			this.regions = parsService.getRegins(MyUtils
-					.getStrList(regions, 88));
+			this.regions = MyUtils.getRegins(MyUtils.getStrList(regions, 88));
+				
+				//parsService.getRegins(MyUtils
+					//.getStrList(regions, 88));
 		}
 	}
 
@@ -307,7 +312,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setSmtpState(String smtpState) {
-		this.smtpState = parsService.getSmtpState(smtpState);// MyUtils.getSmtpState(smtpState);
+		this.smtpState = MyUtils.getSmtpState(smtpState);
 	}
 
 	public String getImsiTransmit() {
@@ -315,7 +320,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setImsiTransmit(String imsiTransmit) {
-		this.imsiTransmit = parsService.getImsiTransmit(imsiTransmit);// MyUtils.getImsiTransmit(imsiTransmit);
+		this.imsiTransmit =MyUtils.getImsiTransmit(imsiTransmit);
 	}
 
 	public String getStatus() {
@@ -453,7 +458,7 @@ public class Smtp implements Serializable {
 	}
 
 	public void setNtp(String ntp) {
-		this.ntp = parsService.getNtp(ntp);// MyUtils.getNtp(ntp);
+		this.ntp = MyUtils.getNtp(ntp);//parsService.getNtp(ntp);// MyUtils.getNtp(ntp);
 	}
 
 	public String getSamLevel() {

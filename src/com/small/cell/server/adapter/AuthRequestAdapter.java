@@ -7,9 +7,7 @@ import java.util.Map;
 
 import org.apache.mina.core.session.IoSession;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
-
 import com.small.cell.server.configure.SpringWebSocketHandler;
 import com.small.cell.server.pojo.Auth;
 import com.small.cell.server.pojo.FrameFlag;
@@ -32,7 +30,7 @@ import com.small.cell.server.util.ReflectUtils;
 import com.small.cell.server.util.TlvTools;
 
 
-@Service("authRequestAdapter")
+
 public class AuthRequestAdapter {
 	@Bean
 	// 这个注解会从Spring容器拿出Bean
@@ -40,10 +38,7 @@ public class AuthRequestAdapter {
 		return new SpringWebSocketHandler();
 	}
 
-	//public static PackageData handler(PackageData packageData, IoSession session)
-		//	throws Exception {
-	
-	public  PackageData handler(PackageData packageData, IoSession session) throws Exception{
+	public  static  PackageData handler(PackageData packageData, IoSession session){
 
 		List<Tlv> tlvList = TlvTools.unpack(packageData.getMsgBodyBytes());
 		Tlv macTlv = tlvList.get(0);
@@ -61,14 +56,25 @@ public class AuthRequestAdapter {
 			resTlv.setValue(ByteAndStr16.HexString2Bytes(MyUtils
 					.IntegerToString16For2(Res.SUCCESS)));
 			// 表明认证通过
-			Smtp smtp = (Smtp) ReflectUtils.setProperty(tlvList);
+			Smtp smtp=null;
+			try {
+				smtp = (Smtp) ReflectUtils.setProperty(tlvList);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			smtp.setVersion(packageData.getMsgHeader().getMsgVersion());
 			smtp.setSeqNum(packageData.getMsgHeader().getMsgSeqNum());
 			smtp.setStatus(Status.ONLINE);
 			smtp.setAuth(Auth.SUCCESS);
 			if (JedisUtil.hgetAll(Smtp.SmtpRedisKey.getBytes()) == null) {
 				Map<byte[], byte[]> map = new HashMap<byte[], byte[]>();
-				map.put(mac.getBytes(), ObjectUtil.object2Bytes(smtp));
+				try {
+					map.put(mac.getBytes(), ObjectUtil.object2Bytes(smtp));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				JedisUtil.hmset(Smtp.SmtpRedisKey, map);
 			} else {
 				JedisUtil.hmset(Smtp.SmtpRedisKey, mac, smtp);

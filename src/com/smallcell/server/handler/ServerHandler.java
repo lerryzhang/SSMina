@@ -1,7 +1,6 @@
 package com.smallcell.server.handler;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 import javax.annotation.Resource;
 
@@ -13,7 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.socket.TextMessage;
 
 import com.small.cell.server.adapter.AlarmRequestAdapter;
+
 import com.small.cell.server.adapter.AuthRequestAdapter;
+
 import com.small.cell.server.adapter.ConfigureQueryResponseAdapter;
 import com.small.cell.server.adapter.ConfigureUpdateResponseAdapter;
 import com.small.cell.server.adapter.ControlResponseAdapter;
@@ -29,7 +30,7 @@ import com.small.cell.server.pojo.Status;
 import com.small.cell.server.pojo.TypeCode;
 import com.small.cell.server.pojo.PackageData.MsgHeader;
 
-import com.small.cell.server.service.AlarmService;
+
 import com.small.cell.server.session.SessionManager;
 import com.small.cell.server.util.ByteAndStr16;
 import com.small.cell.server.util.GoEasyUtil;
@@ -50,11 +51,7 @@ public class ServerHandler extends IoHandlerAdapter {
 		return new SpringWebSocketHandler();
 	}
 
-	@Resource
-	private AlarmRequestAdapter alarmRequestAdapter;
-	
-	@Resource
-	private AuthRequestAdapter authRequestAdapter;
+
 	
 
 	@Override
@@ -107,7 +104,7 @@ public class ServerHandler extends IoHandlerAdapter {
 		switch (TypeCode.getByValue(msgHeader.getMsgTypeCode())) {
 		case AuthRequest:
 			//packageData = AuthRequestAdapter.handler(packageData, session);
-			packageData=authRequestAdapter.handler(packageData, session);
+			packageData=AuthRequestAdapter.handler(packageData, session);
 			session.write(IoBuffer.wrap(ByteAndStr16
 					.HexString2Bytes(packageData.toString())));
 			break;
@@ -128,7 +125,7 @@ public class ServerHandler extends IoHandlerAdapter {
 			break;
 		case AlarmRequest:
 			// packageData = AlarmRequestAdapter.handler(packageData);
-			packageData = alarmRequestAdapter.handler(packageData);
+			packageData = AlarmRequestAdapter.handler(packageData);
 			session.write(IoBuffer.wrap(ByteAndStr16
 					.HexString2Bytes(packageData.toString())));
 			break;
